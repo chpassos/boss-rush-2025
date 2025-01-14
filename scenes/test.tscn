@@ -1,11 +1,44 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxvtdhp8dh0er"]
+[gd_scene load_steps=7 format=3 uid="uid://cxvtdhp8dh0er"]
 
+[ext_resource type="Shader" path="res://shaders/overlayVHS.gdshader" id="1_08d8b"]
 [ext_resource type="PackedScene" uid="uid://qeojnj1qox2l" path="res://scenes/enemy/enemy.tscn" id="1_lc647"]
 [ext_resource type="PackedScene" uid="uid://deje3vxmm68ao" path="res://scenes/player/player.tscn" id="2_5rsj7"]
 [ext_resource type="PackedScene" uid="uid://bit302huqj7xe" path="res://scenes/spawner/spawner.tscn" id="3_2mayb"]
 [ext_resource type="PackedScene" uid="uid://cxikgvsivsi2f" path="res://scenes/asteroid/orbiting/orbiting_asteroid.tscn" id="3_faqd3"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_37w87"]
+shader = ExtResource("1_08d8b")
+shader_parameter/overlay = false
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.25
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 15.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.05
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.03
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 1.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
 [node name="Test" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_37w87")
+custom_minimum_size = Vector2(950, 600)
+offset_left = -481.0
+offset_top = -272.0
+offset_right = 469.0
+offset_bottom = 328.0
 
 [node name="Spawner" parent="." instance=ExtResource("3_2mayb")]
 
