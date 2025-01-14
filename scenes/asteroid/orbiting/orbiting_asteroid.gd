@@ -3,8 +3,8 @@ extends Sprite2D
 
 
 @export var primary: CharacterBody2D
-@export var orbiting_distance: float = 50.0
-@export_range(0.0, TAU, 0.001, "or_greater", "suffix:rad/s") var orbiting_speed: float = PI / 50
+@export_range(0.0, 100.0, 5.0, "or_greater", "suffix:px") var orbiting_distance: float = 20.0
+@export_range(0.0, TAU, 0.001, "or_greater", "suffix:rad/s") var orbiting_speed: float = PI
 
 @onready var angle: float = randf_range(-PI, PI)
 
