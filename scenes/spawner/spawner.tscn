@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://bit302huqj7xe"]
 
 [ext_resource type="Script" path="res://scenes/spawner/spawner.gd" id="1_rdxnw"]
-[ext_resource type="PackedScene" uid="uid://qeojnj1qox2l" path="res://scenes/enemy/enemy.tscn" id="2_uwdve"]
+[ext_resource type="PackedScene" uid="uid://c0hh2lf0b4l02" path="res://scenes/projectiles/projectile.tscn" id="2_xqs6n"]
 
 [node name="Spawner" type="Node2D"]
 script = ExtResource("1_rdxnw")
-projectiles = ExtResource("2_uwdve")
+projectiles = ExtResource("2_xqs6n")
 
 [node name="SpawnTimer" type="Timer" parent="."]
 autostart = true
