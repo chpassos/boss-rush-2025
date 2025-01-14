@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_0o78q"]
 [ext_resource type="Texture2D" uid="uid://cxgyyokv5dgku" path="res://assets/circle.png" id="1_7ogf4"]
-[ext_resource type="Script" path="res://components/player_rotation_detection_component/player_rotation_detection_component.gd" id="3_5wsqv"]
+[ext_resource type="Script" path="res://components/player_revolution_component/player_revolution_component.gd" id="3_5wsqv"]
 
 [node name="Enemy" type="CharacterBody2D"]
 motion_mode = 1
@@ -12,7 +12,7 @@ script = ExtResource("1_0o78q")
 modulate = Color(1, 0.501961, 0, 1)
 texture = ExtResource("1_7ogf4")
 
-[node name="PlayerRotationDetectionComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+[node name="PlayerRevolutionComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("3_5wsqv")
 actor = NodePath("..")
 max_distance = 100.0

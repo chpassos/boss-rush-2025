@@ -1,8 +1,8 @@
-class_name PlayerRotationDetectionComponent
+class_name PlayerRevolutionComponent
 extends Node
 
 
-signal rotation_detected(clockwise: bool)
+signal player_revolved(clockwise: bool)
 
 @export var actor: CharacterBody2D
 @export_range(0.0, 200.0, 10.0, "or_greater", "suffix:px") var max_distance: float
@@ -21,7 +21,7 @@ var player_sq_dist: float:
 @onready var player: Player = get_tree().get_first_node_in_group(&"player") as Player
 @onready var max_sq_dist: float = max_distance ** 2
 @onready var zero: float = INF
-@onready var rotation_progress: float = 0.0
+@onready var revolution_progress: float = 0.0
 
 
 func _physics_process(_delta: float) -> void:
@@ -32,17 +32,17 @@ func _physics_process(_delta: float) -> void:
 	if zero == INF:
 		zero = actor.global_position.angle_to_point(player.global_position)
 
-	var pdelta: float = angle - rotation_progress
+	var pdelta: float = angle - revolution_progress
 
 	if absf(pdelta) > PI / 2:
 		pdelta -= TAU
 
-	rotation_progress += pdelta
+	revolution_progress += pdelta
 
-	if absf(rotation_progress) >= TAU - 0.05:
-		if rotation_progress > 0:
-			rotation_detected.emit(true)
+	if absf(revolution_progress) >= TAU - 0.05:
+		if revolution_progress > 0:
+			player_revolved.emit(true)
 		else:
-			rotation_detected.emit(false)
+			player_revolved.emit(false)
 
-		rotation_progress = 0.0
+		revolution_progress = 0.0
