@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxikgvsivsi2f"]
+
+[ext_resource type="Texture2D" uid="uid://grt5ehndp3ys" path="res://assets/pixel.png" id="1_kfm25"]
+[ext_resource type="Script" path="res://scenes/asteroid/orbiting/orbiting_asteroid.gd" id="2_wyuky"]
+
+[node name="OrbitingAsteroid" type="Sprite2D"]
+texture = ExtResource("1_kfm25")
+script = ExtResource("2_wyuky")

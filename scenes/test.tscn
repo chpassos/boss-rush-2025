@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://qeojnj1qox2l" path="res://scenes/enemy/enemy.tscn" id="1_lc647"]
 [ext_resource type="PackedScene" uid="uid://deje3vxmm68ao" path="res://scenes/player/player.tscn" id="2_5rsj7"]
 [ext_resource type="PackedScene" uid="uid://bit302huqj7xe" path="res://scenes/spawner/spawner.tscn" id="3_2mayb"]
+[ext_resource type="PackedScene" uid="uid://cxikgvsivsi2f" path="res://scenes/asteroid/orbiting/orbiting_asteroid.tscn" id="3_faqd3"]
 
 [node name="Test" type="Node2D"]
 
@@ -16,3 +17,9 @@ position = Vector2(129, 108)
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 process_callback = 0
+
+[node name="OrbitingAsteroid" parent="." node_paths=PackedStringArray("primary") instance=ExtResource("3_faqd3")]
+position = Vector2(103, 139)
+primary = NodePath("../Player")
+orbiting_distance = 24.0
+orbiting_speed = 2.268
