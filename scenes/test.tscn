@@ -12,18 +12,18 @@ shader_parameter/overlay = false
 shader_parameter/scanlines_opacity = 0.4
 shader_parameter/scanlines_width = 0.25
 shader_parameter/grille_opacity = 0.3
-shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/resolution = Vector2(1920, 1080)
 shader_parameter/pixelate = true
-shader_parameter/roll = true
+shader_parameter/roll = false
 shader_parameter/roll_speed = 8.0
-shader_parameter/roll_size = 15.0
+shader_parameter/roll_size = 0.0
 shader_parameter/roll_variation = 1.8
 shader_parameter/distort_intensity = 0.05
-shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_opacity = 0.02
 shader_parameter/noise_speed = 5.0
 shader_parameter/static_noise_intensity = 0.06
-shader_parameter/aberration = 0.03
-shader_parameter/brightness = 1.4
+shader_parameter/aberration = 4.75e-08
+shader_parameter/brightness = 1.0
 shader_parameter/discolor = true
 shader_parameter/warp_amount = 1.0
 shader_parameter/clip_warp = false
@@ -32,14 +32,6 @@ shader_parameter/vignette_opacity = 0.5
 
 [node name="Test" type="Node2D"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_37w87")
-custom_minimum_size = Vector2(950, 600)
-offset_left = -481.0
-offset_top = -272.0
-offset_right = 469.0
-offset_bottom = 328.0
-
 [node name="Spawner" parent="." instance=ExtResource("3_2mayb")]
 
 [node name="Player" parent="." instance=ExtResource("2_5rsj7")]
@@ -47,10 +39,19 @@ position = Vector2(129, 108)
 
 [node name="Enemy" parent="." instance=ExtResource("1_lc647")]
 
+[node name="OrbitingAsteroid" parent="." node_paths=PackedStringArray("primary") instance=ExtResource("3_faqd3")]
+position = Vector2(103, 139)
+primary = NodePath("../Player")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 process_callback = 0
 
-[node name="OrbitingAsteroid" parent="." node_paths=PackedStringArray("primary") instance=ExtResource("3_faqd3")]
-position = Vector2(103, 139)
-primary = NodePath("../Player")
+[node name="ColorRect" type="ColorRect" parent="Camera2D"]
+material = SubResource("ShaderMaterial_37w87")
+custom_minimum_size = Vector2(960, 540)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
