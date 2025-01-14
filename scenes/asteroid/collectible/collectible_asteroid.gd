@@ -1,7 +1,8 @@
 extends Sprite2D
 
 
-@onready var player_revolution: PlayerRevolutionComponent = $PlayerRevolutionComponent
+@export var data: AsteroidData
+@export var player_revolution: PlayerRevolutionComponent
 
 
 func _draw() -> void:
@@ -9,6 +10,7 @@ func _draw() -> void:
 
 
 func _ready() -> void:
+	modulate = data.color
 	player_revolution.player_revolved.connect(_on_player_revolved)
 
 

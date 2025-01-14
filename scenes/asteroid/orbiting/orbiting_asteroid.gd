@@ -2,7 +2,7 @@ class_name OrbitingAsteroid
 extends Sprite2D
 
 
-@export var primary: CharacterBody2D
+@export var primary: Node2D
 @export_range(0.0, 100.0, 5.0, "or_greater", "suffix:px") var orbiting_distance: float = 20.0
 @export_range(0.0, TAU, 0.001, "or_greater", "suffix:rad/s") var orbiting_speed: float = PI
 

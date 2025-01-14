@@ -4,11 +4,12 @@
 [ext_resource type="Script" path="res://scenes/asteroid/collectible/collectible_asteroid.gd" id="2_jhn01"]
 [ext_resource type="Script" path="res://components/player_revolution_component/player_revolution_component.gd" id="3_efdi8"]
 
-[node name="CollectibleAsteroid" type="Sprite2D"]
+[node name="CollectibleAsteroid" type="Sprite2D" node_paths=PackedStringArray("player_revolution")]
 modulate = Color(0.501961, 0.501961, 0.501961, 1)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_hef5j")
 script = ExtResource("2_jhn01")
+player_revolution = NodePath("PlayerRevolutionComponent")
 
 [node name="PlayerRevolutionComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("3_efdi8")
