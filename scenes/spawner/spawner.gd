@@ -1,12 +1,15 @@
 extends Node2D
 
 @export var projectiles : PackedScene # Projectile scene to instantiate
+@export var projectile_types: Array[Projectile]
 
 @onready var screen_size = get_viewport().get_visible_rect().size # get screen size
 
 # Spawn projectiles
 func spawn(pos: Vector2):
 	var projectile_instance = projectiles.instantiate()
+	projectile_instance.type = projectile_types[randi_range(0,1)]
+	print(projectile_instance.type)
 	projectile_instance.global_position = pos
 	get_tree().current_scene.add_child(projectile_instance)
 

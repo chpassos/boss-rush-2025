@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Projectile" load_steps=3 format=3 uid="uid://dkj0aqna4iffc"]
+
+[ext_resource type="Script" path="res://resources/projectile_type.gd" id="1_o1xv0"]
+[ext_resource type="Texture2D" uid="uid://b17hv5seq5dw8" path="res://assets/arrow.png" id="2_2a3hy"]
+
+[resource]
+script = ExtResource("1_o1xv0")
+type = "Type2"
+texture = ExtResource("2_2a3hy")
+damage = 50.0
