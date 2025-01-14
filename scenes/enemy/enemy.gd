@@ -6,4 +6,4 @@ extends CharacterBody2D
 
 
 func _process(_delta: float) -> void:
-	label.text = str("%d" % player_rotation_detection_component.quadrants_visited.size())
+	label.text = str("%d" % rad_to_deg(player_rotation_detection_component.rotation_progress))
