@@ -16,3 +16,9 @@ texture = ExtResource("1_d300q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_481e2")
+
+[node name="VanishTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="VanishTimer" to="." method="_on_vanish_timer_timeout"]
