@@ -4,7 +4,7 @@ extends Node
 
 signal player_revolved(clockwise: bool)
 
-@export var actor: CharacterBody2D
+@export var actor: Node2D
 @export_range(0.0, 200.0, 10.0, "or_greater", "suffix:px") var max_distance: float
 
 var angle: float:

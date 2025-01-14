@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxvtdhp8dh0er"]
+[gd_scene load_steps=8 format=3 uid="uid://cxvtdhp8dh0er"]
 
 [ext_resource type="Shader" path="res://shaders/overlayVHS.gdshader" id="1_08d8b"]
 [ext_resource type="PackedScene" uid="uid://qeojnj1qox2l" path="res://scenes/enemy/enemy.tscn" id="1_lc647"]
 [ext_resource type="PackedScene" uid="uid://deje3vxmm68ao" path="res://scenes/player/player.tscn" id="2_5rsj7"]
+[ext_resource type="PackedScene" uid="uid://x83i8cfjst2t" path="res://scenes/asteroid/collectible/collectible_asteroid.tscn" id="2_sdvru"]
 [ext_resource type="PackedScene" uid="uid://bit302huqj7xe" path="res://scenes/spawner/spawner.tscn" id="3_2mayb"]
 [ext_resource type="PackedScene" uid="uid://cxikgvsivsi2f" path="res://scenes/asteroid/orbiting/orbiting_asteroid.tscn" id="3_faqd3"]
 
@@ -35,12 +36,15 @@ shader_parameter/vignette_opacity = 0.5
 [node name="Spawner" parent="." instance=ExtResource("3_2mayb")]
 
 [node name="Player" parent="." instance=ExtResource("2_5rsj7")]
-position = Vector2(129, 108)
+position = Vector2(-352, -157)
 
 [node name="Enemy" parent="." instance=ExtResource("1_lc647")]
 
+[node name="CollectibleAsteroid" parent="." instance=ExtResource("2_sdvru")]
+position = Vector2(280, -101)
+
 [node name="OrbitingAsteroid" parent="." node_paths=PackedStringArray("primary") instance=ExtResource("3_faqd3")]
-position = Vector2(103, 139)
+position = Vector2(-354, -206)
 primary = NodePath("../Player")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -48,6 +52,7 @@ zoom = Vector2(2, 2)
 process_callback = 0
 
 [node name="ColorRect" type="ColorRect" parent="Camera2D"]
+visible = false
 material = SubResource("ShaderMaterial_37w87")
 custom_minimum_size = Vector2(960, 540)
 anchors_preset = 15

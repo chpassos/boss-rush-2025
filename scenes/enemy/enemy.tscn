@@ -10,6 +10,7 @@ script = ExtResource("1_0o78q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.501961, 0, 1)
+scale = Vector2(2, 2)
 texture = ExtResource("1_7ogf4")
 
 [node name="PlayerRevolutionComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]

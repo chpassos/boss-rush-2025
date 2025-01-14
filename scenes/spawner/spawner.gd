@@ -9,7 +9,7 @@ extends Node2D
 func spawn(pos: Vector2):
 	var projectile_instance = projectiles.instantiate()
 	projectile_instance.type = projectile_types[randi_range(0,1)]
-	print(projectile_instance.type)
+	#print(projectile_instance.type)
 	projectile_instance.global_position = pos
 	get_tree().current_scene.add_child(projectile_instance)
 
