@@ -11,6 +11,7 @@ extends CharacterBody2D
 @onready var rotation_input_queue: Array[StringName] = []
 
 
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"toggle_shoot_mode"):
 		state_chart.send_event(&"pressed_shoot")
