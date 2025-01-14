@@ -2,6 +2,8 @@ class_name PlayerRotationDetectionComponent
 extends Node
 
 
+signal rotation_detected(clockwise: bool)
+
 @export var actor: CharacterBody2D
 
 var angle: float:
@@ -26,4 +28,9 @@ func _physics_process(_delta: float) -> void:
 	rotation_progress += pdelta
 
 	if absf(rotation_progress) >= TAU - 0.05:
+		if rotation_progress > 0:
+			rotation_detected.emit(true)
+		else:
+			rotation_detected.emit(false)
+
 		rotation_progress = 0.0
