@@ -1,8 +1,49 @@
-[gd_scene load_steps=4 format=3 uid="uid://deje3vxmm68ao"]
+[gd_scene load_steps=11 format=3 uid="uid://deje3vxmm68ao"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_uadqj"]
 [ext_resource type="Texture2D" uid="uid://cxgyyokv5dgku" path="res://assets/circle.png" id="2_oyygl"]
-[ext_resource type="Script" path="res://components/movement_input_component/movement_input_component.gd" id="3_f7xtr"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="4_ai658"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="5_mnto5"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/animation_player_state.gd" id="6_q2gnl"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="7_mn7qe"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="8_vhe2l"]
+
+[sub_resource type="Animation" id="Animation_f1e7n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jt4gv"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -6)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_71xxc"]
+_data = {
+"RESET": SubResource("Animation_f1e7n"),
+"idle": SubResource("Animation_jt4gv")
+}
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
@@ -12,6 +53,48 @@ script = ExtResource("1_uadqj")
 modulate = Color(0, 0.501961, 1, 1)
 texture = ExtResource("2_oyygl")
 
-[node name="MovementInputComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
-script = ExtResource("3_f7xtr")
-actor = NodePath("..")
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("4_ai658")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("5_mnto5")
+initial_state = NodePath("Move")
+
+[node name="Move" type="Node" parent="StateChart/Root"]
+script = ExtResource("6_q2gnl")
+animation_player = NodePath("../../../AnimationPlayer")
+animation_name = &"idle"
+
+[node name="ToShoot" type="Node" parent="StateChart/Root/Move"]
+script = ExtResource("7_mn7qe")
+to = NodePath("../../Shoot")
+event = &"pressed_shoot"
+delay_in_seconds = "0.0"
+
+[node name="Shoot" type="Node" parent="StateChart/Root"]
+script = ExtResource("6_q2gnl")
+animation_player = NodePath("../../../AnimationPlayer")
+animation_name = &"idle"
+
+[node name="ToMove" type="Node" parent="StateChart/Root/Shoot"]
+script = ExtResource("7_mn7qe")
+to = NodePath("../../Move")
+event = &"released_shoot"
+delay_in_seconds = "0.0"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_71xxc")
+}
+
+[node name="StateChartDebugger" parent="." instance=ExtResource("8_vhe2l")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 372.0
+offset_bottom = 448.0
+grow_horizontal = 1
+grow_vertical = 1
+initial_node_to_watch = NodePath("../StateChart")
+
+[connection signal="state_physics_processing" from="StateChart/Root/Move" to="." method="_on_move_state_physics_processing"]
