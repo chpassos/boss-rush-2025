@@ -6,7 +6,7 @@ extends CharacterBody2D
 
 
 func _draw() -> void:
-	draw_circle(global_position, player_revolution.max_distance, Color.BLACK, false)
+	draw_circle(global_position, player_revolution.max_distance, Color.WHITE, false)
 
 
 func _process(_delta: float) -> void:
