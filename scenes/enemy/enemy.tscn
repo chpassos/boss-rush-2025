@@ -15,6 +15,7 @@ texture = ExtResource("1_7ogf4")
 [node name="PlayerRotationDetectionComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("3_5wsqv")
 actor = NodePath("..")
+max_distance = 100.0
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8
