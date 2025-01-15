@@ -1,17 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxvtdhp8dh0er"]
+[gd_scene load_steps=8 format=3 uid="uid://cxvtdhp8dh0er"]
 
-[ext_resource type="Shader" path="res://shaders/overlayVHS.gdshader" id="1_08d8b"]
-[ext_resource type="PackedScene" uid="uid://qeojnj1qox2l" path="res://scenes/enemy/enemy.tscn" id="1_lc647"]
+[ext_resource type="Shader" path="res://assets/shaders/overlayVHS.gdshader" id="1_08d8b"]
 [ext_resource type="PackedScene" uid="uid://deje3vxmm68ao" path="res://scenes/player/player.tscn" id="2_5rsj7"]
 [ext_resource type="PackedScene" uid="uid://x83i8cfjst2t" path="res://scenes/asteroid/collectible/collectible_asteroid.tscn" id="2_sdvru"]
-[ext_resource type="Script" path="res://scenes/asteroid/asteroid_data.gd" id="5_bl2e6"]
+[ext_resource type="Script" path="res://customs/resources/asteroid_data.gd" id="5_bl2e6"]
 [ext_resource type="Texture2D" uid="uid://cxgyyokv5dgku" path="res://assets/circle.png" id="6_2evji"]
-
-[sub_resource type="Resource" id="Resource_eeh06"]
-script = ExtResource("5_bl2e6")
-type = &"damage"
-sprite = ExtResource("6_2evji")
-color = Color(0.25098, 0.25098, 0.25098, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_37w87"]
 shader = ExtResource("1_08d8b")
@@ -37,23 +30,22 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
 
+[sub_resource type="Resource" id="Resource_eeh06"]
+script = ExtResource("5_bl2e6")
+type = &"damage"
+sprite = ExtResource("6_2evji")
+color = Color(0.25098, 0.25098, 0.25098, 1)
+
 [node name="Test" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("2_5rsj7")]
-position = Vector2(-352, -157)
 
-[node name="Enemy" parent="." instance=ExtResource("1_lc647")]
-
-[node name="CollectibleAsteroid" parent="." instance=ExtResource("2_sdvru")]
-position = Vector2(-215, 109)
-data = SubResource("Resource_eeh06")
-
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
 process_callback = 0
+position_smoothing_enabled = true
 
-[node name="ColorRect" type="ColorRect" parent="Camera2D"]
-visible = false
+[node name="ColorRect" type="ColorRect" parent="Player/Camera2D"]
 material = SubResource("ShaderMaterial_37w87")
 custom_minimum_size = Vector2(960, 540)
 anchors_preset = 15
@@ -61,3 +53,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="CollectibleAsteroid" parent="." instance=ExtResource("2_sdvru")]
+position = Vector2(295, 0)
+data = SubResource("Resource_eeh06")

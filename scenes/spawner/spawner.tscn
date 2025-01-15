@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scenes/spawner/spawner.gd" id="1_rdxnw"]
 [ext_resource type="PackedScene" uid="uid://c0hh2lf0b4l02" path="res://scenes/projectiles/projectile.tscn" id="2_xqs6n"]
-[ext_resource type="Script" path="res://resources/projectile_type.gd" id="3_i1qjf"]
-[ext_resource type="Resource" uid="uid://5ig4whq2kntd" path="res://resources/projectile_type1.tres" id="4_871cv"]
-[ext_resource type="Resource" uid="uid://dkj0aqna4iffc" path="res://resources/projectile_type2.tres" id="5_s12a5"]
+[ext_resource type="Script" path="res://customs/resources/projectile_type.gd" id="3_i1qjf"]
+[ext_resource type="Resource" uid="uid://5ig4whq2kntd" path="res://scenes/projectiles/projectile_type1.tres" id="4_871cv"]
+[ext_resource type="Resource" uid="uid://dkj0aqna4iffc" path="res://scenes/projectiles/projectile_type2.tres" id="5_s12a5"]
 
 [node name="Spawner" type="Node2D"]
 script = ExtResource("1_rdxnw")

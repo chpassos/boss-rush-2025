@@ -135,5 +135,12 @@ func _on_shoot_state_unhandled_input(event: InputEvent) -> void:
 			rotation_input_queue = [&"move_left"]
 
 	if rotation_input_queue.size() == 4:
-		print("SHOOT!")
+		if (rotation_input_queue[0] == &"move_up" and rotation_input_queue[1] == &"move_right") \
+		or (rotation_input_queue[0] == &"move_right" and rotation_input_queue[1] == &"move_down") \
+		or (rotation_input_queue[0] == &"move_down" and rotation_input_queue[1] == &"move_left") \
+		or (rotation_input_queue[0] == &"move_left" and rotation_input_queue[1] == &"move_up"):
+			print("SHOOT CLOCKWISE!")
+		else:
+			print("SHOOT COUNTERCLOCKWISE!")
+
 		rotation_input_queue = []

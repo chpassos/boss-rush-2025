@@ -36,9 +36,8 @@ enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/go
 folder_colors={
 "res://addons/": "gray",
 "res://assets/": "orange",
-"res://components/": "pink",
+"res://customs/": "pink",
 "res://globals/": "purple",
-"res://resources/": "green",
 "res://scenes/": "blue",
 "res://ui/": "green"
 }
