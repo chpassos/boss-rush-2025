@@ -101,6 +101,7 @@ position = Vector2(48, 0)
 texture = ExtResource("4_fes46")
 
 [node name="Shape" type="Sprite2D" parent="."]
+light_mask = 0
 texture = ExtResource("5_nj1yd")
 region_enabled = true
 region_rect = Rect2(0, 0, 36, 32)
