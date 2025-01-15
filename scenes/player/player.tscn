@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://deje3vxmm68ao"]
+[gd_scene load_steps=11 format=3 uid="uid://deje3vxmm68ao"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_uadqj"]
 [ext_resource type="Texture2D" uid="uid://cxgyyokv5dgku" path="res://assets/circle.png" id="2_oyygl"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="5_mnto5"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/animation_player_state.gd" id="6_q2gnl"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="7_mn7qe"]
-[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="8_vhe2l"]
 
 [sub_resource type="Animation" id="Animation_f1e7n"]
 length = 0.001
@@ -88,17 +87,6 @@ delay_in_seconds = "0.0"
 libraries = {
 "": SubResource("AnimationLibrary_71xxc")
 }
-
-[node name="StateChartDebugger" parent="." instance=ExtResource("8_vhe2l")]
-visible = false
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 199.0
-offset_bottom = 148.0
-grow_horizontal = 1
-grow_vertical = 1
-initial_node_to_watch = NodePath("../StateChart")
 
 [connection signal="state_physics_processing" from="StateChart/Root/Move" to="." method="_on_move_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Shoot" to="." method="_on_shoot_state_entered"]
