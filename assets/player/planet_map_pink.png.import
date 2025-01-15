@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://l2276j46u7hf"
-path="res://.godot/imported/planet_map_green.png-e87bd6efa26572ddf4027756cef97330.ctex"
+uid="uid://bwgn8w0y2sfdg"
+path="res://.godot/imported/planet_map_pink.png-ee98dd363b81b47146757ca106ceabc7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/planet_map_green.png"
-dest_files=["res://.godot/imported/planet_map_green.png-e87bd6efa26572ddf4027756cef97330.ctex"]
+source_file="res://assets/player/planet_map_pink.png"
+dest_files=["res://.godot/imported/planet_map_pink.png-ee98dd363b81b47146757ca106ceabc7.ctex"]
 
 [params]
 

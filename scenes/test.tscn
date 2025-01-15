@@ -46,6 +46,7 @@ process_callback = 0
 position_smoothing_enabled = true
 
 [node name="ColorRect" type="ColorRect" parent="Player/Camera2D"]
+visible = false
 material = SubResource("ShaderMaterial_37w87")
 custom_minimum_size = Vector2(960, 540)
 anchors_preset = 15

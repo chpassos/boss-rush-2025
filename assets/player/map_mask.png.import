@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhh6jmfxm36h8"
-path="res://.godot/imported/planet_map_orange.png-67a688cd8f87a00055885a7f4b0f89eb.ctex"
+uid="uid://b57v31wqc2en3"
+path="res://.godot/imported/map_mask.png-b5c62cacbeab2e98a39a2ed7f154c7b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/planet_map_orange.png"
-dest_files=["res://.godot/imported/planet_map_orange.png-67a688cd8f87a00055885a7f4b0f89eb.ctex"]
+source_file="res://assets/player/map_mask.png"
+dest_files=["res://.godot/imported/map_mask.png-b5c62cacbeab2e98a39a2ed7f154c7b1.ctex"]
 
 [params]
 
