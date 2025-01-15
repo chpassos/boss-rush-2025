@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxvtdhp8dh0er"]
+[gd_scene load_steps=11 format=3 uid="uid://cxvtdhp8dh0er"]
 
 [ext_resource type="Shader" path="res://shaders/overlayVHS.gdshader" id="1_08d8b"]
 [ext_resource type="PackedScene" uid="uid://qeojnj1qox2l" path="res://scenes/enemy/enemy.tscn" id="1_lc647"]
@@ -7,11 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://bit302huqj7xe" path="res://scenes/spawner/spawner.tscn" id="3_2mayb"]
 [ext_resource type="PackedScene" uid="uid://cxikgvsivsi2f" path="res://scenes/asteroid/orbiting/orbiting_asteroid.tscn" id="3_faqd3"]
 [ext_resource type="Script" path="res://scenes/asteroid/asteroid_data.gd" id="5_bl2e6"]
+[ext_resource type="Texture2D" uid="uid://cxgyyokv5dgku" path="res://assets/circle.png" id="6_2evji"]
 
 [sub_resource type="Resource" id="Resource_eeh06"]
 script = ExtResource("5_bl2e6")
 type = &"damage"
-color = Color(0.19, 0.05491, 0.0399, 1)
+sprite = ExtResource("6_2evji")
+color = Color(0.25098, 0.25098, 0.25098, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_37w87"]
 shader = ExtResource("1_08d8b")

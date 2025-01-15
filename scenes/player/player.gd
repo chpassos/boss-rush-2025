@@ -2,14 +2,14 @@ class_name Player
 extends CharacterBody2D
 
 
-@export var actor: CharacterBody2D
 @export var max_speed: float = 200.0
 @export var acceleration: float = 1500.0
 @export var drag: float = 800.0
+@export var orbiting_asteroid_scene: PackedScene
 
 @onready var state_chart: StateChart = $StateChart as StateChart
 @onready var rotation_input_queue: Array[StringName] = []
-
+@onready var asteroids: Array[AsteroidData] = []
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -17,6 +17,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		state_chart.send_event(&"pressed_shoot")
 	elif event.is_action_released(&"toggle_shoot_mode"):
 		state_chart.send_event(&"released_shoot")
+
+
+func add_asteroid(asteroid_data: AsteroidData) -> void:
+	asteroids.append(asteroid_data)
+
+	var orbiting_asteroid: OrbitingAsteroid = orbiting_asteroid_scene.instantiate() as OrbitingAsteroid
+	orbiting_asteroid.primary = self
+	orbiting_asteroid.orbiting_distance = clampf(randfn(40.0, 10.0), 20.0, 60.0)
+	orbiting_asteroid.orbiting_speed = randf_range(PI / 2, 2 * PI)
+	orbiting_asteroid.global_position = global_position + orbiting_asteroid.orbiting_distance * Vector2.RIGHT
+	orbiting_asteroid.modulate = asteroid_data.color
+
+	add_child(orbiting_asteroid)
 
 
 # MOVE STATE

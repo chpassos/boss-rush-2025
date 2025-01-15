@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://deje3vxmm68ao"]
+[gd_scene load_steps=12 format=3 uid="uid://deje3vxmm68ao"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_uadqj"]
 [ext_resource type="Texture2D" uid="uid://cxgyyokv5dgku" path="res://assets/circle.png" id="2_oyygl"]
+[ext_resource type="PackedScene" uid="uid://cxikgvsivsi2f" path="res://scenes/asteroid/orbiting/orbiting_asteroid.tscn" id="2_xc1xw"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="4_ai658"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="5_mnto5"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/animation_player_state.gd" id="6_q2gnl"]
@@ -48,6 +49,7 @@ _data = {
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_uadqj")
+orbiting_asteroid_scene = ExtResource("2_xc1xw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 0.501961, 1, 1)

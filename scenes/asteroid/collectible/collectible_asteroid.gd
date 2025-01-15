@@ -15,4 +15,5 @@ func _ready() -> void:
 
 
 func _on_player_revolved(_clockwise: bool) -> void:
-	queue_free()
+	player_revolution.player.add_asteroid(data)
+	call_deferred(&"queue_free")
