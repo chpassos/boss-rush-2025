@@ -1,19 +1,21 @@
-[gd_scene load_steps=11 format=3 uid="uid://deje3vxmm68ao"]
+[gd_scene load_steps=13 format=3 uid="uid://deje3vxmm68ao"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_uadqj"]
-[ext_resource type="Texture2D" uid="uid://cxgyyokv5dgku" path="res://assets/circle.png" id="2_oyygl"]
 [ext_resource type="PackedScene" uid="uid://cxikgvsivsi2f" path="res://scenes/asteroid/orbiting/orbiting_asteroid.tscn" id="2_xc1xw"]
+[ext_resource type="Texture2D" uid="uid://b57v31wqc2en3" path="res://assets/map_mask.png" id="3_y8u18"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="4_ai658"]
+[ext_resource type="Texture2D" uid="uid://bwgn8w0y2sfdg" path="res://assets/planet_map_pink.png" id="4_fes46"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="5_mnto5"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/animation_player_state.gd" id="6_q2gnl"]
+[ext_resource type="Texture2D" uid="uid://c22o30tvdwb8x" path="res://assets/planet_shape.png" id="5_nj1yd"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="7_mn7qe"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="8_1si24"]
 
 [sub_resource type="Animation" id="Animation_f1e7n"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/path = NodePath("Shape:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -22,37 +24,86 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shape:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 36, 32)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlanetMask/PlanetMap:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(48, 0)]
+}
 
-[sub_resource type="Animation" id="Animation_jt4gv"]
-resource_name = "idle"
+[sub_resource type="Animation" id="Animation_i5416"]
+resource_name = "rotation"
+length = 2.0
 loop_mode = 1
+step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/path = NodePath("Shape:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 0,
-"values": []
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 36, 32), Rect2(38, 0, 36, 32), Rect2(76, 0, 36, 32), Rect2(114, 0, 36, 32), Rect2(152, 0, 36, 32), Rect2(190, 0, 36, 32), Rect2(228, 0, 36, 32), Rect2(266, 0, 36, 32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlanetMask/PlanetMap:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-37, 0), Vector2(-29, 0), Vector2(-21, 0), Vector2(-13, 0), Vector2(-5, 0), Vector2(3, 0), Vector2(11, 0), Vector2(19, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_71xxc"]
 _data = {
 "RESET": SubResource("Animation_f1e7n"),
-"idle": SubResource("Animation_jt4gv")
+"rotation": SubResource("Animation_i5416")
 }
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("planet_shape", "planet_map") groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_uadqj")
 orbiting_asteroid_scene = ExtResource("2_xc1xw")
+planet_shape = NodePath("Shape")
+planet_map = NodePath("PlanetMask/PlanetMap")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0, 0.501961, 1, 1)
-texture = ExtResource("2_oyygl")
+[node name="PlanetMask" type="Sprite2D" parent="."]
+clip_children = 1
+texture = ExtResource("3_y8u18")
+
+[node name="PlanetMap" type="Sprite2D" parent="PlanetMask"]
+position = Vector2(48, 0)
+texture = ExtResource("4_fes46")
+
+[node name="Shape" type="Sprite2D" parent="."]
+texture = ExtResource("5_nj1yd")
+region_enabled = true
+region_rect = Rect2(0, 0, 36, 32)
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("4_ai658")
@@ -62,9 +113,7 @@ script = ExtResource("5_mnto5")
 initial_state = NodePath("Move")
 
 [node name="Move" type="Node" parent="StateChart/Root"]
-script = ExtResource("6_q2gnl")
-animation_player = NodePath("../../../AnimationPlayer")
-animation_name = &"idle"
+script = ExtResource("8_1si24")
 
 [node name="ToShoot" type="Node" parent="StateChart/Root/Move"]
 script = ExtResource("7_mn7qe")
@@ -73,9 +122,7 @@ event = &"pressed_shoot"
 delay_in_seconds = "0.0"
 
 [node name="Shoot" type="Node" parent="StateChart/Root"]
-script = ExtResource("6_q2gnl")
-animation_player = NodePath("../../../AnimationPlayer")
-animation_name = &"idle"
+script = ExtResource("8_1si24")
 
 [node name="ToMove" type="Node" parent="StateChart/Root/Shoot"]
 script = ExtResource("7_mn7qe")
