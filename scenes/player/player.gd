@@ -9,10 +9,12 @@ extends CharacterBody2D
 @export_group("Nodes")
 @export var planet_shape: Sprite2D
 @export var planet_map: Sprite2D
+@export var aim_line: Line2D
 
 @onready var state_chart: StateChart = $StateChart as StateChart
 @onready var rotation_input_queue: Array[StringName] = []
 @onready var asteroids: Array[AsteroidData] = []
+@onready var aim_line_default_opacity: float = aim_line.modulate.a
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -20,6 +22,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		state_chart.send_event(&"pressed_shoot")
 	elif event.is_action_released(&"toggle_shoot_mode"):
 		state_chart.send_event(&"released_shoot")
+
+
+func _process(_delta: float) -> void:
+	var mouse_position: Vector2 = get_global_mouse_position()
+	var angle: float = global_position.angle_to_point(mouse_position)
+	aim_line.rotation = angle
 
 
 func add_asteroid(asteroid_data: AsteroidData) -> void:
@@ -87,6 +95,11 @@ func _on_move_state_physics_processing(delta: float) -> void:
 
 func _on_shoot_state_entered() -> void:
 	rotation_input_queue = []
+	aim_line.modulate.a = 1.0
+
+
+func _on_shoot_state_exited() -> void:
+	aim_line.modulate.a = aim_line_default_opacity
 
 
 func _on_shoot_state_unhandled_input(event: InputEvent) -> void:
