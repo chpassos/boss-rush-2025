@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxvtdhp8dh0er"]
+[gd_scene load_steps=9 format=3 uid="uid://cxvtdhp8dh0er"]
 
 [ext_resource type="Shader" path="res://assets/shaders/overlayVHS.gdshader" id="1_08d8b"]
 [ext_resource type="PackedScene" uid="uid://deje3vxmm68ao" path="res://scenes/player/player.tscn" id="2_5rsj7"]
 [ext_resource type="PackedScene" uid="uid://x83i8cfjst2t" path="res://scenes/asteroid/collectible/collectible_asteroid.tscn" id="2_sdvru"]
 [ext_resource type="Script" path="res://customs/resources/asteroid_data.gd" id="5_bl2e6"]
 [ext_resource type="Texture2D" uid="uid://cxgyyokv5dgku" path="res://assets/circle.png" id="6_2evji"]
+[ext_resource type="PackedScene" uid="uid://b46v3f7wavfeq" path="res://scenes/boss/boss.tscn" id="6_dtdlm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_37w87"]
 shader = ExtResource("1_08d8b")
@@ -58,3 +59,6 @@ grow_vertical = 2
 [node name="CollectibleAsteroid" parent="." instance=ExtResource("2_sdvru")]
 position = Vector2(295, 0)
 data = SubResource("Resource_eeh06")
+
+[node name="Boss" parent="." instance=ExtResource("6_dtdlm")]
+position = Vector2(462, -248)
