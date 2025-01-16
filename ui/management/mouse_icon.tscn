@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://th0v8ya0g4kf"]
 
-[ext_resource type="Script" path="res://scenes/management/mouse_icon.gd" id="1_avkki"]
-[ext_resource type="Texture2D" uid="uid://cw1kl0h6dx1np" path="res://assets/mouse_cursor_v2.png" id="1_e4m5t"]
+[ext_resource type="Script" path="res://ui/management/mouse_icon.gd" id="1_avkki"]
+[ext_resource type="Texture2D" uid="uid://cw1kl0h6dx1np" path="res://assets/cursor/mouse_cursor_v2.png" id="1_e4m5t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0fy3c"]
 

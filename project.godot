@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 SignalBus="*res://globals/signal_bus.gd"
 SpeedrunTimer="*res://globals/speedrun_timer.gd"
+Globals="*res://globals/globals.gd"
 
 [display]
 

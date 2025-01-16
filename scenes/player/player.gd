@@ -18,6 +18,10 @@ extends CharacterBody2D
 @onready var aim_line_default_opacity: float = aim_line.modulate.a
 
 
+func _ready() -> void:
+	Globals.player = self
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"toggle_shoot_mode"):
 		state_chart.send_event(&"pressed_shoot")

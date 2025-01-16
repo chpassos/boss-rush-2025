@@ -5,25 +5,24 @@ extends RigidBody2D
 @export var data: AsteroidData
 @export_group("Nodes")
 @export var sprite: Sprite2D
-@export var player_revolution: PlayerRevolutionComponent
+@export var player_revolution: PlayerRevolutionComponent  # TODO: temporary
 
 
 func _draw() -> void:
-	draw_circle(Vector2.ZERO, player_revolution.max_distance, data.color, false)
+	draw_circle(Vector2.ZERO, player_revolution.max_distance - 16, data.color, false)
 
 
 func _ready() -> void:
 	#sprite.modulate = data.color
 	sprite.texture = data.sprite
-	player_revolution.player_revolved.connect(_on_player_revolved)
 
 
 func _on_player_revolved(_clockwise: bool) -> void:
-	player_revolution.player.add_asteroid_to_queue(data)
+	Globals.player.add_asteroid_to_queue(data)
 	call_deferred(&"queue_free")
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not linear_velocity:
 		return
 
@@ -32,3 +31,7 @@ func _physics_process(delta: float) -> void:
 	var vel_dir: Vector2 = linear_velocity.normalized()
 
 	apply_central_force(-1 * k * vel_sq * vel_dir)
+
+
+func _on_despawn_timer_timeout() -> void:
+	queue_free()
