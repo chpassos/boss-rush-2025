@@ -11,7 +11,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i7q1f"]
 shader = ExtResource("8_vc04t")
-shader_parameter/bg_color = null
+shader_parameter/bg_color = Color(0, 0, 0, 0)
 shader_parameter/offset = null
 shader_parameter/bigStarSlow = 2.0
 shader_parameter/mediumStarSlow = 6.0
@@ -44,7 +44,7 @@ zoom = Vector2(2, 2)
 process_callback = 0
 position_smoothing_enabled = true
 
-[node name="CollectibleAsteroid" parent="." instance=ExtResource("2_sdvru")]
+[node name="CollectibleAsteroid1" parent="." instance=ExtResource("2_sdvru")]
 position = Vector2(295, 0)
 data = SubResource("Resource_eeh06")
 

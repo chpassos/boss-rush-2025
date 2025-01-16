@@ -11,7 +11,6 @@ radius = 64.4981
 [node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "light", "health_component")]
 disable_mode = 1
 collision_layer = 2
-collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_kvpo3")
 light_color = Color(0.709804, 0.305882, 0.207843, 1)

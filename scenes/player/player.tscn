@@ -121,7 +121,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("planet_shape", "planet_map", "sprite", "aim_line") groups=["player"]]
-collision_mask = 6
+collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_uadqj")
 orbiting_asteroid_scene = ExtResource("2_xc1xw")
