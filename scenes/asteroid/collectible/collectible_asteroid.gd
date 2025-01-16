@@ -21,3 +21,14 @@ func _ready() -> void:
 func _on_player_revolved(_clockwise: bool) -> void:
 	player_revolution.player.add_asteroid_to_queue(data)
 	call_deferred(&"queue_free")
+
+
+func _physics_process(delta: float) -> void:
+	if not linear_velocity:
+		return
+
+	var k: float = 0.025
+	var vel_sq: float = linear_velocity.length_squared()
+	var vel_dir: Vector2 = linear_velocity.normalized()
+
+	apply_central_force(-1 * k * vel_sq * vel_dir)

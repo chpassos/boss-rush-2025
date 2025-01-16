@@ -11,7 +11,7 @@ func update_ui():
 	var decimal_index = string_time.find(".")
 	if decimal_index > 0:
 		string_time = string_time.left(decimal_index + 3)
-		print(string_time)
-	
+		#print(string_time)
+
 	Globals.speedrun_time = string_time
 	$Label.text = string_time
