@@ -16,5 +16,6 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_agui6")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 4.0
 texture = ExtResource("3_fr0ge")
 texture_scale = 10.0

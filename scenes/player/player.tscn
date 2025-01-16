@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://deje3vxmm68ao"]
+[gd_scene load_steps=17 format=3 uid="uid://deje3vxmm68ao"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_uadqj"]
 [ext_resource type="PackedScene" uid="uid://cxikgvsivsi2f" path="res://scenes/asteroid/orbiting/orbiting_asteroid.tscn" id="2_xc1xw"]
@@ -7,8 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://l2276j46u7hf" path="res://assets/player/planet_map_green.png" id="4_jys78"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="5_mnto5"]
 [ext_resource type="Texture2D" uid="uid://c22o30tvdwb8x" path="res://assets/player/planet_shape.png" id="5_nj1yd"]
+[ext_resource type="Texture2D" uid="uid://cvrbcloqdkbnr" path="res://assets/player/planet_all-in-one.png" id="6_218uw"]
+[ext_resource type="Texture2D" uid="uid://df75ek36wusrd" path="res://assets/player/planet_all-in-one_n.png" id="7_fq23a"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="7_mn7qe"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="8_1si24"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_wxmcx"]
+diffuse_texture = ExtResource("6_218uw")
+normal_texture = ExtResource("7_fq23a")
 
 [sub_resource type="Gradient" id="Gradient_k1xnt"]
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
@@ -88,15 +94,17 @@ _data = {
 "rotation": SubResource("Animation_i5416")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("planet_shape", "planet_map", "aim_line") groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("planet_shape", "planet_map", "sprite", "aim_line") groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_uadqj")
 orbiting_asteroid_scene = ExtResource("2_xc1xw")
 planet_shape = NodePath("Shape")
 planet_map = NodePath("PlanetMask/PlanetMap")
+sprite = NodePath("Sprite2D")
 aim_line = NodePath("AimLine")
 
 [node name="PlanetMask" type="Sprite2D" parent="."]
+visible = false
 clip_children = 1
 texture = ExtResource("3_y8u18")
 
@@ -105,8 +113,14 @@ position = Vector2(48, 0)
 texture = ExtResource("4_jys78")
 
 [node name="Shape" type="Sprite2D" parent="."]
+visible = false
 light_mask = 0
 texture = ExtResource("5_nj1yd")
+region_enabled = true
+region_rect = Rect2(0, 0, 36, 32)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("CanvasTexture_wxmcx")
 region_enabled = true
 region_rect = Rect2(0, 0, 36, 32)
 
