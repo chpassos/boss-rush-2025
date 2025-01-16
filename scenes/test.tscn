@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxvtdhp8dh0er"]
+[gd_scene load_steps=12 format=3 uid="uid://cxvtdhp8dh0er"]
 
 [ext_resource type="Shader" path="res://assets/shaders/overlayVHS.gdshader" id="1_08d8b"]
 [ext_resource type="PackedScene" uid="uid://deje3vxmm68ao" path="res://scenes/player/player.tscn" id="2_5rsj7"]
@@ -7,6 +7,18 @@
 [ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroid.png" id="5_ae6jn"]
 [ext_resource type="Script" path="res://customs/resources/asteroid_data.gd" id="5_bl2e6"]
 [ext_resource type="PackedScene" uid="uid://b46v3f7wavfeq" path="res://scenes/boss/boss.tscn" id="6_dtdlm"]
+[ext_resource type="Shader" path="res://assets/shaders/space_background.gdshader" id="8_vc04t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i7q1f"]
+shader = ExtResource("8_vc04t")
+shader_parameter/bg_color = null
+shader_parameter/offset = null
+shader_parameter/bigStarSlow = 2.0
+shader_parameter/mediumStarSlow = 6.0
+shader_parameter/smallStarSlow = 8.0
+shader_parameter/smallStarAmount = 0.002
+shader_parameter/mediumStarAmount = 0.01
+shader_parameter/bigStarAmount = 0.02
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_37w87"]
 shader = ExtResource("1_08d8b")
@@ -40,6 +52,13 @@ color = Color(0.815686, 0.121569, 0.423529, 1)
 projectile_scene = ExtResource("4_n5nvi")
 
 [node name="Test" type="Node2D"]
+
+[node name="SpaceShader" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_i7q1f")
+offset_left = -690.0
+offset_top = -498.0
+offset_right = 730.0
+offset_bottom = 538.0
 
 [node name="Player" parent="." instance=ExtResource("2_5rsj7")]
 
