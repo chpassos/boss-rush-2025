@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Boss Rush 2025"
+run/main_scene="res://scenes/test.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -79,6 +80,7 @@ toggle_shoot_mode={
 2d_physics/layer_1="player"
 2d_physics/layer_2="enemies"
 2d_physics/layer_3="objects"
+2d_physics/layer_4="projectiles"
 
 [physics]
 

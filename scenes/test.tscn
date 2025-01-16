@@ -82,5 +82,13 @@ grow_vertical = 2
 position = Vector2(295, 0)
 data = SubResource("Resource_eeh06")
 
+[node name="CollectibleAsteroid2" parent="." instance=ExtResource("2_sdvru")]
+position = Vector2(691, -60)
+data = SubResource("Resource_eeh06")
+
+[node name="CollectibleAsteroid3" parent="." instance=ExtResource("2_sdvru")]
+position = Vector2(242, -383)
+data = SubResource("Resource_eeh06")
+
 [node name="Boss" parent="." instance=ExtResource("6_dtdlm")]
 position = Vector2(462, -248)
