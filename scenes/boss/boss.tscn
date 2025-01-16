@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://b46v3f7wavfeq"]
+[gd_scene load_steps=5 format=3 uid="uid://b46v3f7wavfeq"]
 
 [ext_resource type="Script" path="res://scenes/boss/boss.gd" id="1_kvpo3"]
 [ext_resource type="Texture2D" uid="uid://cxgyyokv5dgku" path="res://assets/circle.png" id="2_agui6"]
 [ext_resource type="Texture2D" uid="uid://xpjeb363su68" path="res://assets/point_light.webp" id="3_fr0ge"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_fqvag"]
+radius = 64.4981
+
 [node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "light")]
+disable_mode = 1
+collision_layer = 2
+collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_kvpo3")
 light_color = Color(0.709804, 0.305882, 0.207843, 1)
@@ -15,7 +21,10 @@ light = NodePath("PointLight2D")
 scale = Vector2(4, 4)
 texture = ExtResource("2_agui6")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fqvag")
+
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 4.0
+energy = 2.0
 texture = ExtResource("3_fr0ge")
 texture_scale = 10.0

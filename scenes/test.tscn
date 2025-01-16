@@ -3,8 +3,8 @@
 [ext_resource type="Shader" path="res://assets/shaders/overlayVHS.gdshader" id="1_08d8b"]
 [ext_resource type="PackedScene" uid="uid://deje3vxmm68ao" path="res://scenes/player/player.tscn" id="2_5rsj7"]
 [ext_resource type="PackedScene" uid="uid://x83i8cfjst2t" path="res://scenes/asteroid/collectible/collectible_asteroid.tscn" id="2_sdvru"]
+[ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroid.png" id="5_ae6jn"]
 [ext_resource type="Script" path="res://customs/resources/asteroid_data.gd" id="5_bl2e6"]
-[ext_resource type="Texture2D" uid="uid://cxgyyokv5dgku" path="res://assets/circle.png" id="6_2evji"]
 [ext_resource type="PackedScene" uid="uid://b46v3f7wavfeq" path="res://scenes/boss/boss.tscn" id="6_dtdlm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_37w87"]
@@ -34,8 +34,8 @@ shader_parameter/vignette_opacity = 0.5
 [sub_resource type="Resource" id="Resource_eeh06"]
 script = ExtResource("5_bl2e6")
 type = &"damage"
-sprite = ExtResource("6_2evji")
-color = Color(0.25098, 0.25098, 0.25098, 1)
+sprite = ExtResource("5_ae6jn")
+color = Color(1, 0, 0, 1)
 
 [node name="Test" type="Node2D"]
 

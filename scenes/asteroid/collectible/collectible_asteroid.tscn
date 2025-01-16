@@ -1,18 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://x83i8cfjst2t"]
+[gd_scene load_steps=5 format=3 uid="uid://x83i8cfjst2t"]
 
-[ext_resource type="Texture2D" uid="uid://cxgyyokv5dgku" path="res://assets/circle.png" id="1_hef5j"]
+[ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroid.png" id="1_rnuwn"]
 [ext_resource type="Script" path="res://scenes/asteroid/collectible/collectible_asteroid.gd" id="2_jhn01"]
 [ext_resource type="Script" path="res://customs/nodes/player_revolution_component/player_revolution_component.gd" id="3_efdi8"]
 
-[node name="CollectibleAsteroid" type="Sprite2D" node_paths=PackedStringArray("player_revolution")]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_hef5j")
+[sub_resource type="CircleShape2D" id="CircleShape2D_0wxfq"]
+radius = 8.0
+
+[node name="CollectibleAsteroid" type="RigidBody2D" node_paths=PackedStringArray("sprite", "player_revolution")]
+gravity_scale = 0.0
+lock_rotation = true
 script = ExtResource("2_jhn01")
+sprite = NodePath("Sprite2D")
 player_revolution = NodePath("PlayerRevolutionComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rnuwn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0wxfq")
 
 [node name="PlayerRevolutionComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("3_efdi8")
-actor = NodePath("..")
+actor = NodePath("../Sprite2D")
 max_distance = 100.0
 
 [node name="DespawnTimer" type="Timer" parent="."]
@@ -20,4 +30,4 @@ wait_time = 30.0
 one_shot = true
 autostart = true
 
-[connection signal="timeout" from="DespawnTimer" to="." method="queue_free"]
+[connection signal="timeout" from="DespawnTimer" to="Sprite2D" method="queue_free"]

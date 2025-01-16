@@ -74,6 +74,12 @@ toggle_shoot_mode={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="enemies"
+2d_physics/layer_3="objects"
+
 [physics]
 
 common/physics_jitter_fix=0.0
