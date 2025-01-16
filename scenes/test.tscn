@@ -35,7 +35,7 @@ shader_parameter/vignette_opacity = 0.5
 script = ExtResource("5_bl2e6")
 type = &"damage"
 sprite = ExtResource("5_ae6jn")
-color = Color(1, 0, 0, 1)
+color = Color(0.815686, 0.121569, 0.423529, 1)
 
 [node name="Test" type="Node2D"]
 

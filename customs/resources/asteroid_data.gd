@@ -3,6 +3,6 @@ extends Resource
 
 
 @export var type: StringName
-@export var sprite: Texture
+@export var sprite: Texture2D
 @export var color: Color
 @export var projectile_scene: PackedScene
