@@ -59,6 +59,7 @@ offset_left = -690.0
 offset_top = -498.0
 offset_right = 730.0
 offset_bottom = 538.0
+mouse_filter = 2
 
 [node name="Player" parent="." instance=ExtResource("2_5rsj7")]
 

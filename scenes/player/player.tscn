@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://deje3vxmm68ao"]
+[gd_scene load_steps=19 format=3 uid="uid://deje3vxmm68ao"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_uadqj"]
 [ext_resource type="PackedScene" uid="uid://cxikgvsivsi2f" path="res://scenes/asteroid/orbiting/orbiting_asteroid.tscn" id="2_xc1xw"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://df75ek36wusrd" path="res://assets/player/planet_all-in-one_n.png" id="7_fq23a"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="7_mn7qe"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="8_1si24"]
+[ext_resource type="PackedScene" uid="uid://th0v8ya0g4kf" path="res://scenes/management/mouse_icon.tscn" id="12_00n0p"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_wxmcx"]
 diffuse_texture = ExtResource("6_218uw")
@@ -185,6 +186,8 @@ script = ExtResource("7_mn7qe")
 to = NodePath("../../Move")
 event = &"released_shoot"
 delay_in_seconds = "0.0"
+
+[node name="MouseIcon" parent="." instance=ExtResource("12_00n0p")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
