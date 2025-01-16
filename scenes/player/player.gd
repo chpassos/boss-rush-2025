@@ -14,7 +14,7 @@ extends CharacterBody2D
 
 @onready var state_chart: StateChart = $StateChart as StateChart
 @onready var rotation_input_queue: Array[StringName] = []
-@onready var asteroids: Array[AsteroidData] = []
+@onready var asteroid_queue: Array[AsteroidData] = []
 @onready var aim_line_default_opacity: float = aim_line.modulate.a
 
 
@@ -31,8 +31,8 @@ func _process(_delta: float) -> void:
 	aim_line.rotation = angle
 
 
-func add_asteroid(asteroid_data: AsteroidData) -> void:
-	asteroids.append(asteroid_data)
+func add_asteroid_to_queue(asteroid_data: AsteroidData) -> void:
+	asteroid_queue.append(asteroid_data)
 
 	var orbiting_asteroid: OrbitingAsteroid = orbiting_asteroid_scene.instantiate() as OrbitingAsteroid
 	orbiting_asteroid.primary = self
@@ -43,6 +43,18 @@ func add_asteroid(asteroid_data: AsteroidData) -> void:
 	orbiting_asteroid.top_level = true
 
 	add_child(orbiting_asteroid)
+
+
+func shoot_asteroid_from_queue(direction: Vector2) -> void:
+	if not asteroid_queue:
+		return
+
+	var asteroid_data: AsteroidData = asteroid_queue.pop_front()
+	var projectile: ProjectileAsteroid = asteroid_data.projectile_scene.instantiate() as ProjectileAsteroid
+	projectile.global_position = global_position
+	projectile.direction = direction
+	projectile.top_level = true
+	add_child(projectile)
 
 
 # MOVE STATE
@@ -158,12 +170,16 @@ func _on_shoot_state_unhandled_input(event: InputEvent) -> void:
 			rotation_input_queue = [&"move_left"]
 
 	if rotation_input_queue.size() == 4:
+		var mouse_position: Vector2 = get_global_mouse_position()
+
 		if (rotation_input_queue[0] == &"move_up" and rotation_input_queue[1] == &"move_right") \
 		or (rotation_input_queue[0] == &"move_right" and rotation_input_queue[1] == &"move_down") \
 		or (rotation_input_queue[0] == &"move_down" and rotation_input_queue[1] == &"move_left") \
 		or (rotation_input_queue[0] == &"move_left" and rotation_input_queue[1] == &"move_up"):
+			shoot_asteroid_from_queue(global_position.direction_to(mouse_position))
 			print("SHOOT CLOCKWISE!")
 		else:
+			shoot_asteroid_from_queue(global_position.direction_to(mouse_position))
 			print("SHOOT COUNTERCLOCKWISE!")
 
 		rotation_input_queue = []

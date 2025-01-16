@@ -1,3 +1,4 @@
+class_name ProjectileAsteroid
 extends Area2D
 
 

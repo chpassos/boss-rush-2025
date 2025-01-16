@@ -1,3 +1,4 @@
+class_name CollectibleAsteroid
 extends RigidBody2D
 
 
@@ -18,5 +19,5 @@ func _ready() -> void:
 
 
 func _on_player_revolved(_clockwise: bool) -> void:
-	player_revolution.player.add_asteroid(data)
+	player_revolution.player.add_asteroid_to_queue(data)
 	call_deferred(&"queue_free")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxvtdhp8dh0er"]
+[gd_scene load_steps=10 format=3 uid="uid://cxvtdhp8dh0er"]
 
 [ext_resource type="Shader" path="res://assets/shaders/overlayVHS.gdshader" id="1_08d8b"]
 [ext_resource type="PackedScene" uid="uid://deje3vxmm68ao" path="res://scenes/player/player.tscn" id="2_5rsj7"]
 [ext_resource type="PackedScene" uid="uid://x83i8cfjst2t" path="res://scenes/asteroid/collectible/collectible_asteroid.tscn" id="2_sdvru"]
+[ext_resource type="PackedScene" uid="uid://dxsferrm0w3i8" path="res://scenes/asteroid/projectile/projectile_asteroid.tscn" id="4_n5nvi"]
 [ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroid.png" id="5_ae6jn"]
 [ext_resource type="Script" path="res://customs/resources/asteroid_data.gd" id="5_bl2e6"]
 [ext_resource type="PackedScene" uid="uid://b46v3f7wavfeq" path="res://scenes/boss/boss.tscn" id="6_dtdlm"]
@@ -36,6 +37,7 @@ script = ExtResource("5_bl2e6")
 type = &"damage"
 sprite = ExtResource("5_ae6jn")
 color = Color(0.815686, 0.121569, 0.423529, 1)
+projectile_scene = ExtResource("4_n5nvi")
 
 [node name="Test" type="Node2D"]
 
