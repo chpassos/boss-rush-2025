@@ -5,13 +5,18 @@ extends RigidBody2D
 @export var clockwise: bool = true
 @export_group("Nodes")
 @export var sprite: Sprite2D
+@export var revolution_progess: TextureProgressBar
 
 
 func _ready() -> void:
 	if clockwise:
 		sprite.texture = Globals.CLOCKWISE_ASTEROID_DATA.sprites.pick_random()
+		revolution_progess.tint_over = Globals.CLOCKWISE_ASTEROID_DATA.color
+		revolution_progess.tint_progress = Globals.CLOCKWISE_ASTEROID_DATA.color
 	else:
 		sprite.texture = Globals.COUNTERCLOCKWISE_ASTEROID_DATA.sprites.pick_random()
+		revolution_progess.tint_over = Globals.COUNTERCLOCKWISE_ASTEROID_DATA.color
+		revolution_progess.tint_progress = Globals.COUNTERCLOCKWISE_ASTEROID_DATA.color
 
 
 func _on_player_revolved(_clockwise: bool) -> void:

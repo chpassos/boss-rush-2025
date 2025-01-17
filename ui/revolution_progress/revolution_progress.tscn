@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3xeqpsd8k1m"]
+
+[ext_resource type="Texture2D" uid="uid://drr64glcubnys" path="res://assets/revolution_progress/over.png" id="1_na3kn"]
+[ext_resource type="Texture2D" uid="uid://b8qi8ctgokeyn" path="res://assets/revolution_progress/progress.png" id="2_mue4b"]
+
+[node name="RevolutionProgress" type="TextureProgressBar"]
+modulate = Color(1, 1, 1, 0.25098)
+offset_right = 200.0
+offset_bottom = 200.0
+max_value = 1.0
+step = 0.0
+fill_mode = 4
+radial_initial_angle = 90.0
+texture_over = ExtResource("1_na3kn")
+texture_progress = ExtResource("2_mue4b")

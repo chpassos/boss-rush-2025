@@ -46,10 +46,6 @@ folder_colors={
 "res://ui/": "green"
 }
 
-[global_group]
-
-player=""
-
 [input]
 
 move_up={

@@ -1,19 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://x83i8cfjst2t"]
+[gd_scene load_steps=6 format=3 uid="uid://x83i8cfjst2t"]
 
 [ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroids/asteroid.png" id="1_rnuwn"]
 [ext_resource type="Script" path="res://scenes/asteroid/collectible/collectible_asteroid.gd" id="2_jhn01"]
 [ext_resource type="Script" path="res://customs/nodes/player_revolution_component/player_revolution_component.gd" id="3_efdi8"]
+[ext_resource type="PackedScene" uid="uid://c3xeqpsd8k1m" path="res://ui/revolution_progress/revolution_progress.tscn" id="4_o26ek"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0wxfq"]
 radius = 8.0
 
-[node name="CollectibleAsteroid" type="RigidBody2D" node_paths=PackedStringArray("sprite")]
+[node name="CollectibleAsteroid" type="RigidBody2D" node_paths=PackedStringArray("sprite", "revolution_progess")]
 collision_layer = 4
 collision_mask = 7
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("2_jhn01")
 sprite = NodePath("Sprite2D")
+revolution_progess = NodePath("RevolutionProgress")
+
+[node name="RevolutionProgress" parent="." instance=ExtResource("4_o26ek")]
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_rnuwn")
@@ -21,9 +29,10 @@ texture = ExtResource("1_rnuwn")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_0wxfq")
 
-[node name="PlayerRevolutionComponent" type="Node2D" parent="."]
+[node name="PlayerRevolutionComponent" type="Node2D" parent="." node_paths=PackedStringArray("progress_bar")]
 script = ExtResource("3_efdi8")
 max_distance = 100.0
+progress_bar = NodePath("../RevolutionProgress")
 
 [node name="DespawnTimer" type="Timer" parent="."]
 wait_time = 30.0
