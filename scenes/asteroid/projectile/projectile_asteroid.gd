@@ -9,11 +9,11 @@ extends Area2D
 
 var direction: Vector2 = Vector2.RIGHT
 
-@onready var data: AsteroidData = Globals.CLOCKWISE_ASTEROID_DATA if clockwise else Globals.COUNTERCLOCKWISE_ASTEROID_DATA
-
-
-func _ready() -> void:
-	sprite.texture = data.sprites.pick_random()
+#func _ready() -> void:
+	#if clockwise:
+		#sprite.texture = Globals.CLOCKWISE_ASTEROID_DATA.sprites.pick_random()
+	#else:
+		#sprite.texture = Globals.COUNTERCLOCKWISE_ASTEROID_DATA.sprites.pick_random()
 
 
 func _process(delta: float) -> void:

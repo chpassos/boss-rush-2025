@@ -6,15 +6,12 @@ extends RigidBody2D
 @export_group("Nodes")
 @export var sprite: Sprite2D
 
-@onready var data: AsteroidData = Globals.CLOCKWISE_ASTEROID_DATA if clockwise else Globals.COUNTERCLOCKWISE_ASTEROID_DATA
-
-
-func _draw() -> void:
-	draw_circle(Vector2.ZERO, ($PlayerRevolutionComponent).max_distance - 16, data.color, false)
-
 
 func _ready() -> void:
-	sprite.texture = data.sprites.pick_random()
+	if clockwise:
+		sprite.texture = Globals.CLOCKWISE_ASTEROID_DATA.sprites.pick_random()
+	else:
+		sprite.texture = Globals.COUNTERCLOCKWISE_ASTEROID_DATA.sprites.pick_random()
 
 
 func _on_player_revolved(_clockwise: bool) -> void:

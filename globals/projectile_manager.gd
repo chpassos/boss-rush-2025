@@ -10,6 +10,7 @@ func spawn_projectile(global_position: Vector2, clockwise: bool, direction: Vect
 		projectile = Globals.COUNTERCLOCKWISE_ASTEROID_DATA.projectile_scene.instantiate() as ProjectileAsteroid
 
 	projectile.global_position = global_position
+	projectile.clockwise = clockwise
 	projectile.direction = direction
 
 	add_child(projectile)

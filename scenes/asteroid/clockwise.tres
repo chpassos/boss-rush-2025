@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AsteroidData" load_steps=4 format=3 uid="uid://d0ktlimm4jpix"]
+
+[ext_resource type="Script" path="res://customs/resources/asteroid_data.gd" id="1_egcp3"]
+[ext_resource type="PackedScene" uid="uid://dxsferrm0w3i8" path="res://scenes/asteroid/projectile/projectile_asteroid.tscn" id="1_wwq0v"]
+[ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroid.png" id="3_b13rv"]
+
+[resource]
+script = ExtResource("1_egcp3")
+type = &"clockwise"
+sprites = Array[Texture2D]([ExtResource("3_b13rv")])
+color = Color(0, 0, 1, 1)
+projectile_scene = ExtResource("1_wwq0v")
