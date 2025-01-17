@@ -1,19 +1,59 @@
-[gd_resource type="Resource" script_class="AsteroidData" load_steps=11 format=3 uid="uid://d0ktlimm4jpix"]
+[gd_resource type="Resource" script_class="AsteroidData" load_steps=27 format=3 uid="uid://d0ktlimm4jpix"]
 
 [ext_resource type="Script" path="res://customs/resources/asteroid_data.gd" id="1_egcp3"]
 [ext_resource type="PackedScene" uid="uid://dxsferrm0w3i8" path="res://scenes/asteroid/projectile/projectile_asteroid.tscn" id="1_wwq0v"]
-[ext_resource type="Texture2D" uid="uid://la5j2p5dxje0" path="res://assets/asteroids/asteroid_1.png" id="3_dmpmn"]
-[ext_resource type="Texture2D" uid="uid://bgrt6tjirky4s" path="res://assets/asteroids/asteroid_2.png" id="4_cfyfa"]
-[ext_resource type="Texture2D" uid="uid://co1mjdjhkq7te" path="res://assets/asteroids/asteroid_3.png" id="5_cglco"]
-[ext_resource type="Texture2D" uid="uid://p5tdb6cgyj5w" path="res://assets/asteroids/asteroid_4.png" id="6_yfqr4"]
-[ext_resource type="Texture2D" uid="uid://maofr4u8ryac" path="res://assets/asteroids/asteroid_5.png" id="7_6nges"]
-[ext_resource type="Texture2D" uid="uid://8r58bkkkmhhl" path="res://assets/asteroids/asteroid_6.png" id="8_l8yl3"]
-[ext_resource type="Texture2D" uid="uid://db88pmvf20v25" path="res://assets/asteroids/asteroid_7.png" id="9_untah"]
-[ext_resource type="Texture2D" uid="uid://bls84cxv7hph0" path="res://assets/asteroids/asteroid_8.png" id="10_0jyp3"]
+[ext_resource type="Texture2D" uid="uid://la5j2p5dxje0" path="res://assets/asteroids/asteroid_1.png" id="3_v8h8s"]
+[ext_resource type="Texture2D" uid="uid://erm1y0yu5bir" path="res://assets/asteroids/asteroid_n_1.png" id="4_a1ih8"]
+[ext_resource type="Texture2D" uid="uid://bgrt6tjirky4s" path="res://assets/asteroids/asteroid_2.png" id="5_doa2g"]
+[ext_resource type="Texture2D" uid="uid://cxh2l5psad370" path="res://assets/asteroids/asteroid_n_2.png" id="6_j3elo"]
+[ext_resource type="Texture2D" uid="uid://co1mjdjhkq7te" path="res://assets/asteroids/asteroid_3.png" id="7_l2p2m"]
+[ext_resource type="Texture2D" uid="uid://dbh5hm5v2yief" path="res://assets/asteroids/asteroid_n_3.png" id="8_upgyw"]
+[ext_resource type="Texture2D" uid="uid://p5tdb6cgyj5w" path="res://assets/asteroids/asteroid_4.png" id="9_ik7q0"]
+[ext_resource type="Texture2D" uid="uid://urqvngfnbt6i" path="res://assets/asteroids/asteroid_n_4.png" id="10_oommc"]
+[ext_resource type="Texture2D" uid="uid://maofr4u8ryac" path="res://assets/asteroids/asteroid_5.png" id="11_7hwti"]
+[ext_resource type="Texture2D" uid="uid://dw2b8bbo5bdml" path="res://assets/asteroids/asteroid_n_5.png" id="12_won51"]
+[ext_resource type="Texture2D" uid="uid://8r58bkkkmhhl" path="res://assets/asteroids/asteroid_6.png" id="13_kvq6r"]
+[ext_resource type="Texture2D" uid="uid://bx8n4su3bwd0n" path="res://assets/asteroids/asteroid_n_6.png" id="14_belin"]
+[ext_resource type="Texture2D" uid="uid://db88pmvf20v25" path="res://assets/asteroids/asteroid_7.png" id="15_puvo2"]
+[ext_resource type="Texture2D" uid="uid://duil5gy1c68ep" path="res://assets/asteroids/asteroid_n_7.png" id="16_qqurx"]
+[ext_resource type="Texture2D" uid="uid://bls84cxv7hph0" path="res://assets/asteroids/asteroid_8.png" id="17_ggj7w"]
+[ext_resource type="Texture2D" uid="uid://bqk65yavuucdn" path="res://assets/asteroids/asteroid_n_8.png" id="18_xr8q4"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_0h0be"]
+diffuse_texture = ExtResource("3_v8h8s")
+normal_texture = ExtResource("4_a1ih8")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_uivll"]
+diffuse_texture = ExtResource("5_doa2g")
+normal_texture = ExtResource("6_j3elo")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_by2k2"]
+diffuse_texture = ExtResource("7_l2p2m")
+normal_texture = ExtResource("8_upgyw")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ikfnh"]
+diffuse_texture = ExtResource("9_ik7q0")
+normal_texture = ExtResource("10_oommc")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_vmdwo"]
+diffuse_texture = ExtResource("11_7hwti")
+normal_texture = ExtResource("12_won51")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_scjpg"]
+diffuse_texture = ExtResource("13_kvq6r")
+normal_texture = ExtResource("14_belin")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_uvob8"]
+diffuse_texture = ExtResource("15_puvo2")
+normal_texture = ExtResource("16_qqurx")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_mu6ye"]
+diffuse_texture = ExtResource("17_ggj7w")
+normal_texture = ExtResource("18_xr8q4")
 
 [resource]
 script = ExtResource("1_egcp3")
 type = &"clockwise"
-sprites = Array[Texture2D]([ExtResource("3_dmpmn"), ExtResource("4_cfyfa"), ExtResource("5_cglco"), ExtResource("6_yfqr4"), ExtResource("7_6nges"), ExtResource("8_l8yl3"), ExtResource("9_untah"), ExtResource("10_0jyp3")])
+sprites = Array[CanvasTexture]([SubResource("CanvasTexture_0h0be"), SubResource("CanvasTexture_uivll"), SubResource("CanvasTexture_by2k2"), SubResource("CanvasTexture_ikfnh"), SubResource("CanvasTexture_vmdwo"), SubResource("CanvasTexture_scjpg"), SubResource("CanvasTexture_uvob8"), SubResource("CanvasTexture_mu6ye")])
 color = Color(0, 0, 1, 1)
 projectile_scene = ExtResource("1_wwq0v")

@@ -16,7 +16,6 @@ script = ExtResource("2_jhn01")
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-light_mask = 0
 texture = ExtResource("1_rnuwn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
