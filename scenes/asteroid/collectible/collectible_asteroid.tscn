@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://x83i8cfjst2t"]
 
-[ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroid.png" id="1_rnuwn"]
+[ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroids/asteroid.png" id="1_rnuwn"]
 [ext_resource type="Script" path="res://scenes/asteroid/collectible/collectible_asteroid.gd" id="2_jhn01"]
 [ext_resource type="Script" path="res://customs/nodes/player_revolution_component/player_revolution_component.gd" id="3_efdi8"]
 

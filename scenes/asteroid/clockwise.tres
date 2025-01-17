@@ -1,12 +1,19 @@
-[gd_resource type="Resource" script_class="AsteroidData" load_steps=4 format=3 uid="uid://d0ktlimm4jpix"]
+[gd_resource type="Resource" script_class="AsteroidData" load_steps=11 format=3 uid="uid://d0ktlimm4jpix"]
 
 [ext_resource type="Script" path="res://customs/resources/asteroid_data.gd" id="1_egcp3"]
 [ext_resource type="PackedScene" uid="uid://dxsferrm0w3i8" path="res://scenes/asteroid/projectile/projectile_asteroid.tscn" id="1_wwq0v"]
-[ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroid.png" id="3_b13rv"]
+[ext_resource type="Texture2D" uid="uid://la5j2p5dxje0" path="res://assets/asteroids/asteroid_1.png" id="3_dmpmn"]
+[ext_resource type="Texture2D" uid="uid://bgrt6tjirky4s" path="res://assets/asteroids/asteroid_2.png" id="4_cfyfa"]
+[ext_resource type="Texture2D" uid="uid://co1mjdjhkq7te" path="res://assets/asteroids/asteroid_3.png" id="5_cglco"]
+[ext_resource type="Texture2D" uid="uid://p5tdb6cgyj5w" path="res://assets/asteroids/asteroid_4.png" id="6_yfqr4"]
+[ext_resource type="Texture2D" uid="uid://maofr4u8ryac" path="res://assets/asteroids/asteroid_5.png" id="7_6nges"]
+[ext_resource type="Texture2D" uid="uid://8r58bkkkmhhl" path="res://assets/asteroids/asteroid_6.png" id="8_l8yl3"]
+[ext_resource type="Texture2D" uid="uid://db88pmvf20v25" path="res://assets/asteroids/asteroid_7.png" id="9_untah"]
+[ext_resource type="Texture2D" uid="uid://bls84cxv7hph0" path="res://assets/asteroids/asteroid_8.png" id="10_0jyp3"]
 
 [resource]
 script = ExtResource("1_egcp3")
 type = &"clockwise"
-sprites = Array[Texture2D]([ExtResource("3_b13rv")])
+sprites = Array[Texture2D]([ExtResource("3_dmpmn"), ExtResource("4_cfyfa"), ExtResource("5_cglco"), ExtResource("6_yfqr4"), ExtResource("7_6nges"), ExtResource("8_l8yl3"), ExtResource("9_untah"), ExtResource("10_0jyp3")])
 color = Color(0, 0, 1, 1)
 projectile_scene = ExtResource("1_wwq0v")

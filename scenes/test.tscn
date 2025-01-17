@@ -36,12 +36,15 @@ position_smoothing_enabled = true
 
 [node name="CollectibleAsteroid1" parent="." instance=ExtResource("2_sdvru")]
 position = Vector2(295, 0)
+clockwise = false
 
 [node name="CollectibleAsteroid2" parent="." instance=ExtResource("2_sdvru")]
 position = Vector2(691, -60)
+clockwise = false
 
 [node name="CollectibleAsteroid3" parent="." instance=ExtResource("2_sdvru")]
 position = Vector2(242, -383)
+clockwise = false
 
 [node name="Boss" parent="." instance=ExtResource("6_dtdlm")]
 position = Vector2(462, -248)
