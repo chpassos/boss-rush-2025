@@ -2,23 +2,23 @@ class_name CollectibleAsteroid
 extends RigidBody2D
 
 
-@export var data: AsteroidData
+@export var clockwise: bool = true
 @export_group("Nodes")
 @export var sprite: Sprite2D
-@export var player_revolution: PlayerRevolutionComponent  # TODO: temporary
+
+@onready var data: AsteroidData = Globals.CLOCKWISE_ASTEROID_DATA if clockwise else Globals.COUNTERCLOCKWISE_ASTEROID_DATA
 
 
 func _draw() -> void:
-	draw_circle(Vector2.ZERO, player_revolution.max_distance - 16, data.color, false)
+	draw_circle(Vector2.ZERO, ($PlayerRevolutionComponent).max_distance - 16, data.color, false)
 
 
 func _ready() -> void:
-	#sprite.modulate = data.color
-	sprite.texture = data.sprite
+	sprite.texture = data.sprites.pick_random()
 
 
 func _on_player_revolved(_clockwise: bool) -> void:
-	Globals.player.add_asteroid_to_queue(data)
+	Globals.player.add_asteroid_to_queue(clockwise)
 	call_deferred(&"queue_free")
 
 

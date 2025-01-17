@@ -5,10 +5,11 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2c7r2"]
 
-[node name="ProjectileAsteroid" type="Area2D"]
+[node name="ProjectileAsteroid" type="Area2D" node_paths=PackedStringArray("sprite")]
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_ma1no")
+sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 0
