@@ -10,6 +10,7 @@ extends CharacterBody2D
 @export var planet_shape: Sprite2D
 @export var planet_map: Sprite2D
 @export var sprite: Sprite2D
+@export var anim_player: AnimationPlayer
 @export var aim_line: Line2D
 
 @onready var state_chart: StateChart = $StateChart as StateChart
@@ -139,61 +140,62 @@ func _on_shoot_state_exited() -> void:
 
 
 func _on_shoot_state_unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"move_up"):
+	if event.is_action_pressed(&"spin_clockwise_1"):
 		if not rotation_input_queue:
-			rotation_input_queue = [&"move_up"]
-		elif rotation_input_queue[-1] == &"move_up":
+			rotation_input_queue = [&"spin_clockwise_1"]
+		elif rotation_input_queue[-1] == &"spin_clockwise_1":
 			pass
-		elif (rotation_input_queue.size() > 1 and rotation_input_queue[-2] == &"move_down") \
-		or (rotation_input_queue[-1] == &"move_right" or rotation_input_queue[-1] == &"move_left"):
-			rotation_input_queue.append(&"move_up")
+		elif rotation_input_queue[-1] == &"spin_clockwise_2":
+			rotation_input_queue.append(&"spin_clockwise_1")
 		else:
-			rotation_input_queue = [&"move_up"]
+			rotation_input_queue = [&"spin_clockwise_1"]
 
-	elif event.is_action_pressed(&"move_right"):
-		if not rotation_input_queue:
-			rotation_input_queue = [&"move_right"]
-		elif rotation_input_queue[-1] == &"move_right":
-			pass
-		elif (rotation_input_queue.size() > 1 and rotation_input_queue[-2] == &"move_left") \
-		or (rotation_input_queue[-1] == &"move_up" or rotation_input_queue[-1] == &"move_down"):
-			rotation_input_queue.append(&"move_right")
-		else:
-			rotation_input_queue = [&"move_right"]
+		anim_player.play_backwards(&"rotation")
 
-	elif event.is_action_pressed(&"move_down"):
+	elif event.is_action_pressed(&"spin_clockwise_2"):
 		if not rotation_input_queue:
-			rotation_input_queue = [&"move_down"]
-		elif rotation_input_queue[-1] == &"move_down":
+			rotation_input_queue = [&"spin_clockwise_2"]
+		elif rotation_input_queue[-1] == &"spin_clockwise_2":
 			pass
-		elif (rotation_input_queue.size() > 1 and rotation_input_queue[-2] == &"move_up") \
-		or (rotation_input_queue[-1] == &"move_right" or rotation_input_queue[-1] == &"move_left"):
-			rotation_input_queue.append(&"move_down")
+		elif rotation_input_queue[-1] == &"spin_clockwise_1":
+			rotation_input_queue.append(&"spin_clockwise_2")
 		else:
-			rotation_input_queue = [&"move_down"]
+			rotation_input_queue = [&"spin_clockwise_2"]
 
-	elif event.is_action_pressed(&"move_left"):
+		anim_player.play_backwards(&"rotation")
+
+	elif event.is_action_pressed(&"spin_counterclockwise_1"):
 		if not rotation_input_queue:
-			rotation_input_queue = [&"move_left"]
-		elif rotation_input_queue[-1] == &"move_left":
+			rotation_input_queue = [&"spin_counterclockwise_1"]
+		elif rotation_input_queue[-1] == &"spin_counterclockwise_1":
 			pass
-		elif (rotation_input_queue.size() > 1 and rotation_input_queue[-2] == &"move_right") \
-		or (rotation_input_queue[-1] == &"move_up" or rotation_input_queue[-1] == &"move_down"):
-			rotation_input_queue.append(&"move_left")
+		elif rotation_input_queue[-1] == &"spin_counterclockwise_2":
+			rotation_input_queue.append(&"spin_counterclockwise_1")
 		else:
-			rotation_input_queue = [&"move_left"]
+			rotation_input_queue = [&"spin_counterclockwise_1"]
+
+		anim_player.play(&"rotation")
+
+	elif event.is_action_pressed(&"spin_counterclockwise_2"):
+		if not rotation_input_queue:
+			rotation_input_queue = [&"spin_counterclockwise_2"]
+		elif rotation_input_queue[-1] == &"spin_counterclockwise_2":
+			pass
+		elif rotation_input_queue[-1] == &"spin_counterclockwise_1":
+			rotation_input_queue.append(&"spin_counterclockwise_2")
+		else:
+			rotation_input_queue = [&"spin_counterclockwise_2"]
+
+		anim_player.play(&"rotation")
 
 	if rotation_input_queue.size() == 4:
 		var mouse_position: Vector2 = get_global_mouse_position()
 
-		if (rotation_input_queue[0] == &"move_up" and rotation_input_queue[1] == &"move_right") \
-		or (rotation_input_queue[0] == &"move_right" and rotation_input_queue[1] == &"move_down") \
-		or (rotation_input_queue[0] == &"move_down" and rotation_input_queue[1] == &"move_left") \
-		or (rotation_input_queue[0] == &"move_left" and rotation_input_queue[1] == &"move_up"):
+		if rotation_input_queue[0] == &"spin_clockwise_1" or rotation_input_queue[0] == &"spin_clockwise_2":
 			shoot_asteroid_from_queue(true, global_position.direction_to(mouse_position))
-			print("SHOOT CLOCKWISE!")
+			#print("SHOOT CLOCKWISE!")
 		else:
 			shoot_asteroid_from_queue(false, global_position.direction_to(mouse_position))
-			print("SHOOT COUNTERCLOCKWISE!")
+			#print("SHOOT COUNTERCLOCKWISE!")
 
 		rotation_input_queue = []

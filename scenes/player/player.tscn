@@ -120,7 +120,7 @@ _data = {
 "rotation": SubResource("Animation_i5416")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("planet_shape", "planet_map", "sprite", "aim_line")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("planet_shape", "planet_map", "sprite", "anim_player", "aim_line")]
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_uadqj")
@@ -128,6 +128,7 @@ orbiting_asteroid_scene = ExtResource("2_xc1xw")
 planet_shape = NodePath("Shape")
 planet_map = NodePath("PlanetMask/PlanetMap")
 sprite = NodePath("Sprite2D")
+anim_player = NodePath("AnimationPlayer")
 aim_line = NodePath("AimLine")
 
 [node name="PlanetMask" type="Sprite2D" parent="."]
@@ -190,6 +191,7 @@ delay_in_seconds = "0.0"
 libraries = {
 "": SubResource("AnimationLibrary_71xxc")
 }
+speed_scale = 1.5
 
 [connection signal="state_physics_processing" from="StateChart/Root/Move" to="." method="_on_move_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Shoot" to="." method="_on_shoot_state_entered"]
