@@ -44,6 +44,7 @@ func add_asteroid_to_queue(clockwise: bool) -> void:
 	orbiting_asteroid.primary = self
 	orbiting_asteroid.orbiting_distance = clampf(randfn(40.0, 10.0), 20.0, 60.0)
 	orbiting_asteroid.orbiting_speed = randf_range(PI / 2, 2 * PI)
+	orbiting_asteroid.clockwise = asteroid_data.clockwise
 	orbiting_asteroid.modulate = asteroid_data.color
 	orbiting_asteroid.global_position = global_position + orbiting_asteroid.orbiting_distance * Vector2.RIGHT
 	orbiting_asteroid.top_level = true

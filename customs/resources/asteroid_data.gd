@@ -2,7 +2,7 @@ class_name AsteroidData
 extends Resource
 
 
-@export var type: StringName
+@export var clockwise: bool
 @export var sprites: Array[CanvasTexture]
 @export var color: Color
 @export_group("Scenes")

@@ -53,7 +53,7 @@ normal_texture = ExtResource("18_xr8q4")
 
 [resource]
 script = ExtResource("1_egcp3")
-type = &"clockwise"
+clockwise = true
 sprites = Array[CanvasTexture]([SubResource("CanvasTexture_0h0be"), SubResource("CanvasTexture_uivll"), SubResource("CanvasTexture_by2k2"), SubResource("CanvasTexture_ikfnh"), SubResource("CanvasTexture_vmdwo"), SubResource("CanvasTexture_scjpg"), SubResource("CanvasTexture_uvob8"), SubResource("CanvasTexture_mu6ye")])
 color = Color(0.52549, 0.741176, 0.156863, 1)
 projectile_scene = ExtResource("1_wwq0v")
