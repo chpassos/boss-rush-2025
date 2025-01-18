@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b8qi8ctgokeyn" path="res://assets/revolution_progress/progress.png" id="2_mue4b"]
 
 [node name="RevolutionProgress" type="TextureProgressBar"]
-modulate = Color(1, 1, 1, 0.25098)
+light_mask = 0
 offset_right = 200.0
 offset_bottom = 200.0
 max_value = 1.0

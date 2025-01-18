@@ -40,10 +40,12 @@ clockwise = false
 
 [node name="CollectibleAsteroid2" parent="." instance=ExtResource("2_sdvru")]
 position = Vector2(691, -60)
-clockwise = false
 
 [node name="CollectibleAsteroid3" parent="." instance=ExtResource("2_sdvru")]
 position = Vector2(242, -383)
+
+[node name="CollectibleAsteroid4" parent="." instance=ExtResource("2_sdvru")]
+position = Vector2(672, -406)
 clockwise = false
 
 [node name="Boss" parent="." instance=ExtResource("6_dtdlm")]

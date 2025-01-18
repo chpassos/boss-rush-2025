@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://scenes/asteroid/orbiting/orbiting_asteroid.gd" id="2_wyuky"]
 
 [node name="OrbitingAsteroid" type="Sprite2D"]
+light_mask = 0
 scale = Vector2(2, 2)
 texture = ExtResource("1_kfm25")
 script = ExtResource("2_wyuky")
