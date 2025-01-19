@@ -1,13 +1,13 @@
 [gd_scene load_steps=7 format=3 uid="uid://b46v3f7wavfeq"]
 
 [ext_resource type="Script" path="res://scenes/boss/boss.gd" id="1_kvpo3"]
-[ext_resource type="Texture2D" uid="uid://cxgyyokv5dgku" path="res://assets/circle.png" id="2_agui6"]
+[ext_resource type="Texture2D" uid="uid://8cad2d2ajuiw" path="res://assets/boss1.png" id="2_id5a8"]
 [ext_resource type="Texture2D" uid="uid://xpjeb363su68" path="res://assets/point_light.webp" id="3_fr0ge"]
 [ext_resource type="Script" path="res://customs/nodes/health_component.gd" id="4_qjcns"]
 [ext_resource type="Script" path="res://customs/nodes/poise_component.gd" id="5_ok362"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fqvag"]
-radius = 64.4981
+radius = 80.0
 
 [node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "light", "health_component")]
 disable_mode = 1
@@ -20,8 +20,9 @@ light = NodePath("PointLight2D")
 health_component = NodePath("HealthComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(4, 4)
-texture = ExtResource("2_agui6")
+light_mask = 0
+scale = Vector2(2, 2)
+texture = ExtResource("2_id5a8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_fqvag")
