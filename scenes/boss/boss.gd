@@ -11,13 +11,15 @@ extends CharacterBody2D
 
 
 func _ready() -> void:
-	sprite.modulate = light_color
 	light.color = light_color
+	Globals.boss = self
+	SignalBus.boss_ready.emit.call_deferred()
 
 
 func take_damage(health_damage: int, poise_damage: float) -> void:
 	health_component.take_damage(health_damage)
 	poise_component.take_damage(poise_damage)
+	SignalBus.boss_vitals_changed.emit()
 
 
 func _on_health_component_health_reached_zero() -> void:

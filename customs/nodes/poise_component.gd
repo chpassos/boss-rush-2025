@@ -14,6 +14,7 @@ signal poise_reached_zero()
 
 func _ready() -> void:
 	regen_timer = Timer.new()
+	regen_timer.one_shot = true
 	add_child(regen_timer)
 
 
@@ -27,6 +28,6 @@ func take_damage(amount: float):
 
 
 func _process(delta: float) -> void:
-	if regen_timer.is_stopped() and current_poise < max_poise:
-		print("healing")
+	if not regen_timer.time_left and current_poise < max_poise:
 		current_poise = minf(current_poise + regen * delta, max_poise)
+		SignalBus.boss_vitals_changed.emit()

@@ -38,5 +38,6 @@ script = ExtResource("4_qjcns")
 
 [node name="Poise Component" type="Node" parent="."]
 script = ExtResource("5_ok362")
+regen_delay = 1.0
 
 [connection signal="health_reached_zero" from="HealthComponent" to="." method="_on_health_component_health_reached_zero"]

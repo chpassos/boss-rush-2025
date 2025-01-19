@@ -21,6 +21,7 @@ extends CharacterBody2D
 
 func _ready() -> void:
 	Globals.player = self
+	SignalBus.player_ready.emit.call_deferred()
 
 
 func _unhandled_input(event: InputEvent) -> void:

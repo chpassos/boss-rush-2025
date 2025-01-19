@@ -9,3 +9,4 @@ const CLOCKWISE_ASTEROID_DATA: AsteroidData = preload("res://scenes/asteroid/clo
 const COUNTERCLOCKWISE_ASTEROID_DATA: AsteroidData = preload("res://scenes/asteroid/counterclockwise.tres")
 
 var player: Player
+var boss: Boss
