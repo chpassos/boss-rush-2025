@@ -4,7 +4,7 @@ extends Node
 
 signal health_reached_zero()
 
-@export var max_health: int = 5
+@export_range(0, 500, 10, "or_greater") var max_health: int = 100
 
 @onready var current_health: int = max_health
 

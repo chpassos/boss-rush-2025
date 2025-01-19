@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b46v3f7wavfeq"]
+[gd_scene load_steps=7 format=3 uid="uid://b46v3f7wavfeq"]
 
 [ext_resource type="Script" path="res://scenes/boss/boss.gd" id="1_kvpo3"]
 [ext_resource type="Texture2D" uid="uid://cxgyyokv5dgku" path="res://assets/circle.png" id="2_agui6"]
 [ext_resource type="Texture2D" uid="uid://xpjeb363su68" path="res://assets/point_light.webp" id="3_fr0ge"]
-[ext_resource type="Script" path="res://customs/nodes/health_component/health_component.gd" id="4_qjcns"]
+[ext_resource type="Script" path="res://customs/nodes/health_component.gd" id="4_qjcns"]
+[ext_resource type="Script" path="res://customs/nodes/poise_component.gd" id="5_ok362"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fqvag"]
 radius = 64.4981
@@ -32,6 +33,8 @@ texture_scale = 10.0
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("4_qjcns")
-max_health = 3
+
+[node name="Poise Component" type="Node" parent="."]
+script = ExtResource("5_ok362")
 
 [connection signal="health_reached_zero" from="HealthComponent" to="." method="_on_health_component_health_reached_zero"]
