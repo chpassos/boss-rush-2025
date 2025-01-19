@@ -5,7 +5,6 @@ extends CharacterBody2D
 @export var max_speed: float = 200.0
 @export var acceleration: float = 1500.0
 @export var drag: float = 800.0
-@export var orbiting_asteroid_scene: PackedScene
 @export_group("Nodes")
 @export var planet_shape: Sprite2D
 @export var planet_map: Sprite2D
@@ -40,7 +39,7 @@ func _process(_delta: float) -> void:
 func add_asteroid_to_queue(clockwise: bool) -> void:
 	var asteroid_data: AsteroidData = Globals.CLOCKWISE_ASTEROID_DATA if clockwise else Globals.COUNTERCLOCKWISE_ASTEROID_DATA
 
-	var orbiting_asteroid: OrbitingAsteroid = orbiting_asteroid_scene.instantiate() as OrbitingAsteroid
+	var orbiting_asteroid: OrbitingAsteroid = Globals.ORBITING_ASTEROID_SCENE.instantiate() as OrbitingAsteroid
 	orbiting_asteroid.primary = self
 	orbiting_asteroid.orbiting_distance = clampf(randfn(40.0, 10.0), 20.0, 60.0)
 	orbiting_asteroid.orbiting_speed = randf_range(PI / 2, 2 * PI)
@@ -61,6 +60,7 @@ func shoot_asteroid_from_queue(clockwise: bool, direction: Vector2) -> void:
 	if clockwise:
 		if not clockwise_asteroid_queue:
 			return
+
 		var orbiting_asteroid: OrbitingAsteroid = clockwise_asteroid_queue.pop_front()
 		orbiting_asteroid.queue_free()
 		ProjectileManager.spawn_projectile(global_position, true, direction)

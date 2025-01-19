@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="AsteroidData" load_steps=27 format=3 uid="uid://bh11qrbjvynyj"]
+[gd_resource type="Resource" script_class="AsteroidData" load_steps=26 format=3 uid="uid://bh11qrbjvynyj"]
 
-[ext_resource type="PackedScene" uid="uid://dxsferrm0w3i8" path="res://scenes/asteroid/projectile/projectile_asteroid.tscn" id="1_xyjf5"]
 [ext_resource type="Script" path="res://customs/resources/asteroid_data.gd" id="2_c7kwu"]
 [ext_resource type="Texture2D" uid="uid://c35i8i4damogg" path="res://assets/asteroids/asteroid_9.png" id="3_i4tu7"]
 [ext_resource type="Texture2D" uid="uid://dibiw0vxwpdk3" path="res://assets/asteroids/asteroid_n_9.png" id="4_8jg44"]
@@ -54,6 +53,7 @@ normal_texture = ExtResource("18_ytv4k")
 [resource]
 script = ExtResource("2_c7kwu")
 clockwise = false
+health_damage = 0
+poise_damage = 1.0
 sprites = Array[CanvasTexture]([SubResource("CanvasTexture_1frtv"), SubResource("CanvasTexture_f1rfj"), SubResource("CanvasTexture_13ju8"), SubResource("CanvasTexture_6j7xe"), SubResource("CanvasTexture_ff2re"), SubResource("CanvasTexture_7e4yl"), SubResource("CanvasTexture_wjgeb"), SubResource("CanvasTexture_x55rh")])
 color = Color(0.815686, 0.121569, 0.423529, 1)
-projectile_scene = ExtResource("1_xyjf5")
