@@ -7,6 +7,10 @@ extends RigidBody2D
 @export var sprite: Sprite2D
 @export var revolution_progess: TextureProgressBar
 
+@onready var player_revolution_component: PlayerRevolutionComponent = $PlayerRevolutionComponent as PlayerRevolutionComponent
+@onready var label: Label = $Label as Label
+@onready var label_2: Label = $Label2 as Label
+
 
 func _ready() -> void:
 	if clockwise:
@@ -14,6 +18,7 @@ func _ready() -> void:
 		revolution_progess.tint_over = Globals.CLOCKWISE_ASTEROID_DATA.color
 		revolution_progess.tint_progress = Globals.CLOCKWISE_ASTEROID_DATA.color
 		revolution_progess.tint_progress.a = 0.25
+
 	else:
 		sprite.texture = Globals.COUNTERCLOCKWISE_ASTEROID_DATA.sprites.pick_random()
 		revolution_progess.tint_over = Globals.COUNTERCLOCKWISE_ASTEROID_DATA.color
@@ -24,6 +29,11 @@ func _ready() -> void:
 func _on_player_revolved(_clockwise: bool) -> void:
 	Globals.player.add_asteroid_to_queue(clockwise)
 	call_deferred(&"queue_free")
+
+
+func _process(_delta: float) -> void:
+	label.text = str("%.2f" % rad_to_deg(player_revolution_component.revolution_progress))
+	label_2.text = str("%.2f" % rad_to_deg(player_revolution_component.angle))
 
 
 func _physics_process(_delta: float) -> void:

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b1llnkk8fdpg3" path="res://assets/temp_button.png" id="1_c64ux"]
 [ext_resource type="Script" path="res://ui/menu_button/menu_button.gd" id="1_wmif3"]
-[ext_resource type="FontFile" uid="uid://di188ewjqmjeg" path="res://assets/fonts/Not Jam Mono Clean 8.ttf" id="3_srov2"]
+[ext_resource type="FontFile" uid="uid://ba6k7qkywusa2" path="res://assets/fonts/Not Jam Atomic 20.ttf" id="3_dpc32"]
 
 [node name="MenuButton" type="TextureButton"]
 modulate = Color(0.968627, 0.945098, 0.894118, 1)
@@ -20,18 +20,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = -11.5
-offset_right = 48.0
-offset_bottom = 11.5
+offset_left = -69.5
+offset_top = -16.0
+offset_right = 69.5
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.176471, 0.631373, 0.768627, 1)
 theme_override_colors/font_outline_color = Color(0.0588235, 0.0509804, 0.0588235, 1)
 theme_override_constants/outline_size = 16
-theme_override_fonts/font = ExtResource("3_srov2")
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/font = ExtResource("3_dpc32")
+theme_override_font_sizes/font_size = 40
 text = "Button"
+vertical_alignment = 1
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

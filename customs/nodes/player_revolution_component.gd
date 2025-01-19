@@ -9,11 +9,7 @@ signal player_revolved(clockwise: bool)
 
 var angle: float:
 	get:
-		var ang: float = global_position.angle_to_point(Globals.player.global_position) - zero
-		if ang >= 0:
-			return ang
-		else:
-			return TAU + ang
+		return global_position.angle_to_point(Globals.player.global_position) - zero
 var player_sq_dist: float:
 	get:
 		return global_position.distance_squared_to(Globals.player.global_position)
@@ -23,7 +19,7 @@ var player_sq_dist: float:
 @onready var revolution_progress: float = 0.0
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not Globals.player:
 		return
 
@@ -37,12 +33,16 @@ func _physics_process(_delta: float) -> void:
 		zero = global_position.angle_to_point(Globals.player.global_position)
 		progress_bar.radial_initial_angle = rad_to_deg(zero + PI / 2)
 
-	var pdelta: float = angle - revolution_progress
+	var delta: float
 
-	if absf(pdelta) > PI / 2:
-		pdelta -= TAU
+	if revolution_progress < -PI / 2 and angle > 0:
+		delta = angle - TAU - revolution_progress
+	elif revolution_progress > PI / 2 and angle < 0:
+		delta = angle + TAU - revolution_progress
+	else:
+		delta = angle - revolution_progress
 
-	revolution_progress += pdelta
+	revolution_progress += delta
 
 	if revolution_progress < 0:
 		progress_bar.fill_mode = TextureProgressBar.FillMode.FILL_COUNTER_CLOCKWISE

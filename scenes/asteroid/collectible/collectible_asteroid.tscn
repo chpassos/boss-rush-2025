@@ -17,12 +17,6 @@ script = ExtResource("2_jhn01")
 sprite = NodePath("Sprite2D")
 revolution_progess = NodePath("RevolutionProgress")
 
-[node name="RevolutionProgress" parent="." instance=ExtResource("4_o26ek")]
-offset_left = -100.0
-offset_top = -100.0
-offset_right = 100.0
-offset_bottom = 100.0
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_rnuwn")
 
@@ -33,6 +27,28 @@ shape = SubResource("CircleShape2D_0wxfq")
 script = ExtResource("3_efdi8")
 max_distance = 100.0
 progress_bar = NodePath("../RevolutionProgress")
+
+[node name="RevolutionProgress" parent="." instance=ExtResource("4_o26ek")]
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -30.0
+offset_right = 20.0
+offset_bottom = -7.0
+text = "180"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_left = -20.0
+offset_top = 8.0
+offset_right = 20.0
+offset_bottom = 31.0
+text = "360"
+horizontal_alignment = 1
 
 [node name="DespawnTimer" type="Timer" parent="."]
 wait_time = 30.0
