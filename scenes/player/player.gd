@@ -6,11 +6,12 @@ extends CharacterBody2D
 @export var acceleration: float = 1500.0
 @export var drag: float = 800.0
 @export_group("Nodes")
-@export var planet_shape: Sprite2D
-@export var planet_map: Sprite2D
+#@export var planet_shape: Sprite2D
+#@export var planet_map: Sprite2D
 @export var sprite: Sprite2D
 @export var anim_player: AnimationPlayer
 @export var aim_line: Line2D
+@export var health_component: HealthComponent
 
 @onready var state_chart: StateChart = $StateChart as StateChart
 @onready var rotation_input_queue: Array[StringName] = []
@@ -94,8 +95,8 @@ func _on_move_state_physics_processing(delta: float) -> void:
 		#planet_map.position.x = -29
 	elif input_dir.x > 0 and input_dir.y == 0:  # right
 		sprite.region_rect.position.x = 76
-		planet_shape.region_rect.position.x = 76
-		planet_map.position.x = -21
+		#planet_shape.region_rect.position.x = 76
+		#planet_map.position.x = -21
 	elif input_dir.x > 0 and input_dir.y < 0:  # backward-right
 		sprite.region_rect.position.x = 114
 		#planet_shape.region_rect.position.x = 114

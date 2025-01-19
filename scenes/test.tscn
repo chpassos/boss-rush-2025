@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxvtdhp8dh0er"]
+[gd_scene load_steps=7 format=3 uid="uid://cxvtdhp8dh0er"]
 
 [ext_resource type="PackedScene" uid="uid://deje3vxmm68ao" path="res://scenes/player/player.tscn" id="2_5rsj7"]
 [ext_resource type="PackedScene" uid="uid://x83i8cfjst2t" path="res://scenes/asteroid/collectible/collectible_asteroid.tscn" id="2_sdvru"]
 [ext_resource type="PackedScene" uid="uid://b46v3f7wavfeq" path="res://scenes/boss/boss.tscn" id="6_dtdlm"]
 [ext_resource type="PackedScene" uid="uid://bguqcq048fxe1" path="res://ui/hud/hud.tscn" id="6_k4fi3"]
 [ext_resource type="Shader" path="res://assets/shaders/space_background.gdshader" id="8_vc04t"]
-[ext_resource type="PackedScene" uid="uid://jpk2dfn4tqhd" path="res://ui/speed_run.tscn" id="9_sotvg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i7q1f"]
 shader = ExtResource("8_vc04t")
@@ -51,8 +50,6 @@ clockwise = false
 
 [node name="Boss" parent="." instance=ExtResource("6_dtdlm")]
 position = Vector2(462, -248)
-
-[node name="SpeedRun" parent="." instance=ExtResource("9_sotvg")]
 
 [node name="FG" type="CanvasLayer" parent="."]
 
