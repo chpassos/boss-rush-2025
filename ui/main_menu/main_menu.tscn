@@ -28,36 +28,49 @@ theme_override_constants/margin_bottom = 64
 layout_mode = 2
 theme_override_constants/separation = 128
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+self_modulate = Color(0.968627, 0.945098, 0.894118, 1)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("2_8w4in")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -896.0
+offset_top = -60.0
+offset_right = 896.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.52549, 0.741176, 0.156863, 1)
 theme_override_fonts/font = ExtResource("1_vlmol")
 theme_override_font_sizes/font_size = 120
 text = "a PLANET game"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
+size_flags_vertical = 8
 theme_override_constants/separation = 32
+alignment = 1
 
-[node name="MenuButton" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_chx7b")]
+[node name="MenuButton" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_chx7b")]
 layout_mode = 2
 
-[node name="MenuButton2" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_chx7b")]
+[node name="MenuButton2" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_chx7b")]
 layout_mode = 2
 
-[node name="MenuButton3" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_chx7b")]
+[node name="MenuButton3" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_chx7b")]
 layout_mode = 2
 
-[node name="MenuButton4" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_chx7b")]
+[node name="MenuButton4" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_chx7b")]
 layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("2_8w4in")
-stretch_mode = 5

@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://di188ewjqmjeg" path="res://assets/fonts/Not Jam Mono Clean 8.ttf" id="3_srov2"]
 
 [node name="MenuButton" type="TextureButton"]
+modulate = Color(0.968627, 0.945098, 0.894118, 1)
 offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = ExtResource("1_c64ux")
@@ -25,7 +26,8 @@ offset_right = 48.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.176471, 0.631373, 0.768627, 1)
+theme_override_colors/font_outline_color = Color(0.0588235, 0.0509804, 0.0588235, 1)
 theme_override_constants/outline_size = 16
 theme_override_fonts/font = ExtResource("3_srov2")
 theme_override_font_sizes/font_size = 24

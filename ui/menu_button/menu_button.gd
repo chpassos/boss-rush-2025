@@ -11,6 +11,8 @@ func _ready() -> void:
 
 
 func _on_mouse_entered() -> void:
+	z_index += 10
+
 	if tween:
 		tween.kill()
 
@@ -25,6 +27,8 @@ func _on_mouse_entered() -> void:
 
 
 func _on_mouse_exited() -> void:
+	z_index -= 10
+
 	if tween:
 		tween.kill()
 
