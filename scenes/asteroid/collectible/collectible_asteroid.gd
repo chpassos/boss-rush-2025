@@ -8,8 +8,6 @@ extends RigidBody2D
 @export var revolution_progess: TextureProgressBar
 
 @onready var player_revolution_component: PlayerRevolutionComponent = $PlayerRevolutionComponent as PlayerRevolutionComponent
-@onready var label: Label = $Label as Label
-@onready var label_2: Label = $Label2 as Label
 
 
 func _ready() -> void:
@@ -31,20 +29,14 @@ func _on_player_revolved(_clockwise: bool) -> void:
 	call_deferred(&"queue_free")
 
 
-func _process(_delta: float) -> void:
-	label.text = str("%.2f" % rad_to_deg(player_revolution_component.revolution_progress))
-	label_2.text = str("%.2f" % rad_to_deg(player_revolution_component.angle))
-
-
 func _physics_process(_delta: float) -> void:
 	if not linear_velocity:
 		return
 
-	var k: float = 0.025
 	var vel_sq: float = linear_velocity.length_squared()
 	var vel_dir: Vector2 = linear_velocity.normalized()
 
-	apply_central_force(-1 * k * vel_sq * vel_dir)
+	apply_central_force(-1 * 0.02 * vel_sq * vel_dir)
 
 
 func _on_despawn_timer_timeout() -> void:
