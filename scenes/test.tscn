@@ -1,31 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxvtdhp8dh0er"]
+[gd_scene load_steps=6 format=3 uid="uid://cxvtdhp8dh0er"]
 
+[ext_resource type="PackedScene" uid="uid://8tksrqglc2j5" path="res://scenes/arena/arena.tscn" id="1_c6a7u"]
 [ext_resource type="PackedScene" uid="uid://deje3vxmm68ao" path="res://scenes/player/player.tscn" id="2_5rsj7"]
 [ext_resource type="PackedScene" uid="uid://x83i8cfjst2t" path="res://scenes/asteroid/collectible/collectible_asteroid.tscn" id="2_sdvru"]
 [ext_resource type="PackedScene" uid="uid://b46v3f7wavfeq" path="res://scenes/boss/boss.tscn" id="6_dtdlm"]
 [ext_resource type="PackedScene" uid="uid://bguqcq048fxe1" path="res://ui/hud/hud.tscn" id="6_k4fi3"]
-[ext_resource type="Shader" path="res://assets/shaders/space_background.gdshader" id="8_vc04t"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_i7q1f"]
-shader = ExtResource("8_vc04t")
-shader_parameter/bg_color = Color(0, 0, 0, 0)
-shader_parameter/offset = Vector2(0, 0)
-shader_parameter/bigStarSlow = 2.0
-shader_parameter/mediumStarSlow = 6.0
-shader_parameter/smallStarSlow = 8.0
-shader_parameter/smallStarAmount = 0.002
-shader_parameter/mediumStarAmount = 0.01
-shader_parameter/bigStarAmount = 0.02
 
 [node name="Test" type="Node2D"]
 
-[node name="SpaceShader" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_i7q1f")
-offset_left = -690.0
-offset_top = -498.0
-offset_right = 730.0
-offset_bottom = 538.0
-mouse_filter = 2
+[node name="Arena" parent="." instance=ExtResource("1_c6a7u")]
+arena_size = Vector2(1920, 1080)
 
 [node name="Player" parent="." instance=ExtResource("2_5rsj7")]
 
