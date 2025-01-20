@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bguqcq048fxe1"]
+[gd_scene load_steps=3 format=3 uid="uid://bguqcq048fxe1"]
 
 [ext_resource type="Script" path="res://ui/hud/hud.gd" id="1_7fbvm"]
+[ext_resource type="FontFile" uid="uid://p7e4iexcgjoh" path="res://assets/fonts/m6x11.ttf" id="2_g8v5x"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -32,6 +33,7 @@ alignment = 2
 [node name="HBoxContainer" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 1
 
 [node name="PlayerHealthBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -53,6 +55,8 @@ offset_left = -32.0
 offset_right = 32.0
 offset_bottom = 23.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_g8v5x")
+theme_override_font_sizes/font_size = 32
 text = "00:00:00"
 
 [node name="BossPoiseBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
