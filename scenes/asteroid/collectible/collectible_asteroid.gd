@@ -29,6 +29,10 @@ func _on_player_revolved(_clockwise: bool) -> void:
 	call_deferred(&"queue_free")
 
 
+func _process(_delta: float) -> void:
+	revolution_progess.global_position = global_position - revolution_progess.size / 2
+
+
 func _physics_process(_delta: float) -> void:
 	if not linear_velocity:
 		return
