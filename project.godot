@@ -23,6 +23,7 @@ SpeedrunTimer="*res://globals/speedrun_timer.gd"
 Globals="*res://globals/globals.gd"
 ProjectileManager="*res://globals/projectile_manager.gd"
 CursorManager="*res://globals/cursor_manager.gd"
+SaveManager="*res://globals/save_manager.gd"
 
 [display]
 
