@@ -13,7 +13,7 @@ var player_sq_dist: float:
 
 @onready var max_sq_dist: float = max_distance ** 2
 @onready var zero: float = INF
-@onready var last_player_position: Vector2
+@onready var last_dir_to_player: Vector2
 @onready var revolution_progress: float = 0.0
 
 
@@ -30,10 +30,9 @@ func _process(_delta: float) -> void:
 	if zero == INF:
 		zero = global_position.angle_to_point(Globals.player.global_position)
 		progress_bar.radial_initial_angle = rad_to_deg(zero + PI / 2)
-		last_player_position = Globals.player.global_position
+		last_dir_to_player =global_position.direction_to(Globals.player.global_position)
 		return
 
-	var last_dir_to_player: Vector2 = global_position.direction_to(last_player_position)
 	var dir_to_player: Vector2 = global_position.direction_to(Globals.player.global_position)
 	var delta: float = last_dir_to_player.angle_to(dir_to_player)
 	revolution_progress += delta
@@ -50,4 +49,4 @@ func _process(_delta: float) -> void:
 		revolution_progress = 0.0
 		progress_bar.value = 0.0
 
-	last_player_position = Globals.player.global_position
+	last_dir_to_player = dir_to_player
