@@ -41,3 +41,5 @@ script = ExtResource("5_ok362")
 regen_delay = 1.0
 
 [connection signal="health_reached_zero" from="HealthComponent" to="." method="_on_health_component_health_reached_zero"]
+[connection signal="poise_fully_restored" from="Poise Component" to="." method="_on_poise_fully_restored"]
+[connection signal="poise_partially_restored" from="Poise Component" to="." method="_on_poise_partially_restored"]

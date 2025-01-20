@@ -24,3 +24,11 @@ func take_damage(health_damage: int, poise_damage: float) -> void:
 
 func _on_health_component_health_reached_zero() -> void:
 	queue_free()
+
+
+func _on_poise_partially_restored() -> void:
+	SignalBus.boss_vitals_changed.emit()
+
+
+func _on_poise_fully_restored() -> void:
+	SignalBus.boss_vitals_changed.emit()

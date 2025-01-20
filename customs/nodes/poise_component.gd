@@ -3,6 +3,8 @@ extends Node
 
 
 signal poise_reached_zero()
+signal poise_partially_restored()
+signal poise_fully_restored()
 
 @export_range(0.0, 100.0, 5.0, "or_greater") var max_poise: float = 10.0
 @export_range(0.0, 2.0, 0.05, "or_greater", "suffix:/s") var regen: float = 0.1
@@ -29,5 +31,9 @@ func take_damage(amount: float):
 
 func _process(delta: float) -> void:
 	if not regen_timer.time_left and current_poise < max_poise:
-		current_poise = minf(current_poise + regen * delta, max_poise)
-		SignalBus.boss_vitals_changed.emit()
+		current_poise += regen * delta
+		if current_poise >= max_poise:
+			current_poise = max_poise
+			poise_fully_restored.emit()
+		else:
+			poise_partially_restored.emit()
