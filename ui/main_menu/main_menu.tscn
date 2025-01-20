@@ -74,3 +74,6 @@ layout_mode = 2
 
 [node name="MenuButton4" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_chx7b")]
 layout_mode = 2
+
+[node name="MenuButton5" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_chx7b")]
+layout_mode = 2
