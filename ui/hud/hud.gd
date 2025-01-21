@@ -18,7 +18,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	speedrun_timer.text = "%.2f" % SpeedrunTimer.elapsed_time
+	speedrun_timer.text = Utils.time_to_text(SpeedrunTimer.elapsed_time)
 
 
 func _on_player_ready() -> void:

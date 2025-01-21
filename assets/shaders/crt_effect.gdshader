@@ -14,8 +14,8 @@ void fragment() {
 		color_dark_offset = scanline_intensity;
 
 	// Blend pixel with left and top pixel to simulate color bleeding
-	vec4 adjacent_pixel_color_average = texture(screen_texture, SCREEN_UV - vec2(1.0 / screen_resolution.x, 0)) * 0.5 + texture(screen_texture, SCREEN_UV - vec2(0, 1.0 / screen_resolution.y)) * 0.5;
-	vec4 this_pixel_color = texture(screen_texture, SCREEN_UV);
+	vec4 adjacent_color_average = texture(screen_texture, SCREEN_UV - vec2(1.0 / screen_resolution.x, 0)) * 0.5 + texture(screen_texture, SCREEN_UV - vec2(0, 1.0 / screen_resolution.y)) * 0.5;
+	vec4 color = texture(screen_texture, SCREEN_UV);
 
-	COLOR = adjacent_pixel_color_average * color_bleed_weight + this_pixel_color * (1.0 - color_bleed_weight) - vec4(vec3(color_dark_offset), 0);
+	COLOR = adjacent_color_average * color_bleed_weight + color * (1.0 - color_bleed_weight) - vec4(vec3(color_dark_offset), 0);
 }

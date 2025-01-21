@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b46v3f7wavfeq"]
 
 [ext_resource type="Script" path="res://scenes/boss/boss.gd" id="1_kvpo3"]
-[ext_resource type="Texture2D" uid="uid://8cad2d2ajuiw" path="res://assets/boss1.png" id="2_id5a8"]
+[ext_resource type="Texture2D" uid="uid://8cad2d2ajuiw" path="res://assets/boss.png" id="2_id5a8"]
 [ext_resource type="Texture2D" uid="uid://xpjeb363su68" path="res://assets/point_light.webp" id="3_fr0ge"]
 [ext_resource type="Script" path="res://customs/nodes/health_component.gd" id="4_qjcns"]
 [ext_resource type="Script" path="res://customs/nodes/poise_component.gd" id="5_ok362"]
