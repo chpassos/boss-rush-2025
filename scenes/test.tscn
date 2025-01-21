@@ -1,10 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxvtdhp8dh0er"]
+[gd_scene load_steps=8 format=3 uid="uid://cxvtdhp8dh0er"]
 
 [ext_resource type="PackedScene" uid="uid://8tksrqglc2j5" path="res://scenes/arena/arena.tscn" id="1_c6a7u"]
 [ext_resource type="PackedScene" uid="uid://deje3vxmm68ao" path="res://scenes/player/player.tscn" id="2_5rsj7"]
 [ext_resource type="PackedScene" uid="uid://x83i8cfjst2t" path="res://scenes/asteroid/collectible/collectible_asteroid.tscn" id="2_sdvru"]
 [ext_resource type="PackedScene" uid="uid://b46v3f7wavfeq" path="res://scenes/boss/boss.tscn" id="6_dtdlm"]
 [ext_resource type="PackedScene" uid="uid://bguqcq048fxe1" path="res://ui/hud/hud.tscn" id="6_k4fi3"]
+[ext_resource type="Shader" path="res://assets/shaders/crt_effect.gdshader" id="6_lxb0n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bh6qt"]
+shader = ExtResource("6_lxb0n")
+shader_parameter/screen_resolution = Vector2(960, 540)
+shader_parameter/scanline_intensity = 0.2
+shader_parameter/color_bleed_weight = 0.45
 
 [node name="Test" type="Node2D"]
 
@@ -38,3 +45,12 @@ position = Vector2(462, -248)
 [node name="FG" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="FG" instance=ExtResource("6_k4fi3")]
+
+[node name="ColorRect" type="ColorRect" parent="FG"]
+material = SubResource("ShaderMaterial_bh6qt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
