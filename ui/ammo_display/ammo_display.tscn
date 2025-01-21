@@ -11,6 +11,7 @@ clockwise_ammo_counter = NodePath("ControlRight/ClockwiseAmmoCounter")
 counterclockwise_ammo_counter = NodePath("ControlLeft/CounterclockwiseAmmoCounter")
 
 [node name="CursorReference" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("1_ka0me")
 
 [node name="ControlLeft" type="Control" parent="."]
