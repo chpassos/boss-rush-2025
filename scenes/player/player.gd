@@ -11,8 +11,8 @@ extends CharacterBody2D
 @export var aim_line: Line2D
 @export var ammo_display: AmmoDisplay
 @export var health_component: HealthComponent
+@export var state_chart: StateChart
 
-@onready var state_chart: StateChart = $StateChart as StateChart
 @onready var rotation_input_queue: Array[StringName] = []
 @onready var clockwise_asteroid_queue: Array[OrbitingAsteroid] = []
 @onready var counterclockwise_asteroid_queue: Array[OrbitingAsteroid] = []
@@ -41,7 +41,12 @@ func _process(_delta: float) -> void:
 
 
 func _on_collision_detection_body_entered(_body: Boss) -> void:
-	health_component.take_damage(1)
+	take_damage(1)
+
+
+func take_damage(amount: int) -> void:
+	anim_player.play(&"hit")
+	health_component.take_damage(amount)
 	SignalBus.player_vitals_changed.emit()
 
 
