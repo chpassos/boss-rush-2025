@@ -40,6 +40,11 @@ func _process(_delta: float) -> void:
 	aim_line.rotation = angle
 
 
+func _on_collision_detection_body_entered(_body: Boss) -> void:
+	health_component.take_damage(1)
+	SignalBus.player_vitals_changed.emit()
+
+
 func add_asteroid_to_queue(clockwise: bool) -> void:
 	var asteroid_data: AsteroidData = Globals.CLOCKWISE_ASTEROID_DATA if clockwise else Globals.COUNTERCLOCKWISE_ASTEROID_DATA
 
