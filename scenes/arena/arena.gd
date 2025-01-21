@@ -12,6 +12,8 @@ extends Node2D
 @export var left_boundary: StaticBody2D
 @export var bg_sprite: Sprite2D
 
+@onready var bg_shader: ShaderMaterial = bg_sprite.material as ShaderMaterial
+
 
 func _set_arena_size(a: Vector2) -> void:
 	arena_size = a.abs()
@@ -26,7 +28,7 @@ func _set_arena_size(a: Vector2) -> void:
 
 func _set_bg_offset(b: Vector2) -> void:
 	bg_offset = b
-	(bg_sprite.material as ShaderMaterial).set_shader_parameter(&"offset", bg_offset)
+	bg_shader.set_shader_parameter(&"offset", bg_offset)
 
 
 func _process(_delta: float) -> void:
@@ -38,4 +40,4 @@ func _process(_delta: float) -> void:
 
 	var player_position: Vector2 = Globals.player.global_position - global_position
 	var delta_offset: Vector2 = parallax_intensity * player_position
-	(bg_sprite.material as ShaderMaterial).set_shader_parameter(&"offset", bg_offset + delta_offset)
+	bg_shader.set_shader_parameter(&"offset", bg_offset + delta_offset)

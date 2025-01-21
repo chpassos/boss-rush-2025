@@ -9,6 +9,7 @@ extends CharacterBody2D
 @export var sprite: Sprite2D
 @export var anim_player: AnimationPlayer
 @export var aim_line: Line2D
+@export var ammo_display: AmmoDisplay
 @export var health_component: HealthComponent
 
 @onready var state_chart: StateChart = $StateChart as StateChart
@@ -21,6 +22,9 @@ extends CharacterBody2D
 func _ready() -> void:
 	Globals.player = self
 	SignalBus.player_ready.emit.call_deferred()
+
+	ammo_display.clockwise_ammo_counter.text = "0"
+	ammo_display.counterclockwise_ammo_counter.text = "0"
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -52,8 +56,10 @@ func add_asteroid_to_queue(clockwise: bool) -> void:
 
 	if clockwise:
 		clockwise_asteroid_queue.append(orbiting_asteroid)
+		ammo_display.clockwise_ammo_counter.text = str(clockwise_asteroid_queue.size())
 	else:
 		counterclockwise_asteroid_queue.append(orbiting_asteroid)
+		ammo_display.counterclockwise_ammo_counter.text = str(counterclockwise_asteroid_queue.size())
 
 
 func shoot_asteroid_from_queue(clockwise: bool, direction: Vector2) -> void:
@@ -63,13 +69,16 @@ func shoot_asteroid_from_queue(clockwise: bool, direction: Vector2) -> void:
 
 		var orbiting_asteroid: OrbitingAsteroid = clockwise_asteroid_queue.pop_front()
 		orbiting_asteroid.queue_free()
+		ammo_display.clockwise_ammo_counter.text = str(clockwise_asteroid_queue.size())
 		ProjectileManager.spawn_projectile(global_position, true, direction)
 
 	else:
 		if not counterclockwise_asteroid_queue:
 			return
+
 		var orbiting_asteroid: OrbitingAsteroid = counterclockwise_asteroid_queue.pop_front()
 		orbiting_asteroid.queue_free()
+		ammo_display.counterclockwise_ammo_counter.text = str(counterclockwise_asteroid_queue.size())
 		ProjectileManager.spawn_projectile(global_position, false, direction)
 
 
@@ -116,11 +125,13 @@ func _on_move_state_physics_processing(delta: float) -> void:
 func _on_shoot_state_entered() -> void:
 	rotation_input_queue = []
 	aim_line.modulate.a = 1.0
+	ammo_display.show()
 
 
 func _on_shoot_state_exited() -> void:
 	aim_line.modulate.a = aim_line_default_opacity
 	anim_player.stop()
+	ammo_display.hide()
 
 
 func _on_shoot_state_unhandled_input(event: InputEvent) -> void:

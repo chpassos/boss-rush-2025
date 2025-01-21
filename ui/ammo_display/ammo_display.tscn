@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmh4gb22yvmng"]
+
+[ext_resource type="Texture2D" uid="uid://c742ckmqeqixt" path="res://assets/cursor/cursor.png" id="1_ka0me"]
+[ext_resource type="Script" path="res://ui/ammo_display/ammo_display.gd" id="1_slef7"]
+[ext_resource type="FontFile" uid="uid://p7e4iexcgjoh" path="res://assets/fonts/m6x11.ttf" id="2_3ggnh"]
+
+[node name="AmmoDisplay" type="Node2D" node_paths=PackedStringArray("clockwise_ammo_counter", "counterclockwise_ammo_counter")]
+z_index = 1
+script = ExtResource("1_slef7")
+clockwise_ammo_counter = NodePath("ClockwiseAmmoCounter")
+counterclockwise_ammo_counter = NodePath("CounterclockwiseAmmoCounter")
+
+[node name="CursorReference" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_ka0me")
+
+[node name="ClockwiseAmmoCounter" type="Label" parent="."]
+light_mask = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 27.0
+offset_top = -12.0
+offset_right = 67.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.815686, 0.121569, 0.423529, 1)
+theme_override_fonts/font = ExtResource("2_3ggnh")
+theme_override_font_sizes/font_size = 32
+text = "14"
+vertical_alignment = 1
+
+[node name="CounterclockwiseAmmoCounter" type="Label" parent="."]
+light_mask = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.0
+offset_top = -12.0
+offset_right = -26.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.52549, 0.741176, 0.156863, 1)
+theme_override_fonts/font = ExtResource("2_3ggnh")
+theme_override_font_sizes/font_size = 32
+text = "8"
+horizontal_alignment = 2
+vertical_alignment = 1

@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://deje3vxmm68ao"]
+[gd_scene load_steps=16 format=3 uid="uid://deje3vxmm68ao"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_uadqj"]
+[ext_resource type="PackedScene" uid="uid://bmh4gb22yvmng" path="res://ui/ammo_display/ammo_display.tscn" id="4_8sog7"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="4_ai658"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="5_mnto5"]
 [ext_resource type="Texture2D" uid="uid://cvrbcloqdkbnr" path="res://assets/player/planet_all-in-one.png" id="6_218uw"]
@@ -57,13 +58,14 @@ _data = {
 "rotation": SubResource("Animation_i5416")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "anim_player", "aim_line", "health_component")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "anim_player", "aim_line", "ammo_display", "health_component")]
 collision_mask = 18
 motion_mode = 1
 script = ExtResource("1_uadqj")
 sprite = NodePath("Sprite2D")
 anim_player = NodePath("AnimationPlayer")
 aim_line = NodePath("AimLine")
+ammo_display = NodePath("AmmoDisplay")
 health_component = NodePath("HealthComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -80,6 +82,9 @@ points = PackedVector2Array(0, 0, 540, 0)
 width = 2.0
 gradient = SubResource("Gradient_k1xnt")
 texture_mode = 1
+
+[node name="AmmoDisplay" parent="." instance=ExtResource("4_8sog7")]
+visible = false
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("4_ai658")
