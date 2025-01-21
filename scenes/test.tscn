@@ -11,7 +11,7 @@
 shader = ExtResource("6_lxb0n")
 shader_parameter/screen_resolution = Vector2(960, 540)
 shader_parameter/scanline_intensity = 0.2
-shader_parameter/color_bleed_weight = 0.45
+shader_parameter/color_bleed_weight = 0.25
 
 [node name="Test" type="Node2D"]
 
@@ -46,7 +46,7 @@ position = Vector2(462, -248)
 
 [node name="HUD" parent="FG" instance=ExtResource("6_k4fi3")]
 
-[node name="ColorRect" type="ColorRect" parent="FG"]
+[node name="CRTEffect" type="ColorRect" parent="FG"]
 material = SubResource("ShaderMaterial_bh6qt")
 anchors_preset = 15
 anchor_right = 1.0
