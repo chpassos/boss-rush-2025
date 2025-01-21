@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw1kl0h6dx1np"
-path="res://.godot/imported/mouse_cursor_v2.png-2b87a59766d2145a358e202ec5c82a20.ctex"
+uid="uid://cvrbcloqdkbnr"
+path="res://.godot/imported/planet.png-56efd076e3893ee51bcd19c9eba3d48e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/cursor/mouse_cursor_v2.png"
-dest_files=["res://.godot/imported/mouse_cursor_v2.png-2b87a59766d2145a358e202ec5c82a20.ctex"]
+source_file="res://assets/player/planet.png"
+dest_files=["res://.godot/imported/planet.png-56efd076e3893ee51bcd19c9eba3d48e.ctex"]
 
 [params]
 
