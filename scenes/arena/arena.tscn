@@ -18,7 +18,7 @@ normal = Vector2(1, 0)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a1fsp"]
 shader = ExtResource("2_7qhru")
 shader_parameter/bg_color = Color(0, 0, 0, 0)
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 shader_parameter/bigStarSlow = 2.0
 shader_parameter/mediumStarSlow = 6.0
 shader_parameter/smallStarSlow = 8.0

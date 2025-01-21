@@ -3,6 +3,8 @@ extends Node2D
 
 
 @export var arena_size: Vector2 = Vector2(160, 90): set = _set_arena_size
+@export var bg_offset: Vector2 = Vector2.ZERO: set = _set_bg_offset
+@export var parallax_intensity: float = 0.5
 @export_group("Nodes")
 @export var top_boundary: StaticBody2D
 @export var right_boundary: StaticBody2D
@@ -20,3 +22,20 @@ func _set_arena_size(a: Vector2) -> void:
 	right_boundary.position.x = arena_size.x / 2
 
 	bg_sprite.scale = arena_size / 128
+
+
+func _set_bg_offset(b: Vector2) -> void:
+	bg_offset = b
+	(bg_sprite.material as ShaderMaterial).set_shader_parameter(&"offset", bg_offset)
+
+
+func _process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+
+	if not Globals.player:
+		return
+
+	var player_position: Vector2 = Globals.player.global_position - global_position
+	var delta_offset: Vector2 = parallax_intensity * player_position
+	(bg_sprite.material as ShaderMaterial).set_shader_parameter(&"offset", bg_offset + delta_offset)
