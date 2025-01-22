@@ -2,7 +2,7 @@ class_name PoiseComponent
 extends Node
 
 
-signal poise_reached_zero()
+signal poise_depleted()
 signal poise_partially_restored()
 signal poise_fully_restored()
 
@@ -26,7 +26,7 @@ func take_damage(amount: float):
 	regen_timer.start(regen_delay)
 
 	if not current_poise:
-		poise_reached_zero.emit()
+		poise_depleted.emit()
 
 
 func _process(delta: float) -> void:

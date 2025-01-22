@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b46v3f7wavfeq"]
+[gd_scene load_steps=15 format=3 uid="uid://b46v3f7wavfeq"]
 
 [ext_resource type="Script" path="res://scenes/boss/boss.gd" id="1_kvpo3"]
 [ext_resource type="Texture2D" uid="uid://8cad2d2ajuiw" path="res://assets/sketches/boss.png" id="2_id5a8"]
@@ -9,21 +9,31 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="7_byxne"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="8_u1m5l"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="9_r7fcn"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="10_w0ny7"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="11_n2pg0"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="12_qj81f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fqvag"]
 radius = 80.0
 
-[node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "light", "health_component", "poise_component")]
+[sub_resource type="Resource" id="Resource_t0yqq"]
+script = ExtResource("11_n2pg0")
+expression = "wander_count >= 3"
+
+[node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "light", "health_component", "poise_component", "state_chart")]
 disable_mode = 1
 collision_layer = 2
 collision_mask = 17
 motion_mode = 1
 script = ExtResource("1_kvpo3")
 light_color = Color(0.709804, 0.305882, 0.207843, 1)
+wander_distance = 80.0
+chase_distance = 120.0
 sprite = NodePath("Sprite2D")
 light = NodePath("PointLight2D")
 health_component = NodePath("HealthComponent")
 poise_component = NodePath("Poise Component")
+state_chart = NodePath("StateChart")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 0
@@ -58,6 +68,33 @@ initial_state = NodePath("Idle")
 [node name="Idle" type="Node" parent="StateChart/Root/Movement"]
 script = ExtResource("9_r7fcn")
 
+[node name="ToChase" type="Node" parent="StateChart/Root/Movement/Idle"]
+script = ExtResource("10_w0ny7")
+to = NodePath("../../Chase")
+guard = SubResource("Resource_t0yqq")
+delay_in_seconds = "5"
+
+[node name="ToWander" type="Node" parent="StateChart/Root/Movement/Idle"]
+script = ExtResource("10_w0ny7")
+to = NodePath("../../Wander")
+delay_in_seconds = "5"
+
+[node name="Wander" type="Node" parent="StateChart/Root/Movement"]
+script = ExtResource("9_r7fcn")
+
+[node name="ToIdle" type="Node" parent="StateChart/Root/Movement/Wander"]
+script = ExtResource("10_w0ny7")
+to = NodePath("../../Idle")
+delay_in_seconds = "2"
+
+[node name="Chase" type="Node" parent="StateChart/Root/Movement"]
+script = ExtResource("9_r7fcn")
+
+[node name="ToIdle" type="Node" parent="StateChart/Root/Movement/Chase"]
+script = ExtResource("10_w0ny7")
+to = NodePath("../../Idle")
+delay_in_seconds = "2"
+
 [node name="Attack" type="Node" parent="StateChart/Root"]
 script = ExtResource("8_u1m5l")
 initial_state = NodePath("Idle")
@@ -65,6 +102,16 @@ initial_state = NodePath("Idle")
 [node name="Idle" type="Node" parent="StateChart/Root/Attack"]
 script = ExtResource("9_r7fcn")
 
-[connection signal="health_reached_zero" from="HealthComponent" to="." method="_on_health_component_health_reached_zero"]
+[node name="StateChartDebugger" parent="." instance=ExtResource("12_qj81f")]
+offset_left = -9.0
+offset_top = -25.0
+offset_right = 301.0
+offset_bottom = 330.0
+initial_node_to_watch = NodePath("../StateChart")
+
+[connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_depleted"]
 [connection signal="poise_fully_restored" from="Poise Component" to="." method="_on_poise_fully_restored"]
 [connection signal="poise_partially_restored" from="Poise Component" to="." method="_on_poise_partially_restored"]
+[connection signal="state_entered" from="StateChart/Root/Movement/Idle" to="." method="_on_idle_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Movement/Wander" to="." method="_on_wander_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Movement/Chase" to="." method="_on_chase_state_entered"]

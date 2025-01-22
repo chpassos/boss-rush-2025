@@ -44,6 +44,10 @@ func _on_collision_detection_body_entered(_body: Boss) -> void:
 	take_damage(1)
 
 
+func _on_health_depleted() -> void:
+	pass # Replace with function body.
+
+
 func take_damage(amount: int) -> void:
 	anim_player.play(&"hit")
 	health_component.take_damage(amount)

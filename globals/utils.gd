@@ -16,3 +16,10 @@ static func time_to_text(time_in_seconds: float) -> String:
 		text = ("%02d:" % hours) + text
 
 	return text
+
+
+static func random_point_in_circle() -> Vector2:
+	var r: float = sqrt(randf())
+	var t: float = TAU * randf()
+
+	return r * Vector2.RIGHT.rotated(t)
