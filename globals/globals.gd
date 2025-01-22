@@ -13,5 +13,6 @@ const TOTAL_BOSSES: int = 4
 # SCENES
 var player: Player
 var boss: Boss
+var arena: Arena
 # DATA
 var current_boss: int = 1

@@ -30,4 +30,4 @@ func _on_body_entered(body: Boss) -> void:
 	else:
 		body.take_damage(Globals.COUNTERCLOCKWISE_ASTEROID_DATA.health_damage, Globals.COUNTERCLOCKWISE_ASTEROID_DATA.poise_damage)
 
-	call_deferred(&"queue_free")
+	queue_free.call_deferred()

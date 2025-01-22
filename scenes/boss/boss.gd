@@ -26,7 +26,7 @@ func _ready() -> void:
 	SignalBus.boss_ready.emit.call_deferred()
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if velocity:
 		move_and_slide()
 

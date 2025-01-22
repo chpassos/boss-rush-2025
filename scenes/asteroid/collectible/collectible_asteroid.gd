@@ -26,7 +26,7 @@ func _ready() -> void:
 
 func _on_player_revolved(_clockwise: bool) -> void:
 	Globals.player.add_asteroid_to_queue(clockwise)
-	call_deferred(&"queue_free")
+	queue_free.call_deferred()
 
 
 func _process(_delta: float) -> void:

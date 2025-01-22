@@ -11,3 +11,6 @@ signal player_vitals_changed()
 signal boss_ready()
 @warning_ignore("unused_signal")
 signal boss_vitals_changed()
+# ARENA
+@warning_ignore("unused_signal")
+signal arena_ready()

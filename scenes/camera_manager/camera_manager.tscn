@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cu4l2obyiimj6"]
+
+[ext_resource type="Script" path="res://scenes/camera_manager/camera_manager.gd" id="1_lalib"]
+
+[node name="CameraManager" type="Node2D"]
+top_level = true
+script = ExtResource("1_lalib")
+follow_mode = 1
+zoom = Vector2(2, 2)
+follow_damping = true

@@ -46,7 +46,7 @@ shape = SubResource("CircleShape2D_fqvag")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 5.0
 texture = ExtResource("3_fr0ge")
-texture_scale = 10.0
+texture_scale = 20.0
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("4_qjcns")
@@ -103,6 +103,7 @@ initial_state = NodePath("Idle")
 script = ExtResource("9_r7fcn")
 
 [node name="StateChartDebugger" parent="." instance=ExtResource("12_qj81f")]
+visible = false
 offset_left = -9.0
 offset_top = -25.0
 offset_right = 301.0

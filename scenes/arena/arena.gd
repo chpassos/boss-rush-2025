@@ -1,4 +1,5 @@
 @tool
+class_name Arena
 extends Node2D
 
 
@@ -13,6 +14,7 @@ extends Node2D
 @export var bg_sprite: Sprite2D
 
 @onready var bg_shader: ShaderMaterial = bg_sprite.material as ShaderMaterial
+@onready var rect: Rect2 = Rect2(global_position - arena_size / 2, arena_size)
 
 
 func _set_arena_size(a: Vector2) -> void:
@@ -31,6 +33,12 @@ func _set_bg_offset(b: Vector2) -> void:
 	bg_shader.set_shader_parameter(&"offset", bg_offset)
 
 
+func _ready() -> void:
+	if not Engine.is_editor_hint():
+		Globals.arena = self
+		SignalBus.arena_ready.emit.call_deferred()
+
+
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
@@ -41,3 +49,7 @@ func _process(_delta: float) -> void:
 	var player_position: Vector2 = Globals.player.global_position - global_position
 	var delta_offset: Vector2 = parallax_intensity * player_position
 	bg_shader.set_shader_parameter(&"offset", bg_offset + delta_offset)
+
+
+func has_point(point: Vector2) -> bool:
+	return rect.has_point(point)
