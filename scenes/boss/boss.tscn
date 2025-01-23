@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b46v3f7wavfeq"]
+[gd_scene load_steps=21 format=3 uid="uid://b46v3f7wavfeq"]
 
 [ext_resource type="Script" path="res://scenes/boss/boss.gd" id="1_kvpo3"]
 [ext_resource type="Texture2D" uid="uid://8cad2d2ajuiw" path="res://assets/sketches/boss.png" id="2_id5a8"]
@@ -12,6 +12,9 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="10_w0ny7"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="11_n2pg0"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="12_qj81f"]
+[ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroids/asteroid.png" id="13_cn5aw"]
+[ext_resource type="Script" path="res://addons/PerfBullets/GDScript_Classes/PatternManager.gd" id="14_suji5"]
+[ext_resource type="Script" path="res://addons/PerfBullets/GDScript_Classes/PatternSpawnerData.gd" id="15_75kwp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fqvag"]
 radius = 80.0
@@ -20,7 +23,20 @@ radius = 80.0
 script = ExtResource("11_n2pg0")
 expression = "wander_count >= 3"
 
-[node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "light", "health_component", "poise_component", "state_chart")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_qdbb6"]
+
+[sub_resource type="BulletType" id="BulletType_ktbms"]
+_shape = SubResource("CircleShape2D_qdbb6")
+collideWithBodies = true
+collideWithAreas = false
+
+[sub_resource type="Resource" id="Resource_7qk64"]
+script = ExtResource("15_75kwp")
+ID = 1
+time = 2.0
+timerMode = 0
+
+[node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "light", "health_component", "poise_component", "state_chart", "spawner")]
 disable_mode = 1
 collision_layer = 2
 collision_mask = 17
@@ -34,6 +50,7 @@ light = NodePath("PointLight2D")
 health_component = NodePath("HealthComponent")
 poise_component = NodePath("Poise Component")
 state_chart = NodePath("StateChart")
+spawner = NodePath("Spawner")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 0
@@ -109,6 +126,19 @@ offset_top = -25.0
 offset_right = 301.0
 offset_bottom = 330.0
 initial_node_to_watch = NodePath("../StateChart")
+
+[node name="Spawner" type="Spawner" parent="."]
+startMode = 1
+bulletType = SubResource("BulletType_ktbms")
+homingWeight = 0.05
+startTowardPlayer = true
+staysTowardPlayer = true
+light_mask = 0
+texture = ExtResource("13_cn5aw")
+
+[node name="PatternManager" type="Node" parent="."]
+script = ExtResource("14_suji5")
+data = Array[ExtResource("15_75kwp")]([SubResource("Resource_7qk64")])
 
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_depleted"]
 [connection signal="poise_fully_restored" from="Poise Component" to="." method="_on_poise_fully_restored"]

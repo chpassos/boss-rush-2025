@@ -14,6 +14,7 @@ extends CharacterBody2D
 @export var health_component: HealthComponent
 @export var poise_component: PoiseComponent
 @export var state_chart: StateChart
+@export var spawner: Spawner
 
 @onready var wander_count: int = 0
 
@@ -24,6 +25,11 @@ func _ready() -> void:
 
 	Globals.boss = self
 	SignalBus.boss_ready.emit.call_deferred()
+	SignalBus.player_ready.connect(
+		func():
+			spawner.trackedNode = Globals.player
+			spawner.set_manual_start(true)
+	)
 
 
 func _physics_process(_delta: float) -> void:
