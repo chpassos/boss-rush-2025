@@ -5,9 +5,7 @@ extends CharacterBody2D
 @export var light_color: Color = Color.WHITE
 @export_group("Movement Stats")
 @export_range(0.0, 100.0, 5.0, "or_greater", "suffix:px/s") var wander_speed: float = 50.0
-@export_range(0.0, 500.0, 10.0, "or_greater", "suffix:px") var wander_distance: float = 150.0
 @export_range(0.0, 200.0, 5.0, "or_greater", "suffix:px/s") var chase_speed: float = 120.0
-@export_range(0.0, 500.0, 10.0, "or_greater", "suffix:px") var chase_distance: float = 250.0
 @export_group("Nodes")
 @export var sprite: Sprite2D
 @export var light: PointLight2D
