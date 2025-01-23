@@ -1,3 +1,4 @@
+class_name CameraManager
 extends PhantomCamera2D
 
 
@@ -15,3 +16,11 @@ func _on_arena_ready() -> void:
 	limit_right = zero.x + Globals.arena.arena_size.x / 2
 	@warning_ignore("narrowing_conversion")
 	limit_bottom = zero.y + Globals.arena.arena_size.y / 2
+
+
+func set_target_to_player() -> void:
+	follow_target = Globals.player
+
+
+func set_target_to_boss() -> void:
+	follow_target = Globals.boss

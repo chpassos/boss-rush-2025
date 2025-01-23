@@ -33,31 +33,30 @@ process_priority = 300
 process_physics_priority = 300
 script = ExtResource("1_r6821")
 
-[node name="CameraManager" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("2_vyg58")]
-follow_target = NodePath("../Player")
+[node name="CameraManager" parent="." instance=ExtResource("2_vyg58")]
 tween_resource = SubResource("Resource_tg230")
 
 [node name="Arena" parent="." instance=ExtResource("1_c6a7u")]
 arena_size = Vector2(1920, 1080)
 
 [node name="Player" parent="." instance=ExtResource("2_5rsj7")]
+position = Vector2(-443, -233)
 
 [node name="CollectibleAsteroid1" parent="." instance=ExtResource("2_sdvru")]
-position = Vector2(295, 0)
+position = Vector2(-168, 211)
 clockwise = false
 
 [node name="CollectibleAsteroid2" parent="." instance=ExtResource("2_sdvru")]
-position = Vector2(691, -60)
+position = Vector2(228, 151)
 
 [node name="CollectibleAsteroid3" parent="." instance=ExtResource("2_sdvru")]
-position = Vector2(242, -383)
+position = Vector2(-221, -172)
 
 [node name="CollectibleAsteroid4" parent="." instance=ExtResource("2_sdvru")]
-position = Vector2(672, -406)
+position = Vector2(209, -195)
 clockwise = false
 
 [node name="Boss" parent="." instance=ExtResource("6_dtdlm")]
-position = Vector2(462, -248)
 
 [node name="FG" type="CanvasLayer" parent="."]
 
