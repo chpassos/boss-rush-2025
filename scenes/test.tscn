@@ -25,7 +25,7 @@ shader_parameter/color_bleed_weight = 0.25
 [node name="Test" type="Node2D"]
 
 [node name="MainCamera" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+zoom = Vector2(4, 4)
 process_callback = 0
 
 [node name="PhantomCameraHost" type="Node" parent="MainCamera"]
