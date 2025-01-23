@@ -14,7 +14,7 @@ func _physics_process(delta):
 	if input.y == 0:
 		velocity.y = 0
 	position += velocity * delta
-	
+
 	#This checks if the spawner is in manual mode, and if it is, it sets the manual start to true. This causes one firing of the pattern.
 	if get_node_or_null("PlayerShot") != null: #just because I used this script in multiple examples
 		if $PlayerShot.startMode == 2:
@@ -25,4 +25,3 @@ func _physics_process(delta):
 func _on_bullet_hit(result, bulletIndex, spawner):
 #	spawner.free_bullet_to_pool(bulletIndex) #can be used if returnBulletsToPoolAutomatically is false (see documentation on README)
 	print("hit ", result[0]["collider"])
-

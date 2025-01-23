@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b46v3f7wavfeq"]
+[gd_scene load_steps=19 format=3 uid="uid://b46v3f7wavfeq"]
 
 [ext_resource type="Script" path="res://scenes/boss/boss.gd" id="1_kvpo3"]
 [ext_resource type="Texture2D" uid="uid://8cad2d2ajuiw" path="res://assets/sketches/boss.png" id="2_id5a8"]
@@ -6,15 +6,12 @@
 [ext_resource type="Script" path="res://customs/nodes/health_component.gd" id="4_qjcns"]
 [ext_resource type="Script" path="res://customs/nodes/poise_component.gd" id="5_ok362"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="6_sfafb"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="7_byxne"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="8_u1m5l"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="9_r7fcn"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="10_w0ny7"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="11_n2pg0"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="12_qj81f"]
 [ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroids/asteroid.png" id="13_cn5aw"]
-[ext_resource type="Script" path="res://addons/PerfBullets/GDScript_Classes/PatternManager.gd" id="14_suji5"]
-[ext_resource type="Script" path="res://addons/PerfBullets/GDScript_Classes/PatternSpawnerData.gd" id="15_75kwp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fqvag"]
 radius = 80.0
@@ -26,17 +23,18 @@ expression = "wander_count >= 3"
 [sub_resource type="CircleShape2D" id="CircleShape2D_qdbb6"]
 
 [sub_resource type="BulletType" id="BulletType_ktbms"]
+initialSpeed = 150.0
 _shape = SubResource("CircleShape2D_qdbb6")
 collideWithBodies = true
 collideWithAreas = false
 
-[sub_resource type="Resource" id="Resource_7qk64"]
-script = ExtResource("15_75kwp")
-ID = 1
-time = 2.0
-timerMode = 0
+[sub_resource type="CircleShape2D" id="CircleShape2D_kbtfd"]
 
-[node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "light", "health_component", "poise_component", "state_chart", "spawner")]
+[sub_resource type="BulletType" id="BulletType_jl0c3"]
+initialSpeed = 150.0
+_shape = SubResource("CircleShape2D_kbtfd")
+
+[node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "light", "health_component", "poise_component", "state_chart", "cone_attack_spawner", "circle_attack_spawner")]
 disable_mode = 1
 collision_layer = 2
 collision_mask = 17
@@ -50,7 +48,8 @@ light = NodePath("PointLight2D")
 health_component = NodePath("HealthComponent")
 poise_component = NodePath("Poise Component")
 state_chart = NodePath("StateChart")
-spawner = NodePath("Spawner")
+cone_attack_spawner = NodePath("ConeAttackSpawner")
+circle_attack_spawner = NodePath("CircleAttackSpawner")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 0
@@ -76,73 +75,95 @@ regen_delay = 1.0
 script = ExtResource("6_sfafb")
 
 [node name="Root" type="Node" parent="StateChart"]
-script = ExtResource("7_byxne")
+script = ExtResource("8_u1m5l")
+initial_state = NodePath("Move")
 
-[node name="Movement" type="Node" parent="StateChart/Root"]
+[node name="Move" type="Node" parent="StateChart/Root"]
 script = ExtResource("8_u1m5l")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateChart/Root/Movement"]
+[node name="Idle" type="Node" parent="StateChart/Root/Move"]
 script = ExtResource("9_r7fcn")
 
-[node name="ToChase" type="Node" parent="StateChart/Root/Movement/Idle"]
+[node name="ToChase" type="Node" parent="StateChart/Root/Move/Idle"]
 script = ExtResource("10_w0ny7")
 to = NodePath("../../Chase")
 guard = SubResource("Resource_t0yqq")
-delay_in_seconds = "5"
+delay_in_seconds = "0.0"
 
-[node name="ToWander" type="Node" parent="StateChart/Root/Movement/Idle"]
+[node name="ToWander" type="Node" parent="StateChart/Root/Move/Idle"]
 script = ExtResource("10_w0ny7")
 to = NodePath("../../Wander")
-delay_in_seconds = "5"
+delay_in_seconds = "0.0"
 
-[node name="Wander" type="Node" parent="StateChart/Root/Movement"]
+[node name="Wander" type="Node" parent="StateChart/Root/Move"]
 script = ExtResource("9_r7fcn")
 
-[node name="ToIdle" type="Node" parent="StateChart/Root/Movement/Wander"]
+[node name="ToConeAttack" type="Node" parent="StateChart/Root/Move/Wander"]
 script = ExtResource("10_w0ny7")
-to = NodePath("../../Idle")
-delay_in_seconds = "2"
+to = NodePath("../../../Attack/ConeAttack")
+delay_in_seconds = "2.0"
 
-[node name="Chase" type="Node" parent="StateChart/Root/Movement"]
+[node name="Chase" type="Node" parent="StateChart/Root/Move"]
 script = ExtResource("9_r7fcn")
 
-[node name="ToIdle" type="Node" parent="StateChart/Root/Movement/Chase"]
+[node name="ToCircleAttack" type="Node" parent="StateChart/Root/Move/Chase"]
 script = ExtResource("10_w0ny7")
-to = NodePath("../../Idle")
-delay_in_seconds = "2"
+to = NodePath("../../../Attack/CircleAttack")
+delay_in_seconds = "2.5"
 
 [node name="Attack" type="Node" parent="StateChart/Root"]
 script = ExtResource("8_u1m5l")
 initial_state = NodePath("Idle")
 
+[node name="ToMove" type="Node" parent="StateChart/Root/Attack"]
+script = ExtResource("10_w0ny7")
+to = NodePath("../../Move")
+delay_in_seconds = "5.0"
+
 [node name="Idle" type="Node" parent="StateChart/Root/Attack"]
 script = ExtResource("9_r7fcn")
 
+[node name="ConeAttack" type="Node" parent="StateChart/Root/Attack"]
+script = ExtResource("9_r7fcn")
+
+[node name="CircleAttack" type="Node" parent="StateChart/Root/Attack"]
+script = ExtResource("9_r7fcn")
+
 [node name="StateChartDebugger" parent="." instance=ExtResource("12_qj81f")]
-visible = false
 offset_left = -9.0
 offset_top = -25.0
 offset_right = 301.0
 offset_bottom = 330.0
+enabled = false
 initial_node_to_watch = NodePath("../StateChart")
 
-[node name="Spawner" type="Spawner" parent="."]
-startMode = 1
+[node name="ConeAttackSpawner" type="Spawner" parent="." node_paths=PackedStringArray("trackedNode")]
+startMode = 2
 bulletType = SubResource("BulletType_ktbms")
-homingWeight = 0.05
+fireRadiusDegrees = 45.0
+bulletsPerRadius = 3
+trackedNode = NodePath("..")
 startTowardPlayer = true
 staysTowardPlayer = true
+offsetTowardPlayer = -22.5
 light_mask = 0
 texture = ExtResource("13_cn5aw")
 
-[node name="PatternManager" type="Node" parent="."]
-script = ExtResource("14_suji5")
-data = Array[ExtResource("15_75kwp")]([SubResource("Resource_7qk64")])
+[node name="CircleAttackSpawner" type="Spawner" parent="."]
+startMode = 2
+bulletType = SubResource("BulletType_jl0c3")
+ID = 2
+bulletsPerRadius = 16
+light_mask = 0
+texture = ExtResource("13_cn5aw")
 
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_depleted"]
 [connection signal="poise_fully_restored" from="Poise Component" to="." method="_on_poise_fully_restored"]
 [connection signal="poise_partially_restored" from="Poise Component" to="." method="_on_poise_partially_restored"]
-[connection signal="state_entered" from="StateChart/Root/Movement/Idle" to="." method="_on_idle_state_entered"]
-[connection signal="state_entered" from="StateChart/Root/Movement/Wander" to="." method="_on_wander_state_entered"]
-[connection signal="state_entered" from="StateChart/Root/Movement/Chase" to="." method="_on_chase_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Move" to="." method="_on_move_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/Root/Move" to="." method="_on_move_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Move/Wander" to="." method="_on_wander_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Move/Chase" to="." method="_on_chase_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Attack/ConeAttack" to="." method="_on_cone_attack_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Attack/CircleAttack" to="." method="_on_circle_attack_state_entered"]

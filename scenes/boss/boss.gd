@@ -14,7 +14,8 @@ extends CharacterBody2D
 @export var health_component: HealthComponent
 @export var poise_component: PoiseComponent
 @export var state_chart: StateChart
-@export var spawner: Spawner
+@export var cone_attack_spawner: Spawner
+@export var circle_attack_spawner: Spawner
 
 @onready var wander_count: int = 0
 
@@ -25,16 +26,14 @@ func _ready() -> void:
 
 	Globals.boss = self
 	SignalBus.boss_ready.emit.call_deferred()
-	SignalBus.player_ready.connect(
-		func():
-			spawner.trackedNode = Globals.player
-			spawner.set_manual_start(true)
-	)
 
-
-func _physics_process(_delta: float) -> void:
-	if velocity:
-		move_and_slide()
+	if not Globals.player:
+		SignalBus.player_ready.connect(
+			func():
+				cone_attack_spawner.trackedNode = Globals.player
+		)
+	else:
+		cone_attack_spawner.trackedNode = Globals.player
 
 
 func take_damage(health_damage: int, poise_damage: float) -> void:
@@ -55,10 +54,14 @@ func _on_poise_fully_restored() -> void:
 	SignalBus.boss_vitals_changed.emit()
 
 
-# MOVEMENT IDLE STATE
+# MOVE STATE
 
-func _on_idle_state_entered() -> void:
+func _on_move_state_exited() -> void:
 	velocity = Vector2.ZERO
+
+
+func _on_move_state_physics_processing(_delta: float) -> void:
+	move_and_slide()
 
 
 # WANDER STATE
@@ -79,3 +82,17 @@ func _on_chase_state_entered() -> void:
 		return
 
 	velocity = chase_speed * global_position.direction_to(Globals.player.global_position)
+
+
+# CONE ATTACK STATE
+
+func _on_cone_attack_state_entered() -> void:
+	for _i in range(4):
+		cone_attack_spawner.set_manual_start(true)
+		await get_tree().create_timer(0.15).timeout
+
+
+# CIRCLE ATTACK STATE
+
+func _on_circle_attack_state_entered() -> void:
+	circle_attack_spawner.set_manual_start(true)
