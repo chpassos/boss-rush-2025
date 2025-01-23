@@ -45,7 +45,7 @@ func _on_collision_detection_body_entered(_body: Boss) -> void:
 
 
 func _on_health_depleted() -> void:
-	pass # Replace with function body.
+	anim_player.play(&"death")
 
 
 func take_damage(amount: int) -> void:
@@ -102,24 +102,25 @@ func _on_move_state_physics_processing(delta: float) -> void:
 	var input_dir: Vector2 = Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
 
 	# Set sprite direction
-	if input_dir.x == 0 and input_dir.y == 0:  # idle
-		sprite.region_rect.position.x = 0
-	elif input_dir.x == 0 and input_dir.y > 0:  # forward
-		sprite.region_rect.position.x = 0
-	elif input_dir.x > 0 and input_dir.y > 0:  # forward-right
-		sprite.region_rect.position.x = 38
-	elif input_dir.x > 0 and input_dir.y == 0:  # right
-		sprite.region_rect.position.x = 76
-	elif input_dir.x > 0 and input_dir.y < 0:  # backward-right
-		sprite.region_rect.position.x = 114
-	elif input_dir.x == 0 and input_dir.y < 0:  # backward
-		sprite.region_rect.position.x = 152
-	elif input_dir.x < 0 and input_dir.y < 0:  # backward-left
-		sprite.region_rect.position.x = 190
-	elif input_dir.x < 0 and input_dir.y == 0:  # left
-		sprite.region_rect.position.x = 228
-	elif input_dir.x < 0 and input_dir.y > 0:  # forward-left
-		sprite.region_rect.position.x = 266
+	if not anim_player.is_playing():
+		if input_dir.x == 0 and input_dir.y == 0:  # idle
+			sprite.region_rect.position = Vector2(0, 0)
+		elif input_dir.x == 0 and input_dir.y > 0:  # forward
+			sprite.region_rect.position = Vector2(0, 0)
+		elif input_dir.x > 0 and input_dir.y > 0:  # forward-right
+			sprite.region_rect.position = Vector2(38, 0)
+		elif input_dir.x > 0 and input_dir.y == 0:  # right
+			sprite.region_rect.position = Vector2(76, 0)
+		elif input_dir.x > 0 and input_dir.y < 0:  # backward-right
+			sprite.region_rect.position = Vector2(114, 0)
+		elif input_dir.x == 0 and input_dir.y < 0:  # backward
+			sprite.region_rect.position = Vector2(152, 0)
+		elif input_dir.x < 0 and input_dir.y < 0:  # backward-left
+			sprite.region_rect.position = Vector2(190, 0)
+		elif input_dir.x < 0 and input_dir.y == 0:  # left
+			sprite.region_rect.position = Vector2(228, 0)
+		elif input_dir.x < 0 and input_dir.y > 0:  # forward-left
+			sprite.region_rect.position = Vector2(266, 0)
 
 	if not input_dir:
 		if velocity.length() > delta * drag:
@@ -199,12 +200,28 @@ func _on_shoot_state_unhandled_input(event: InputEvent) -> void:
 
 	if rotation_input_queue.size() == 4:
 		var mouse_position: Vector2 = get_global_mouse_position()
+		var shoot_dir: Vector2 = global_position.direction_to(mouse_position)
 
 		if rotation_input_queue[0] == &"spin_clockwise_1" or rotation_input_queue[0] == &"spin_clockwise_2":
-			shoot_asteroid_from_queue(true, global_position.direction_to(mouse_position))
+			shoot_asteroid_from_queue(true, shoot_dir)
 			#print("SHOOT CLOCKWISE!")
 		else:
-			shoot_asteroid_from_queue(false, global_position.direction_to(mouse_position))
+			shoot_asteroid_from_queue(false, shoot_dir)
 			#print("SHOOT COUNTERCLOCKWISE!")
 
 		rotation_input_queue = []
+
+
+func _on_shoot_state_processing(_delta: float) -> void:
+	if anim_player.is_playing() and anim_player.current_animation == &"rotation":
+		return
+
+	var dir_to_mouse: Vector2 = global_position.direction_to(get_global_mouse_position())
+	var dot: float = Vector2.RIGHT.dot(dir_to_mouse)
+
+	if dot > 0.5:
+		anim_player.play(&"aim_right")
+	elif dot > -0.5:
+		anim_player.play(&"aim_center")
+	else:
+		anim_player.play(&"aim_left")
