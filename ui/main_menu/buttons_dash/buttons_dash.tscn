@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://di5ludk2g2sno"]
+
+[ext_resource type="PackedScene" uid="uid://cgxmetytbv3g1" path="res://ui/menu_button/menu_button.tscn" id="1_q5h6r"]
+
+[node name="ButtonsDash" type="PanelContainer"]
+offset_right = 736.0
+offset_bottom = 48.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="MenuButton" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_q5h6r")]
+layout_mode = 2
+
+[node name="MenuButton2" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_q5h6r")]
+layout_mode = 2
+
+[node name="MenuButton3" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_q5h6r")]
+layout_mode = 2
+
+[node name="MenuButton4" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_q5h6r")]
+layout_mode = 2
+
+[node name="MenuButton5" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_q5h6r")]
+layout_mode = 2

@@ -1,16 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://crj5oic2518nq"]
+[gd_scene load_steps=5 format=3 uid="uid://crj5oic2518nq"]
 
+[ext_resource type="Script" path="res://ui/main_menu/main_menu.gd" id="1_6x6l8"]
 [ext_resource type="FontFile" uid="uid://ba6k7qkywusa2" path="res://assets/fonts/Not Jam Atomic 20.ttf" id="1_vlmol"]
 [ext_resource type="Texture2D" uid="uid://cxgyyokv5dgku" path="res://assets/circle.png" id="2_8w4in"]
-[ext_resource type="PackedScene" uid="uid://cgxmetytbv3g1" path="res://ui/menu_button/menu_button.tscn" id="2_chx7b"]
+[ext_resource type="PackedScene" uid="uid://di5ludk2g2sno" path="res://ui/main_menu/buttons_dash/buttons_dash.tscn" id="3_hepib"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("title", "dash")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_6x6l8")
+title = NodePath("MarginContainer/TextureRect/Label")
+dash = NodePath("MarginContainer/ButtonsDash")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -24,11 +28,7 @@ theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 64
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 128
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
 self_modulate = Color(0.968627, 0.945098, 0.894118, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -36,7 +36,7 @@ size_flags_vertical = 3
 texture = ExtResource("2_8w4in")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TextureRect"]
+[node name="Label" type="Label" parent="MarginContainer/TextureRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -57,23 +57,6 @@ text = "a PLANET game"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="ButtonsDash" parent="MarginContainer" instance=ExtResource("3_hepib")]
 layout_mode = 2
 size_flags_vertical = 8
-theme_override_constants/separation = 32
-alignment = 1
-
-[node name="MenuButton" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_chx7b")]
-layout_mode = 2
-
-[node name="MenuButton2" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_chx7b")]
-layout_mode = 2
-
-[node name="MenuButton3" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_chx7b")]
-layout_mode = 2
-
-[node name="MenuButton4" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_chx7b")]
-layout_mode = 2
-
-[node name="MenuButton5" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_chx7b")]
-layout_mode = 2
