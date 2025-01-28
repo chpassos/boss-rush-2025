@@ -1,3 +1,4 @@
+class_name HealAsteroid
 extends RigidBody2D
 
 
