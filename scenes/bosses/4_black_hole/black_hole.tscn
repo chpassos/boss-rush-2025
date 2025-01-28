@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://gdsprfbpe76q"]
+
+[ext_resource type="Script" path="res://scenes/bosses/4_black_hole/black_hole.gd" id="1_1mhgs"]
+[ext_resource type="Script" path="res://customs/nodes/health_component.gd" id="2_23syd"]
+[ext_resource type="Texture2D" uid="uid://xpjeb363su68" path="res://assets/point_light.webp" id="2_p6k48"]
+[ext_resource type="Script" path="res://customs/nodes/poise_component.gd" id="3_0b6ut"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="4_q0jqj"]
+
+[node name="BlackHole" type="Node2D" node_paths=PackedStringArray("sprite", "anim_player", "light", "health_component", "poise_component", "state_chart")]
+script = ExtResource("1_1mhgs")
+sprite = NodePath("Sprite2D")
+anim_player = NodePath("AnimationPlayer")
+light = NodePath("PointLight2D")
+health_component = NodePath("HealthComponent")
+poise_component = NodePath("PoiseComponent")
+state_chart = NodePath("StateChart")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+blend_mode = 1
+texture = ExtResource("2_p6k48")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_23syd")
+
+[node name="PoiseComponent" type="Node" parent="."]
+script = ExtResource("3_0b6ut")
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("4_q0jqj")

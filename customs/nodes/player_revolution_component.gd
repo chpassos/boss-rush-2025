@@ -30,7 +30,7 @@ func _process(_delta: float) -> void:
 	if zero == INF:
 		zero = global_position.angle_to_point(Globals.player.global_position)
 		progress_bar.radial_initial_angle = rad_to_deg(zero + PI / 2)
-		last_dir_to_player =global_position.direction_to(Globals.player.global_position)
+		last_dir_to_player = global_position.direction_to(Globals.player.global_position)
 		return
 
 	var dir_to_player: Vector2 = global_position.direction_to(Globals.player.global_position)
