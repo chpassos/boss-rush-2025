@@ -23,6 +23,11 @@ func _ready() -> void:
 		cone_attack_spawner.trackedNode = Globals.player
 
 
+func _on_bullet_hit(result: Array, _bulletIndex: int, _spawner: Object) -> void:
+	if result[0]["collider"] == Globals.player:
+		Globals.player.take_damage(1)
+
+
 # MOVE STATE
 
 func _on_move_state_exited() -> void:
@@ -56,9 +61,9 @@ func _on_chase_state_entered() -> void:
 # CONE ATTACK STATE
 
 func _on_cone_attack_state_entered() -> void:
-	for _i in range(4):
+	for _i in range(5):
 		cone_attack_spawner.set_manual_start(true)
-		await get_tree().create_timer(0.15).timeout
+		await get_tree().create_timer(0.2).timeout
 
 
 # CIRCLE ATTACK STATE

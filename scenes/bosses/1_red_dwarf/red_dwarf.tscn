@@ -23,7 +23,7 @@ expression = "wander_count >= 3"
 [sub_resource type="CircleShape2D" id="CircleShape2D_qdbb6"]
 
 [sub_resource type="BulletType" id="BulletType_ktbms"]
-initialSpeed = 150.0
+initialSpeed = 160.0
 _shape = SubResource("CircleShape2D_qdbb6")
 collideWithBodies = true
 collideWithAreas = false
@@ -31,7 +31,7 @@ collideWithAreas = false
 [sub_resource type="CircleShape2D" id="CircleShape2D_kbtfd"]
 
 [sub_resource type="BulletType" id="BulletType_jl0c3"]
-initialSpeed = 150.0
+initialSpeed = 160.0
 _shape = SubResource("CircleShape2D_kbtfd")
 
 [node name="RedDwarf" type="CharacterBody2D" node_paths=PackedStringArray("cone_attack_spawner", "circle_attack_spawner", "sprite", "light", "health_component", "poise_component", "state_chart")]
@@ -163,7 +163,7 @@ texture = ExtResource("12_6yxke")
 startMode = 2
 bulletType = SubResource("BulletType_jl0c3")
 ID = 2
-bulletsPerRadius = 16
+bulletsPerRadius = 20
 light_mask = 0
 texture = ExtResource("12_6yxke")
 
@@ -173,3 +173,4 @@ texture = ExtResource("12_6yxke")
 [connection signal="state_entered" from="StateChart/Root/Move/Chase" to="." method="_on_chase_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Attack/ConeAttack" to="." method="_on_cone_attack_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Attack/CircleAttack" to="." method="_on_circle_attack_state_entered"]
+[connection signal="bullet_hit" from="ConeAttackSpawner" to="." method="_on_bullet_hit"]

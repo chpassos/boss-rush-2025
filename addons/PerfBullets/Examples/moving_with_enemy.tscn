@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://7wfgj7elk1q7"]
 
 [ext_resource type="Script" path="res://addons/PerfBullets/Examples/moving_with_enemy.gd" id="1_8xb1d"]
-[ext_resource type="Texture2D" uid="uid://bqdjo5yxxlw22" path="res://icon.svg" id="1_g0w4q"]
-[ext_resource type="Texture2D" uid="uid://c5x15cffw1yd0" path="res://addons/PerfBullets/test_bullet_animation_sheet.png" id="2_f7hcb"]
+[ext_resource type="Texture2D" uid="uid://dyla24kl7knj1" path="res://icon.svg" id="1_g0w4q"]
+[ext_resource type="Texture2D" uid="uid://dangpsws8ynq" path="res://addons/PerfBullets/test_bullet_animation_sheet.png" id="2_f7hcb"]
 [ext_resource type="Script" path="res://addons/PerfBullets/GDScript_Classes/BulletBorder.gd" id="4_v8qsx"]
 [ext_resource type="PackedScene" uid="uid://duq34uom7vsr6" path="res://addons/PerfBullets/Examples/player.tscn" id="5_fhnh6"]
 
@@ -65,7 +65,6 @@ fireRate = 0.75
 fireRadiusDegrees = 90.0
 bulletsPerRadius = 3
 startRotation = 225.0
-moveWithParent = false
 gravity = 4.0
 multimesh = SubResource("MultiMesh_b2lt3")
 texture = ExtResource("1_g0w4q")
@@ -91,7 +90,6 @@ bulletsPerRadius = 3
 startRotation = 225.0
 rowsInAtlas = 2
 columnsInAtlas = 2
-moveWithParent = false
 texture = ExtResource("2_f7hcb")
 
 [connection signal="bullet_hit" from="Player/Spawner" to="." method="_on_spawner_bullet_hit"]
