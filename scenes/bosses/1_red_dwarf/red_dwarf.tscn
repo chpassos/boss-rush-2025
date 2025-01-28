@@ -1,23 +1,23 @@
 [gd_scene load_steps=19 format=3 uid="uid://b46v3f7wavfeq"]
 
-[ext_resource type="Script" path="res://scenes/boss/boss.gd" id="1_kvpo3"]
-[ext_resource type="Texture2D" uid="uid://8cad2d2ajuiw" path="res://assets/sketches/boss.png" id="2_id5a8"]
-[ext_resource type="Texture2D" uid="uid://xpjeb363su68" path="res://assets/point_light.webp" id="3_fr0ge"]
-[ext_resource type="Script" path="res://customs/nodes/health_component.gd" id="4_qjcns"]
-[ext_resource type="Script" path="res://customs/nodes/poise_component.gd" id="5_ok362"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="6_sfafb"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="8_u1m5l"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="9_r7fcn"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="10_w0ny7"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="11_n2pg0"]
-[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="12_qj81f"]
-[ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroids/asteroid.png" id="13_cn5aw"]
+[ext_resource type="Script" path="res://scenes/bosses/1_red_dwarf/red_dwarf.gd" id="1_n6yai"]
+[ext_resource type="Texture2D" uid="uid://8cad2d2ajuiw" path="res://assets/sketches/boss.png" id="2_ednm6"]
+[ext_resource type="Texture2D" uid="uid://xpjeb363su68" path="res://assets/point_light.webp" id="3_scyfx"]
+[ext_resource type="Script" path="res://customs/nodes/health_component.gd" id="4_7r3q0"]
+[ext_resource type="Script" path="res://customs/nodes/poise_component.gd" id="5_uo8ru"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="6_u2ekn"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="7_f7rkx"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="8_kjjfu"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="9_402m1"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="10_ppt32"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="11_gix34"]
+[ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroids/asteroid.png" id="12_6yxke"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fqvag"]
 radius = 80.0
 
 [sub_resource type="Resource" id="Resource_t0yqq"]
-script = ExtResource("11_n2pg0")
+script = ExtResource("10_ppt32")
 expression = "wander_count >= 3"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qdbb6"]
@@ -34,112 +34,112 @@ collideWithAreas = false
 initialSpeed = 150.0
 _shape = SubResource("CircleShape2D_kbtfd")
 
-[node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "light", "health_component", "poise_component", "state_chart", "cone_attack_spawner", "circle_attack_spawner")]
+[node name="RedDwarf" type="CharacterBody2D" node_paths=PackedStringArray("cone_attack_spawner", "circle_attack_spawner", "sprite", "light", "health_component", "poise_component", "state_chart")]
 disable_mode = 1
 collision_layer = 2
 collision_mask = 17
 motion_mode = 1
-script = ExtResource("1_kvpo3")
-light_color = Color(0.709804, 0.305882, 0.207843, 1)
+script = ExtResource("1_n6yai")
 wander_speed = 100.0
 chase_speed = 200.0
+cone_attack_spawner = NodePath("ConeAttackSpawner")
+circle_attack_spawner = NodePath("CircleAttackSpawner")
+light_color = Color(0.709804, 0.305882, 0.207843, 1)
 sprite = NodePath("Sprite2D")
 light = NodePath("PointLight2D")
 health_component = NodePath("HealthComponent")
 poise_component = NodePath("Poise Component")
 state_chart = NodePath("StateChart")
-cone_attack_spawner = NodePath("ConeAttackSpawner")
-circle_attack_spawner = NodePath("CircleAttackSpawner")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 0
 scale = Vector2(2, 2)
-texture = ExtResource("2_id5a8")
+texture = ExtResource("2_ednm6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_fqvag")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 5.0
-texture = ExtResource("3_fr0ge")
+texture = ExtResource("3_scyfx")
 texture_scale = 20.0
 
 [node name="HealthComponent" type="Node" parent="."]
-script = ExtResource("4_qjcns")
+script = ExtResource("4_7r3q0")
 
 [node name="Poise Component" type="Node" parent="."]
-script = ExtResource("5_ok362")
+script = ExtResource("5_uo8ru")
 regen_delay = 1.0
 
 [node name="StateChart" type="Node" parent="."]
-script = ExtResource("6_sfafb")
+script = ExtResource("6_u2ekn")
 
 [node name="Root" type="Node" parent="StateChart"]
-script = ExtResource("8_u1m5l")
+script = ExtResource("7_f7rkx")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateChart/Root"]
-script = ExtResource("9_r7fcn")
+script = ExtResource("8_kjjfu")
 
 [node name="ToMove" type="Node" parent="StateChart/Root/Idle"]
-script = ExtResource("10_w0ny7")
+script = ExtResource("9_402m1")
 to = NodePath("../../Move")
 event = &"battle_started"
 delay_in_seconds = "0.0"
 
 [node name="Move" type="Node" parent="StateChart/Root"]
-script = ExtResource("8_u1m5l")
+script = ExtResource("7_f7rkx")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateChart/Root/Move"]
-script = ExtResource("9_r7fcn")
+script = ExtResource("8_kjjfu")
 
 [node name="ToChase" type="Node" parent="StateChart/Root/Move/Idle"]
-script = ExtResource("10_w0ny7")
+script = ExtResource("9_402m1")
 to = NodePath("../../Chase")
 guard = SubResource("Resource_t0yqq")
 delay_in_seconds = "0.0"
 
 [node name="ToWander" type="Node" parent="StateChart/Root/Move/Idle"]
-script = ExtResource("10_w0ny7")
+script = ExtResource("9_402m1")
 to = NodePath("../../Wander")
 delay_in_seconds = "0.0"
 
 [node name="Wander" type="Node" parent="StateChart/Root/Move"]
-script = ExtResource("9_r7fcn")
+script = ExtResource("8_kjjfu")
 
 [node name="ToConeAttack" type="Node" parent="StateChart/Root/Move/Wander"]
-script = ExtResource("10_w0ny7")
+script = ExtResource("9_402m1")
 to = NodePath("../../../Attack/ConeAttack")
 delay_in_seconds = "2.0"
 
 [node name="Chase" type="Node" parent="StateChart/Root/Move"]
-script = ExtResource("9_r7fcn")
+script = ExtResource("8_kjjfu")
 
 [node name="ToCircleAttack" type="Node" parent="StateChart/Root/Move/Chase"]
-script = ExtResource("10_w0ny7")
+script = ExtResource("9_402m1")
 to = NodePath("../../../Attack/CircleAttack")
 delay_in_seconds = "2.5"
 
 [node name="Attack" type="Node" parent="StateChart/Root"]
-script = ExtResource("8_u1m5l")
+script = ExtResource("7_f7rkx")
 initial_state = NodePath("Idle")
 
 [node name="ToMove" type="Node" parent="StateChart/Root/Attack"]
-script = ExtResource("10_w0ny7")
+script = ExtResource("9_402m1")
 to = NodePath("../../Move")
 delay_in_seconds = "5.0"
 
 [node name="Idle" type="Node" parent="StateChart/Root/Attack"]
-script = ExtResource("9_r7fcn")
+script = ExtResource("8_kjjfu")
 
 [node name="ConeAttack" type="Node" parent="StateChart/Root/Attack"]
-script = ExtResource("9_r7fcn")
+script = ExtResource("8_kjjfu")
 
 [node name="CircleAttack" type="Node" parent="StateChart/Root/Attack"]
-script = ExtResource("9_r7fcn")
+script = ExtResource("8_kjjfu")
 
-[node name="StateChartDebugger" parent="." instance=ExtResource("12_qj81f")]
+[node name="StateChartDebugger" parent="." instance=ExtResource("11_gix34")]
 offset_left = -9.0
 offset_top = -25.0
 offset_right = 301.0
@@ -157,7 +157,7 @@ startTowardPlayer = true
 staysTowardPlayer = true
 offsetTowardPlayer = -22.5
 light_mask = 0
-texture = ExtResource("13_cn5aw")
+texture = ExtResource("12_6yxke")
 
 [node name="CircleAttackSpawner" type="Spawner" parent="."]
 startMode = 2
@@ -165,11 +165,8 @@ bulletType = SubResource("BulletType_jl0c3")
 ID = 2
 bulletsPerRadius = 16
 light_mask = 0
-texture = ExtResource("13_cn5aw")
+texture = ExtResource("12_6yxke")
 
-[connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_depleted"]
-[connection signal="poise_fully_restored" from="Poise Component" to="." method="_on_poise_fully_restored"]
-[connection signal="poise_partially_restored" from="Poise Component" to="." method="_on_poise_partially_restored"]
 [connection signal="state_exited" from="StateChart/Root/Move" to="." method="_on_move_state_exited"]
 [connection signal="state_physics_processing" from="StateChart/Root/Move" to="." method="_on_move_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Move/Wander" to="." method="_on_wander_state_entered"]
