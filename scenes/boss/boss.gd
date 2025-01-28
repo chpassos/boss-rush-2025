@@ -24,6 +24,7 @@ func _ready() -> void:
 
 	Globals.boss = self
 	SignalBus.boss_ready.emit.call_deferred()
+	SignalBus.camera_animation_finished.connect(_on_camera_animation_finished)
 
 	if not Globals.player:
 		SignalBus.player_ready.connect(
@@ -50,6 +51,11 @@ func _on_poise_partially_restored() -> void:
 
 func _on_poise_fully_restored() -> void:
 	SignalBus.boss_vitals_changed.emit()
+
+
+func _on_camera_animation_finished(anim: StringName) -> void:
+	if anim == &"intro":
+		state_chart.send_event(&"battle_started")
 
 
 # MOVE STATE

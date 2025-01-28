@@ -24,3 +24,7 @@ func set_target_to_player() -> void:
 
 func set_target_to_boss() -> void:
 	follow_target = Globals.boss
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	SignalBus.camera_animation_finished.emit(anim_name)

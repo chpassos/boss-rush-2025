@@ -14,3 +14,6 @@ signal boss_vitals_changed()
 # ARENA
 @warning_ignore("unused_signal")
 signal arena_ready()
+# CAMERA MANAGER
+@warning_ignore("unused_signal")
+signal camera_animation_finished(anim: StringName)
