@@ -57,6 +57,11 @@ func take_damage(amount: int) -> void:
 	SignalBus.player_vitals_changed.emit()
 
 
+func heal(amount: int) -> void:
+	health_component.heal(amount)
+	SignalBus.player_vitals_changed.emit()
+
+
 func add_asteroid_to_queue(clockwise: bool) -> void:
 	var asteroid_data: AsteroidData = Globals.CLOCKWISE_ASTEROID_DATA if clockwise else Globals.COUNTERCLOCKWISE_ASTEROID_DATA
 

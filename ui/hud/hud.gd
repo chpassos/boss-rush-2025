@@ -8,6 +8,10 @@ extends Control
 
 
 func _ready() -> void:
+	hide()
+
+	SignalBus.camera_animation_finished.connect(_on_camera_animation_finished)
+
 	SignalBus.player_ready.connect(_on_player_ready)
 	SignalBus.player_vitals_changed.connect(_on_player_vitals_changed)
 
@@ -15,6 +19,11 @@ func _ready() -> void:
 	SignalBus.boss_vitals_changed.connect(_on_boss_vitals_changed)
 
 	SpeedrunTimer.start()  # TODO: move this to another script
+
+
+func _on_camera_animation_finished(anim_name: StringName) -> void:
+	if anim_name == &"intro":
+		show()
 
 
 func _process(_delta: float) -> void:

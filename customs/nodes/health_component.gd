@@ -9,8 +9,12 @@ signal health_depleted()
 @onready var current_health: int = max_health
 
 
-func take_damage(amount: int):
+func take_damage(amount: int) -> void:
 	current_health = maxi(current_health - amount, 0)
 
 	if not current_health:
 		health_depleted.emit()
+
+
+func heal(amount: int) -> void:
+	current_health = mini(current_health + amount, max_health)

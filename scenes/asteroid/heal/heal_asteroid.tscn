@@ -1,0 +1,57 @@
+[gd_scene load_steps=12 format=3 uid="uid://b6lsmkg21wxa3"]
+
+[ext_resource type="Script" path="res://scenes/asteroid/heal/heal_asteroid.gd" id="1_3idcg"]
+[ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroids/asteroid.png" id="1_jldj5"]
+[ext_resource type="Script" path="res://customs/nodes/player_revolution_component.gd" id="1_qgpyr"]
+[ext_resource type="PackedScene" uid="uid://c3xeqpsd8k1m" path="res://ui/revolution_progress/revolution_progress.tscn" id="2_c27tb"]
+[ext_resource type="Texture2D" uid="uid://ctotpt3ieqi4q" path="res://assets/asteroids/asteroid_17.png" id="2_iv0jk"]
+[ext_resource type="Texture2D" uid="uid://brvhhiqm40qrb" path="res://assets/asteroids/asteroid_n_17.png" id="3_g6vop"]
+[ext_resource type="Texture2D" uid="uid://leoh06lpfx8e" path="res://assets/asteroids/asteroid_18.png" id="4_krfkc"]
+[ext_resource type="Texture2D" uid="uid://c36kuiv6c4eoc" path="res://assets/asteroids/asteroid_n_18.png" id="5_ir3g0"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_511px"]
+diffuse_texture = ExtResource("2_iv0jk")
+normal_texture = ExtResource("3_g6vop")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_afatm"]
+diffuse_texture = ExtResource("4_krfkc")
+normal_texture = ExtResource("5_ir3g0")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5c0tp"]
+radius = 8.0
+
+[node name="HealAsteroid" type="RigidBody2D" node_paths=PackedStringArray("sprite", "player_revolution_component", "revolution_progess")]
+collision_layer = 4
+collision_mask = 7
+gravity_scale = 0.0
+script = ExtResource("1_3idcg")
+sprites = Array[CanvasTexture]([SubResource("CanvasTexture_511px"), SubResource("CanvasTexture_afatm")])
+sprite = NodePath("Sprite2D")
+player_revolution_component = NodePath("PlayerRevolutionComponent")
+revolution_progess = NodePath("RevolutionProgress")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_jldj5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5c0tp")
+
+[node name="PlayerRevolutionComponent" type="Node2D" parent="." node_paths=PackedStringArray("progress_bar")]
+script = ExtResource("1_qgpyr")
+max_distance = 100.0
+progress_bar = NodePath("../RevolutionProgress")
+
+[node name="RevolutionProgress" parent="." instance=ExtResource("2_c27tb")]
+top_level = true
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 90.0
+one_shot = true
+autostart = true
+
+[connection signal="player_revolved" from="PlayerRevolutionComponent" to="." method="_on_player_revolved"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

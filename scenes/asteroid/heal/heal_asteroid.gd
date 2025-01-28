@@ -1,8 +1,7 @@
-class_name CollectibleAsteroid
 extends RigidBody2D
 
 
-@export var clockwise: bool = true
+@export var sprites: Array[CanvasTexture]
 @export_group("Nodes")
 @export var sprite: Sprite2D
 @export var player_revolution_component: PlayerRevolutionComponent
@@ -10,21 +9,14 @@ extends RigidBody2D
 
 
 func _ready() -> void:
-	if clockwise:
-		sprite.texture = Globals.CLOCKWISE_ASTEROID_DATA.sprites.pick_random()
-		revolution_progess.tint_over = Globals.CLOCKWISE_ASTEROID_DATA.color
-		revolution_progess.tint_progress = Globals.CLOCKWISE_ASTEROID_DATA.color
-		revolution_progess.tint_progress.a = 0.25
-
-	else:
-		sprite.texture = Globals.COUNTERCLOCKWISE_ASTEROID_DATA.sprites.pick_random()
-		revolution_progess.tint_over = Globals.COUNTERCLOCKWISE_ASTEROID_DATA.color
-		revolution_progess.tint_progress = Globals.COUNTERCLOCKWISE_ASTEROID_DATA.color
-		revolution_progess.tint_progress.a = 0.25
+	sprite.texture = sprites.pick_random()
+	revolution_progess.tint_over = Color("#2da1c4")
+	revolution_progess.tint_progress = Color("#2da1c4")
+	revolution_progess.tint_progress.a = 0.25
 
 
 func _on_player_revolved(_clockwise: bool) -> void:
-	Globals.player.add_asteroid_to_queue(clockwise)
+	Globals.player.heal(1)
 	queue_free.call_deferred()
 
 

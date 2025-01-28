@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cxvtdhp8dh0er"]
+[gd_scene load_steps=13 format=3 uid="uid://cxvtdhp8dh0er"]
 
 [ext_resource type="PackedScene" uid="uid://8tksrqglc2j5" path="res://scenes/arena/arena.tscn" id="1_c6a7u"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_r6821"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b46v3f7wavfeq" path="res://scenes/bosses/1_red_dwarf/red_dwarf.tscn" id="6_dtdlm"]
 [ext_resource type="PackedScene" uid="uid://bguqcq048fxe1" path="res://ui/hud/hud.tscn" id="6_k4fi3"]
 [ext_resource type="Shader" path="res://assets/shaders/crt_effect.gdshader" id="6_lxb0n"]
+[ext_resource type="PackedScene" uid="uid://b6lsmkg21wxa3" path="res://scenes/asteroid/heal/heal_asteroid.tscn" id="7_nie3u"]
 
 [sub_resource type="Resource" id="Resource_tg230"]
 script = ExtResource("3_8mcjq")
@@ -55,6 +56,9 @@ position = Vector2(-221, -172)
 [node name="CollectibleAsteroid4" parent="." instance=ExtResource("2_sdvru")]
 position = Vector2(209, -195)
 clockwise = false
+
+[node name="HealAsteroid" parent="." instance=ExtResource("7_nie3u")]
+position = Vector2(-554, 0)
 
 [node name="Boss" parent="." instance=ExtResource("6_dtdlm")]
 
