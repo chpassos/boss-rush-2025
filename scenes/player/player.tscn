@@ -300,6 +300,7 @@ shape = SubResource("CircleShape2D_gj2h7")
 modulate = Color(1, 1, 1, 0.12549)
 points = PackedVector2Array(0, 0, 540, 0)
 width = 2.0
+default_color = Color(0.968627, 0.945098, 0.894118, 1)
 gradient = SubResource("Gradient_k1xnt")
 texture_mode = 1
 

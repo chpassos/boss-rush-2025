@@ -49,6 +49,9 @@ func _on_health_depleted() -> void:
 
 
 func take_damage(amount: int) -> void:
+	if anim_player.is_playing() and anim_player.current_animation == &"hit":
+		return
+
 	anim_player.play(&"hit")
 	health_component.take_damage(amount)
 	SignalBus.player_vitals_changed.emit()
