@@ -30,8 +30,14 @@ func take_damage(health_damage: int, poise_damage: float) -> void:
 	SignalBus.boss_vitals_changed.emit()
 
 
+func heal(amount: int) -> void:
+	health_component.heal(amount)
+	SignalBus.boss_vitals_changed.emit()
+
+
 func _on_health_depleted() -> void:
-	queue_free()
+	SignalBus.boss_defeated.emit()
+	queue_free.call_deferred()
 
 
 func _on_poise_partially_restored() -> void:

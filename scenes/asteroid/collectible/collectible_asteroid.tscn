@@ -10,8 +10,7 @@ radius = 8.0
 
 [node name="CollectibleAsteroid" type="RigidBody2D" node_paths=PackedStringArray("sprite", "player_revolution_component", "revolution_progess")]
 collision_layer = 4
-collision_mask = 7
-gravity_scale = 0.0
+collision_mask = 39
 script = ExtResource("2_jhn01")
 sprite = NodePath("Sprite2D")
 player_revolution_component = NodePath("PlayerRevolutionComponent")

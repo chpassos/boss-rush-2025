@@ -1,13 +1,32 @@
-[gd_scene load_steps=6 format=3 uid="uid://gdsprfbpe76q"]
+[gd_scene load_steps=13 format=3 uid="uid://gdsprfbpe76q"]
 
 [ext_resource type="Script" path="res://scenes/bosses/4_black_hole/black_hole.gd" id="1_1mhgs"]
 [ext_resource type="Script" path="res://customs/nodes/health_component.gd" id="2_23syd"]
+[ext_resource type="Texture2D" uid="uid://8cad2d2ajuiw" path="res://assets/sketches/boss.png" id="2_ac02r"]
 [ext_resource type="Texture2D" uid="uid://xpjeb363su68" path="res://assets/point_light.webp" id="2_p6k48"]
 [ext_resource type="Script" path="res://customs/nodes/poise_component.gd" id="3_0b6ut"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="4_q0jqj"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="6_hh3ag"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="7_gjrba"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="9_70372"]
 
-[node name="BlackHole" type="Node2D" node_paths=PackedStringArray("sprite", "anim_player", "light", "health_component", "poise_component", "state_chart")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_7kqoi"]
+radius = 200.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ciu7"]
+radius = 768.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q1ql3"]
+radius = 204.0
+
+[node name="BlackHole" type="CharacterBody2D" node_paths=PackedStringArray("gravity_field", "gravity_field_collision_shape", "sprite", "anim_player", "light", "health_component", "poise_component", "state_chart")]
+disable_mode = 1
+collision_layer = 2
+collision_mask = 17
+motion_mode = 1
 script = ExtResource("1_1mhgs")
+gravity_field = NodePath("GravityField")
+gravity_field_collision_shape = NodePath("GravityField/CollisionShape2D")
 sprite = NodePath("Sprite2D")
 anim_player = NodePath("AnimationPlayer")
 light = NodePath("PointLight2D")
@@ -16,12 +35,41 @@ poise_component = NodePath("PoiseComponent")
 state_chart = NodePath("StateChart")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 0
+scale = Vector2(5, 5)
+texture = ExtResource("2_ac02r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7kqoi")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 1.5
 blend_mode = 1
 texture = ExtResource("2_p6k48")
+texture_scale = 10.0
+
+[node name="GravityField" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 5
+gravity_space_override = 3
+gravity_point = true
+gravity_point_unit_distance = 200.0
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 480.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GravityField"]
+shape = SubResource("CircleShape2D_0ciu7")
+
+[node name="EventHorizon" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EventHorizon"]
+shape = SubResource("CircleShape2D_q1ql3")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_23syd")
@@ -31,3 +79,40 @@ script = ExtResource("3_0b6ut")
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("4_q0jqj")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("7_gjrba")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Root"]
+script = ExtResource("6_hh3ag")
+
+[node name="ToAttack" type="Node" parent="StateChart/Root/Idle"]
+script = ExtResource("9_70372")
+to = NodePath("../../Attack")
+event = &"battle_started"
+delay_in_seconds = "0.0"
+
+[node name="Attack" type="Node" parent="StateChart/Root"]
+script = ExtResource("7_gjrba")
+initial_state = NodePath("GravityPull")
+
+[node name="Idle" type="Node" parent="StateChart/Root/Attack"]
+script = ExtResource("6_hh3ag")
+
+[node name="ToGravityPull" type="Node" parent="StateChart/Root/Attack/Idle"]
+script = ExtResource("9_70372")
+to = NodePath("../../GravityPull")
+delay_in_seconds = "5.0"
+
+[node name="GravityPull" type="Node" parent="StateChart/Root/Attack"]
+script = ExtResource("6_hh3ag")
+
+[node name="ToIdle" type="Node" parent="StateChart/Root/Attack/GravityPull"]
+script = ExtResource("9_70372")
+to = NodePath("../../Idle")
+delay_in_seconds = "4.0"
+
+[connection signal="body_entered" from="EventHorizon" to="." method="_on_event_horizon_body_entered"]
+[connection signal="state_entered" from="StateChart/Root/Attack/GravityPull" to="." method="_on_gravity_pull_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Attack/GravityPull" to="." method="_on_gravity_pull_state_exited"]

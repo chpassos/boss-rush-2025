@@ -14,7 +14,7 @@ extends Node2D
 
 
 func _draw() -> void:
-	draw_circle(global_position, spawn_radius, Color.WHITE, false)  # TODO: só pra debuggar
+	draw_circle(Vector2.ZERO, spawn_radius, Color.WHITE, false)  # TODO: só pra debuggar
 
 
 func _ready() -> void:
@@ -41,21 +41,27 @@ func spawn_asteroid() -> void:
 
 func spawn_heal_asteroid() -> void:
 	var asteroid: HealAsteroid = Globals.HEAL_ASTEROID_SCENE.instantiate() as HealAsteroid
-	asteroid.global_position = global_position + spawn_radius * Utils.random_point_in_circle()
+	#asteroid.top_level = true
+	#asteroid.global_position = global_position + spawn_radius * Utils.random_point_in_circle()
+	asteroid.position = spawn_radius * Utils.random_point_in_circle()
 	add_child(asteroid)
 
 
 func spawn_clockwise_asteroid() -> void:
 	var asteroid: CollectibleAsteroid = Globals.COLLECTIBLE_ASTEROID_SCENE.instantiate() as CollectibleAsteroid
+	#asteroid.top_level = true
+	#asteroid.global_position = global_position + spawn_radius * Utils.random_point_in_circle()
+	asteroid.position = spawn_radius * Utils.random_point_in_circle()
 	asteroid.clockwise = true
-	asteroid.global_position = global_position + spawn_radius * Utils.random_point_in_circle()
 	add_child(asteroid)
 
 
 func spawn_counterclockwise_asteroid() -> void:
 	var asteroid: CollectibleAsteroid = Globals.COLLECTIBLE_ASTEROID_SCENE.instantiate() as CollectibleAsteroid
+	#asteroid.top_level = true
+	#asteroid.global_position = global_position + spawn_radius * Utils.random_point_in_circle()
+	asteroid.position = spawn_radius * Utils.random_point_in_circle()
 	asteroid.clockwise = false
-	asteroid.global_position = global_position + spawn_radius * Utils.random_point_in_circle()
 	add_child(asteroid)
 
 

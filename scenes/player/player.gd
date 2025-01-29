@@ -46,6 +46,7 @@ func _on_collision_detection_body_entered(_body: Boss) -> void:
 
 func _on_health_depleted() -> void:
 	anim_player.play(&"death")
+	SignalBus.player_defeated.emit()
 
 
 func take_damage(amount: int) -> void:
@@ -130,16 +131,23 @@ func _on_move_state_physics_processing(delta: float) -> void:
 		elif input_dir.x < 0 and input_dir.y > 0:  # forward-left
 			sprite.region_rect.position = Vector2(266, 0)
 
-	if not input_dir:
-		if velocity.length() > delta * drag:
-			velocity -= delta * drag * velocity.normalized()
+	var gravity: Vector2 = get_gravity()
+
+	if not gravity:
+		if not input_dir:
+			if velocity.length() > delta * drag:
+				velocity -= delta * drag * velocity.normalized()
+			else:
+				velocity = Vector2.ZERO
+
 		else:
-			velocity = Vector2.ZERO
+			velocity += delta * acceleration * input_dir
 
 	else:
-		velocity += delta * acceleration * input_dir
-		velocity = velocity.limit_length(max_speed)
+		gravity = 0.8 * acceleration * gravity.normalized()
+		velocity += delta * (acceleration * input_dir + gravity)
 
+	velocity = velocity.limit_length(max_speed)
 	move_and_slide()
 
 

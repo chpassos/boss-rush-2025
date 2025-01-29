@@ -40,19 +40,21 @@ tween_resource = SubResource("Resource_tg230")
 arena_size = Vector2(1920, 1080)
 
 [node name="Player" parent="." instance=ExtResource("2_5rsj7")]
-position = Vector2(-443, -233)
+position = Vector2(-448, -224)
 
 [node name="Boss" parent="." instance=ExtResource("6_dtdlm")]
 
 [node name="AsteroidSpawner1" parent="." instance=ExtResource("7_lvcto")]
-position = Vector2(200, -216)
+position = Vector2(224, -224)
+spawn_radius = 150.0
 min_wait_time = 6.0
 max_wait_time = 10.0
 heal_asteroid_weight = 5.0
 clockwise_asteroid_weight = 2.0
 
-[node name="AsteroidSpawner3" parent="." instance=ExtResource("7_lvcto")]
-position = Vector2(-375, 147)
+[node name="AsteroidSpawner2" parent="." instance=ExtResource("7_lvcto")]
+position = Vector2(-384, 128)
+spawn_radius = 150.0
 min_wait_time = 5.0
 max_wait_time = 8.0
 heal_asteroid_weight = 0.0
