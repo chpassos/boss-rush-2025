@@ -5,6 +5,7 @@ extends Control
 @onready var boss_poise_bar: ProgressBar = %BossPoiseBar as ProgressBar
 @onready var player_health_bar: ProgressBar = %PlayerHealthBar as ProgressBar
 @onready var speedrun_timer: Label = %SpeedrunTimer as Label
+@onready var tween: Tween
 
 
 func _ready() -> void:
@@ -24,6 +25,25 @@ func _ready() -> void:
 func _on_camera_animation_finished(anim_name: StringName) -> void:
 	if anim_name == &"intro":
 		show()
+		tween = create_tween()
+		tween.tween_property(
+			boss_health_bar,
+			^"value",
+			Globals.boss.health_component.current_health,
+			2.0
+		)
+		tween.parallel().tween_property(
+			boss_poise_bar,
+			^"value",
+			Globals.boss.poise_component.current_poise,
+			2.0
+		)
+		tween.parallel().tween_property(
+			player_health_bar,
+			^"value",
+			Globals.player.health_component.current_health,
+			2.0
+		)
 
 
 func _process(_delta: float) -> void:
@@ -32,7 +52,7 @@ func _process(_delta: float) -> void:
 
 func _on_player_ready() -> void:
 	player_health_bar.max_value = Globals.player.health_component.max_health
-	player_health_bar.value = Globals.player.health_component.current_health
+	#player_health_bar.value = Globals.player.health_component.current_health
 
 
 func _on_player_vitals_changed() -> void:
@@ -41,9 +61,9 @@ func _on_player_vitals_changed() -> void:
 
 func _on_boss_ready() -> void:
 	boss_health_bar.max_value = Globals.boss.health_component.max_health
-	boss_health_bar.value = Globals.boss.health_component.current_health
+	#boss_health_bar.value = Globals.boss.health_component.current_health
 	boss_poise_bar.max_value = Globals.boss.poise_component.max_poise
-	boss_poise_bar.value = Globals.boss.poise_component.current_poise
+	#boss_poise_bar.value = Globals.boss.poise_component.current_poise
 
 
 func _on_boss_vitals_changed() -> void:
