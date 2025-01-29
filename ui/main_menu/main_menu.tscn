@@ -1,5 +1,6 @@
-[gd_scene load_steps=36 format=3 uid="uid://csgewo4ifdwtl"]
+[gd_scene load_steps=37 format=3 uid="uid://csgewo4ifdwtl"]
 
+[ext_resource type="Script" path="res://ui/main_menu/main_menu.gd" id="1_6x6l8"]
 [ext_resource type="Shader" path="res://assets/shaders/space_background.gdshader" id="1_at1td"]
 [ext_resource type="Texture2D" uid="uid://dhiphdrtdbyvv" path="res://assets/main_menu/bg.png" id="1_bwsoe"]
 [ext_resource type="Texture2D" uid="uid://bwkwsf81ps72x" path="res://assets/buttons/start_button.png" id="2_ayxtu"]
@@ -128,6 +129,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_6x6l8")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_7mxup")
@@ -171,6 +173,7 @@ layout_mode = 2
 theme_override_constants/separation = 16
 
 [node name="StartButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerTop"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(216, 80)
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_8rpkk")
@@ -183,6 +186,7 @@ script = ExtResource("3_rybte")
 on_hover_scale = 1.4
 
 [node name="ContinueButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerTop"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(324, 80)
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_pn36m")
@@ -199,6 +203,7 @@ layout_mode = 2
 theme_override_constants/separation = 16
 
 [node name="SettingsButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerBottom"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(280, 64)
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_n8e04")
@@ -211,6 +216,7 @@ script = ExtResource("3_rybte")
 on_hover_scale = 1.2
 
 [node name="CreditsButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerBottom"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(236, 64)
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_x5rdh")
@@ -223,6 +229,7 @@ script = ExtResource("3_rybte")
 on_hover_scale = 1.2
 
 [node name="QuitButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerBottom"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(124, 64)
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_fysda")
@@ -233,3 +240,9 @@ texture_focused = SubResource("AtlasTexture_jf1ro")
 stretch_mode = 0
 script = ExtResource("3_rybte")
 on_hover_scale = 1.2
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerTop/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerTop/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerBottom/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerBottom/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerBottom/QuitButton" to="." method="_on_quit_button_pressed"]

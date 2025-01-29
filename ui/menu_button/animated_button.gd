@@ -14,6 +14,9 @@ func _ready() -> void:
 
 
 func _on_mouse_entered() -> void:
+	if disabled:
+		return
+
 	z_index += 10
 
 	if tween:
@@ -30,6 +33,9 @@ func _on_mouse_entered() -> void:
 
 
 func _on_mouse_exited() -> void:
+	if disabled:
+		return
+
 	z_index -= 10
 
 	if tween:
