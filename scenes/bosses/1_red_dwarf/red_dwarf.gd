@@ -13,6 +13,7 @@ func _ready() -> void:
 	super._ready()
 
 	state_chart.set_expression_property(&"wander_count", wander_count)
+	anim_player.play(&"idle")
 
 	if not Globals.player:
 		SignalBus.player_ready.connect(
@@ -51,6 +52,16 @@ func _on_chase_state_entered() -> void:
 		return
 
 	velocity = chase_speed * global_position.direction_to(Globals.player.global_position)
+
+
+# ATTACK STATE
+
+func _on_attack_state_entered() -> void:
+	anim_player.play(&"attack")
+
+
+func _on_attack_state_exited() -> void:
+	anim_player.play(&"idle")
 
 
 # CONE ATTACK STATE

@@ -27,6 +27,11 @@ func _ready() -> void:
 func take_damage(health_damage: int, poise_damage: float) -> void:
 	health_component.take_damage(health_damage)
 	poise_component.take_damage(poise_damage)
+
+	if health_component.current_health:
+		anim_player.play(&"damage")
+		anim_player.queue(&"idle")
+
 	SignalBus.boss_vitals_changed.emit()
 
 
@@ -36,8 +41,8 @@ func heal(amount: int) -> void:
 
 
 func _on_health_depleted() -> void:
+	state_chart.send_event(&"boss_defeated")
 	SignalBus.boss_defeated.emit()
-	queue_free.call_deferred()
 
 
 func _on_poise_partially_restored() -> void:

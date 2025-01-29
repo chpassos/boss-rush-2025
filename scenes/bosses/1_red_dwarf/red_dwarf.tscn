@@ -1,7 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://b46v3f7wavfeq"]
+[gd_scene load_steps=25 format=3 uid="uid://b46v3f7wavfeq"]
 
 [ext_resource type="Script" path="res://scenes/bosses/1_red_dwarf/red_dwarf.gd" id="1_n6yai"]
-[ext_resource type="Texture2D" uid="uid://8cad2d2ajuiw" path="res://assets/sketches/boss.png" id="2_ednm6"]
+[ext_resource type="Texture2D" uid="uid://lll4ov3ih6br" path="res://assets/bosses/red_dwarf/red_dwarf_sketch.png" id="2_l51nt"]
 [ext_resource type="Texture2D" uid="uid://xpjeb363su68" path="res://assets/point_light.webp" id="3_scyfx"]
 [ext_resource type="Script" path="res://customs/nodes/health_component.gd" id="4_7r3q0"]
 [ext_resource type="Script" path="res://customs/nodes/poise_component.gd" id="5_uo8ru"]
@@ -10,11 +10,128 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="8_kjjfu"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="9_402m1"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="10_ppt32"]
-[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="11_gix34"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/animation_player_state.gd" id="11_0d1j0"]
 [ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroids/asteroid.png" id="12_6yxke"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fqvag"]
-radius = 80.0
+radius = 66.0
+
+[sub_resource type="Animation" id="Animation_52l8n"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 134, 133), Rect2(136, 0, 134, 133), Rect2(272, 0, 134, 133), Rect2(408, 0, 134, 133), Rect2(544, 0, 134, 133), Rect2(680, 0, 134, 133)]
+}
+
+[sub_resource type="Animation" id="Animation_yf2kk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 133, 134)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_eaonw"]
+resource_name = "damage"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 135, 134, 133)]
+}
+
+[sub_resource type="Animation" id="Animation_tp38o"]
+resource_name = "attack"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 405, 134, 133), Rect2(136, 405, 134, 133), Rect2(272, 405, 134, 133), Rect2(408, 405, 134, 133), Rect2(544, 405, 134, 133)]
+}
+
+[sub_resource type="Animation" id="Animation_dvs7x"]
+resource_name = "death"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.2, 1.4, 1.6, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 540, 134, 133), Rect2(136, 540, 134, 133), Rect2(272, 540, 134, 133), Rect2(408, 540, 134, 133), Rect2(544, 540, 134, 133), Rect2(680, 540, 134, 133), Rect2(816, 540, 134, 133)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.0588235, 0.0509804, 0.0588235, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wk2ei"]
+_data = {
+"RESET": SubResource("Animation_yf2kk"),
+"attack": SubResource("Animation_tp38o"),
+"damage": SubResource("Animation_eaonw"),
+"death": SubResource("Animation_dvs7x"),
+"idle": SubResource("Animation_52l8n")
+}
 
 [sub_resource type="Resource" id="Resource_t0yqq"]
 script = ExtResource("10_ppt32")
@@ -36,7 +153,7 @@ _shape = SubResource("CircleShape2D_kbtfd")
 collideWithBodies = true
 collideWithAreas = false
 
-[node name="RedDwarf" type="CharacterBody2D" node_paths=PackedStringArray("cone_attack_spawner", "circle_attack_spawner", "sprite", "light", "health_component", "poise_component", "state_chart")]
+[node name="RedDwarf" type="CharacterBody2D" node_paths=PackedStringArray("cone_attack_spawner", "circle_attack_spawner", "sprite", "anim_player", "light", "health_component", "poise_component", "state_chart")]
 disable_mode = 1
 collision_layer = 2
 collision_mask = 17
@@ -48,6 +165,7 @@ cone_attack_spawner = NodePath("ConeAttackSpawner")
 circle_attack_spawner = NodePath("CircleAttackSpawner")
 light_color = Color(0.968627, 0.596078, 0.192157, 1)
 sprite = NodePath("Sprite2D")
+anim_player = NodePath("AnimationPlayer")
 light = NodePath("PointLight2D")
 health_component = NodePath("HealthComponent")
 poise_component = NodePath("Poise Component")
@@ -55,23 +173,31 @@ state_chart = NodePath("StateChart")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 0
-scale = Vector2(2, 2)
-texture = ExtResource("2_ednm6")
+texture = ExtResource("2_l51nt")
+region_enabled = true
+region_rect = Rect2(0, 0, 133, 134)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_fqvag")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 4.0
+energy = 3.0
 texture = ExtResource("3_scyfx")
 texture_scale = 20.0
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("4_7r3q0")
+max_health = 2
 
 [node name="Poise Component" type="Node" parent="."]
 script = ExtResource("5_uo8ru")
 regen_delay = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wk2ei")
+}
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("6_u2ekn")
@@ -89,9 +215,21 @@ to = NodePath("../../Move")
 event = &"battle_started"
 delay_in_seconds = "0.0"
 
+[node name="ToDead" type="Node" parent="StateChart/Root/Idle"]
+script = ExtResource("9_402m1")
+to = NodePath("../../Dead")
+event = &"boss_defeated"
+delay_in_seconds = "0.0"
+
 [node name="Move" type="Node" parent="StateChart/Root"]
 script = ExtResource("7_f7rkx")
 initial_state = NodePath("Idle")
+
+[node name="ToDead" type="Node" parent="StateChart/Root/Move"]
+script = ExtResource("9_402m1")
+to = NodePath("../../Dead")
+event = &"boss_defeated"
+delay_in_seconds = "0.0"
 
 [node name="Idle" type="Node" parent="StateChart/Root/Move"]
 script = ExtResource("8_kjjfu")
@@ -132,6 +270,12 @@ script = ExtResource("9_402m1")
 to = NodePath("../../Move")
 delay_in_seconds = "5.0"
 
+[node name="ToDead" type="Node" parent="StateChart/Root/Attack"]
+script = ExtResource("9_402m1")
+to = NodePath("../../Dead")
+event = &"boss_defeated"
+delay_in_seconds = "0.0"
+
 [node name="Idle" type="Node" parent="StateChart/Root/Attack"]
 script = ExtResource("8_kjjfu")
 
@@ -141,13 +285,10 @@ script = ExtResource("8_kjjfu")
 [node name="CircleAttack" type="Node" parent="StateChart/Root/Attack"]
 script = ExtResource("8_kjjfu")
 
-[node name="StateChartDebugger" parent="." instance=ExtResource("11_gix34")]
-offset_left = -9.0
-offset_top = -25.0
-offset_right = 301.0
-offset_bottom = 330.0
-enabled = false
-initial_node_to_watch = NodePath("../StateChart")
+[node name="Dead" type="Node" parent="StateChart/Root"]
+script = ExtResource("11_0d1j0")
+animation_player = NodePath("../../../AnimationPlayer")
+animation_name = &"death"
 
 [node name="ConeAttackSpawner" type="Spawner" parent="." node_paths=PackedStringArray("trackedNode")]
 startMode = 2
@@ -173,6 +314,8 @@ texture = ExtResource("12_6yxke")
 [connection signal="state_physics_processing" from="StateChart/Root/Move" to="." method="_on_move_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Move/Wander" to="." method="_on_wander_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Move/Chase" to="." method="_on_chase_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Attack" to="." method="_on_attack_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Attack" to="." method="_on_attack_state_exited"]
 [connection signal="state_entered" from="StateChart/Root/Attack/ConeAttack" to="." method="_on_cone_attack_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Attack/CircleAttack" to="." method="_on_circle_attack_state_entered"]
 [connection signal="bullet_hit" from="ConeAttackSpawner" to="." method="_on_bullet_hit"]
