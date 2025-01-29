@@ -23,11 +23,6 @@ func _ready() -> void:
 		cone_attack_spawner.trackedNode = Globals.player
 
 
-func _on_bullet_hit(result: Array, _bulletIndex: int, _spawner: Object) -> void:
-	if result[0]["collider"] == Globals.player:
-		Globals.player.take_damage(1)
-
-
 # MOVE STATE
 
 func _on_move_state_exited() -> void:

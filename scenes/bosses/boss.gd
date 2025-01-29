@@ -51,3 +51,8 @@ func _on_poise_fully_restored() -> void:
 func _on_camera_animation_finished(anim: StringName) -> void:
 	if anim == &"intro":
 		state_chart.send_event(&"battle_started")
+
+
+func _on_bullet_hit(result: Array, _bulletIndex: int, _spawner: Object) -> void:
+	if result[0]["collider"] == Globals.player:
+		Globals.player.take_damage(1)
