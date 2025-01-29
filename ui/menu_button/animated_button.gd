@@ -1,3 +1,4 @@
+class_name AnimatedButton
 extends TextureButton
 
 
@@ -8,6 +9,8 @@ extends TextureButton
 
 func _ready() -> void:
 	pivot_offset = size / 2
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
 
 
 func _on_mouse_entered() -> void:
