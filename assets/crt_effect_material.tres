@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://k8w7wpayleaw"]
+
+[ext_resource type="Shader" path="res://assets/shaders/crt_effect.gdshader" id="1_r54cv"]
+
+[resource]
+shader = ExtResource("1_r54cv")
+shader_parameter/screen_resolution = Vector2(480, 270)
+shader_parameter/scanline_intensity = 0.3
+shader_parameter/color_bleed_weight = 0.35

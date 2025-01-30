@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://pqvoo5woaqd"]
+[gd_scene load_steps=11 format=3 uid="uid://pqvoo5woaqd"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_1ot8k"]
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_joxw5"]
@@ -9,13 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bigybb2e4jmfv" path="res://scenes/asteroid/spawner/asteroid_spawner.tscn" id="6_s07ch"]
 [ext_resource type="PackedScene" uid="uid://bguqcq048fxe1" path="res://ui/hud/hud.tscn" id="7_rr8gk"]
 [ext_resource type="PackedScene" uid="uid://dcyok8jhypmiv" path="res://ui/pause_menu/pause_menu.tscn" id="8_gfrdj"]
-[ext_resource type="Shader" path="res://assets/shaders/crt_effect.gdshader" id="9_tjuh2"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gyc5d"]
-shader = ExtResource("9_tjuh2")
-shader_parameter/screen_resolution = Vector2(480, 270)
-shader_parameter/scanline_intensity = 0.3
-shader_parameter/color_bleed_weight = 0.35
+[ext_resource type="Material" uid="uid://k8w7wpayleaw" path="res://assets/crt_effect_material.tres" id="10_sqo1m"]
 
 [node name="RedDwarfLevel" type="Node2D" node_paths=PackedStringArray("pause_menu")]
 script = ExtResource("1_joxw5")
@@ -75,7 +69,7 @@ visible = false
 
 [node name="CRTEffect" type="ColorRect" parent="FG"]
 z_index = 100
-material = SubResource("ShaderMaterial_gyc5d")
+material = ExtResource("10_sqo1m")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

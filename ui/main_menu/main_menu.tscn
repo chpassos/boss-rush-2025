@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://csgewo4ifdwtl"]
+[gd_scene load_steps=39 format=3 uid="uid://csgewo4ifdwtl"]
 
 [ext_resource type="Script" path="res://ui/main_menu/main_menu.gd" id="1_6x6l8"]
 [ext_resource type="Shader" path="res://assets/shaders/space_background.gdshader" id="1_at1td"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://bjycg3kn7urr8" path="res://assets/buttons/settings_button.png" id="5_wnl3m"]
 [ext_resource type="Texture2D" uid="uid://cies2uaf7v5fc" path="res://assets/buttons/credits_button.png" id="6_badav"]
 [ext_resource type="Texture2D" uid="uid://cpn1ai75gghti" path="res://assets/buttons/quit_button.png" id="7_poh8v"]
+[ext_resource type="PackedScene" uid="uid://bwmr00dl8des8" path="res://ui/credits/credits.tscn" id="11_jyjel"]
+[ext_resource type="Material" uid="uid://k8w7wpayleaw" path="res://assets/crt_effect_material.tres" id="12_oa131"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7mxup"]
 shader = ExtResource("1_at1td")
@@ -122,7 +124,7 @@ region = Rect2(0, 48, 31, 16)
 atlas = ExtResource("7_poh8v")
 region = Rect2(0, 16, 31, 16)
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("credits")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -130,7 +132,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6x6l8")
-credits_scene_path = "res://ui/credits/credits.tscn"
+level_transition_scene_path = "res://ui/level_transition/level_transition.tscn"
+credits = NodePath("Credits")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_7mxup")
@@ -207,6 +210,8 @@ theme_override_constants/separation = 32
 unique_name_in_owner = true
 custom_minimum_size = Vector2(280, 64)
 layout_mode = 2
+focus_mode = 0
+disabled = true
 texture_normal = SubResource("AtlasTexture_n8e04")
 texture_pressed = SubResource("AtlasTexture_if78x")
 texture_hover = SubResource("AtlasTexture_7g8fn")
@@ -241,6 +246,21 @@ texture_focused = SubResource("AtlasTexture_jf1ro")
 stretch_mode = 4
 script = ExtResource("3_rybte")
 on_hover_scale = 1.2
+
+[node name="Credits" parent="." instance=ExtResource("11_jyjel")]
+visible = false
+layout_mode = 1
+
+[node name="CRTEffect" type="ColorRect" parent="."]
+z_index = 100
+material = ExtResource("12_oa131")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerTop/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerTop/ContinueButton" to="." method="_on_continue_button_pressed"]

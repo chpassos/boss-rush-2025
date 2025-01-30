@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcyok8jhypmiv"]
+[gd_scene load_steps=28 format=3 uid="uid://dcyok8jhypmiv"]
 
 [ext_resource type="Script" path="res://ui/menu_button/animated_button.gd" id="1_1uxb8"]
 [ext_resource type="Texture2D" uid="uid://dd720txt5p4db" path="res://assets/buttons/back_button.png" id="1_vbuye"]
@@ -6,24 +6,89 @@
 [ext_resource type="Texture2D" uid="uid://bjycg3kn7urr8" path="res://assets/buttons/settings_button.png" id="3_346d0"]
 [ext_resource type="Texture2D" uid="uid://cies2uaf7v5fc" path="res://assets/buttons/credits_button.png" id="4_wxojg"]
 [ext_resource type="Texture2D" uid="uid://cpn1ai75gghti" path="res://assets/buttons/quit_button.png" id="5_fsf5k"]
+[ext_resource type="PackedScene" uid="uid://bwmr00dl8des8" path="res://ui/credits/credits.tscn" id="7_6cwjc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i17im"]
 atlas = ExtResource("1_vbuye")
 region = Rect2(0, 0, 33, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_as5o2"]
+atlas = ExtResource("1_vbuye")
+region = Rect2(0, 16, 33, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4hnl"]
+atlas = ExtResource("1_vbuye")
+region = Rect2(0, 32, 33, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxph5"]
+atlas = ExtResource("1_vbuye")
+region = Rect2(0, 48, 33, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ndxf"]
+atlas = ExtResource("1_vbuye")
+region = Rect2(0, 16, 33, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_mhych"]
 atlas = ExtResource("3_346d0")
 region = Rect2(0, 0, 70, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfjrt"]
+atlas = ExtResource("3_346d0")
+region = Rect2(0, 16, 70, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pcmc"]
+atlas = ExtResource("3_346d0")
+region = Rect2(0, 32, 70, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u07wu"]
+atlas = ExtResource("3_346d0")
+region = Rect2(0, 48, 70, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4hw4"]
+atlas = ExtResource("3_346d0")
+region = Rect2(0, 16, 70, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_apdpb"]
 atlas = ExtResource("4_wxojg")
 region = Rect2(0, 0, 59, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dp2g"]
+atlas = ExtResource("4_wxojg")
+region = Rect2(0, 16, 59, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxrto"]
+atlas = ExtResource("4_wxojg")
+region = Rect2(0, 32, 59, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3js32"]
+atlas = ExtResource("4_wxojg")
+region = Rect2(0, 48, 59, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1gh4"]
+atlas = ExtResource("4_wxojg")
+region = Rect2(0, 16, 59, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_rvcqd"]
 atlas = ExtResource("5_fsf5k")
 region = Rect2(0, 0, 31, 16)
 
-[node name="PauseMenu" type="Control"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_vx4va"]
+atlas = ExtResource("5_fsf5k")
+region = Rect2(0, 16, 31, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsyjk"]
+atlas = ExtResource("5_fsf5k")
+region = Rect2(0, 32, 31, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwn3g"]
+atlas = ExtResource("5_fsf5k")
+region = Rect2(0, 48, 31, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5y6l"]
+atlas = ExtResource("5_fsf5k")
+region = Rect2(0, 16, 31, 16)
+
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("credits")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -32,6 +97,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xy0sf")
+credits = NodePath("Credits")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -73,6 +139,10 @@ custom_minimum_size = Vector2(132, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 texture_normal = SubResource("AtlasTexture_i17im")
+texture_pressed = SubResource("AtlasTexture_as5o2")
+texture_hover = SubResource("AtlasTexture_w4hnl")
+texture_disabled = SubResource("AtlasTexture_gxph5")
+texture_focused = SubResource("AtlasTexture_7ndxf")
 stretch_mode = 5
 script = ExtResource("1_1uxb8")
 on_hover_scale = 1.2
@@ -81,7 +151,13 @@ on_hover_scale = 1.2
 custom_minimum_size = Vector2(280, 64)
 layout_mode = 2
 size_flags_horizontal = 4
+focus_mode = 0
+disabled = true
 texture_normal = SubResource("AtlasTexture_mhych")
+texture_pressed = SubResource("AtlasTexture_cfjrt")
+texture_hover = SubResource("AtlasTexture_3pcmc")
+texture_disabled = SubResource("AtlasTexture_u07wu")
+texture_focused = SubResource("AtlasTexture_p4hw4")
 stretch_mode = 5
 script = ExtResource("1_1uxb8")
 on_hover_scale = 1.2
@@ -91,6 +167,10 @@ custom_minimum_size = Vector2(236, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 texture_normal = SubResource("AtlasTexture_apdpb")
+texture_pressed = SubResource("AtlasTexture_8dp2g")
+texture_hover = SubResource("AtlasTexture_kxrto")
+texture_disabled = SubResource("AtlasTexture_3js32")
+texture_focused = SubResource("AtlasTexture_t1gh4")
 stretch_mode = 5
 script = ExtResource("1_1uxb8")
 on_hover_scale = 1.2
@@ -100,9 +180,17 @@ custom_minimum_size = Vector2(124, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 texture_normal = SubResource("AtlasTexture_rvcqd")
+texture_pressed = SubResource("AtlasTexture_vx4va")
+texture_hover = SubResource("AtlasTexture_rsyjk")
+texture_disabled = SubResource("AtlasTexture_jwn3g")
+texture_focused = SubResource("AtlasTexture_g5y6l")
 stretch_mode = 5
 script = ExtResource("1_1uxb8")
 on_hover_scale = 1.2
+
+[node name="Credits" parent="." instance=ExtResource("7_6cwjc")]
+visible = false
+layout_mode = 1
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
