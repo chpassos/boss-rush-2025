@@ -182,7 +182,7 @@ texture_pressed = SubResource("AtlasTexture_4yvbq")
 texture_hover = SubResource("AtlasTexture_rkyjo")
 texture_disabled = SubResource("AtlasTexture_d876o")
 texture_focused = SubResource("AtlasTexture_yv1v7")
-stretch_mode = 0
+stretch_mode = 4
 script = ExtResource("3_rybte")
 on_hover_scale = 1.4
 
@@ -195,7 +195,7 @@ texture_pressed = SubResource("AtlasTexture_p84ac")
 texture_hover = SubResource("AtlasTexture_5hlkl")
 texture_disabled = SubResource("AtlasTexture_m8cxp")
 texture_focused = SubResource("AtlasTexture_oxr7l")
-stretch_mode = 0
+stretch_mode = 4
 script = ExtResource("3_rybte")
 on_hover_scale = 1.4
 
@@ -212,7 +212,7 @@ texture_pressed = SubResource("AtlasTexture_if78x")
 texture_hover = SubResource("AtlasTexture_7g8fn")
 texture_disabled = SubResource("AtlasTexture_qow84")
 texture_focused = SubResource("AtlasTexture_wftmv")
-stretch_mode = 0
+stretch_mode = 4
 script = ExtResource("3_rybte")
 on_hover_scale = 1.2
 
@@ -225,7 +225,7 @@ texture_pressed = SubResource("AtlasTexture_6trct")
 texture_hover = SubResource("AtlasTexture_yhr8c")
 texture_disabled = SubResource("AtlasTexture_3psbq")
 texture_focused = SubResource("AtlasTexture_ubnpw")
-stretch_mode = 0
+stretch_mode = 4
 script = ExtResource("3_rybte")
 on_hover_scale = 1.2
 
@@ -238,7 +238,7 @@ texture_pressed = SubResource("AtlasTexture_ll8aw")
 texture_hover = SubResource("AtlasTexture_5ahna")
 texture_disabled = SubResource("AtlasTexture_ewnyd")
 texture_focused = SubResource("AtlasTexture_jf1ro")
-stretch_mode = 0
+stretch_mode = 4
 script = ExtResource("3_rybte")
 on_hover_scale = 1.2
 
