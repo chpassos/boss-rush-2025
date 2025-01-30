@@ -15,7 +15,7 @@
 script = ExtResource("1_joxw5")
 boss_number = 1
 pause_menu = NodePath("FG/PauseMenu")
-next_scene_path = "res://ui/main_menu/main_menu.tscn"
+next_scene_path = "res://ui/level_transition/level_transition.tscn"
 
 [node name="MainCamera" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://gdsprfbpe76q"]
+[gd_scene load_steps=25 format=3 uid="uid://gdsprfbpe76q"]
 
 [ext_resource type="Script" path="res://scenes/bosses/4_black_hole/black_hole.gd" id="1_1mhgs"]
 [ext_resource type="Script" path="res://customs/nodes/health_component.gd" id="2_23syd"]
@@ -9,7 +9,10 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="6_hh3ag"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="7_gjrba"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="9_70372"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/animation_player_state.gd" id="10_4x4fg"]
 [ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroids/asteroid.png" id="10_07p0w"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="10_s8duk"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="13_1tg7s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7kqoi"]
 radius = 200.0
@@ -19,6 +22,14 @@ radius = 768.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q1ql3"]
 radius = 204.0
+
+[sub_resource type="Resource" id="Resource_4pljd"]
+script = ExtResource("10_s8duk")
+expression = "homing_attack_count >= 2"
+
+[sub_resource type="Resource" id="Resource_b6lek"]
+script = ExtResource("10_s8duk")
+expression = "target_attack_count >= 2"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tl8jd"]
 
@@ -36,7 +47,16 @@ _shape = SubResource("CircleShape2D_k2lur")
 collideWithBodies = true
 collideWithAreas = false
 
-[node name="BlackHole" type="CharacterBody2D" node_paths=PackedStringArray("gravity_field", "gravity_field_collision_shape", "circle_attack_spawner", "target_attack_spawner", "sprite", "anim_player", "light", "health_component", "poise_component", "state_chart")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_vp12n"]
+
+[sub_resource type="BulletType" id="BulletType_tr3eg"]
+initialSpeed = 120.0
+_shape = SubResource("CircleShape2D_vp12n")
+maxLifetime = 8.0
+collideWithBodies = true
+collideWithAreas = false
+
+[node name="BlackHole" type="CharacterBody2D" node_paths=PackedStringArray("gravity_field", "gravity_field_collision_shape", "circle_attack_spawner", "target_attack_spawner", "homing_attack_spawner", "sprite", "anim_player", "light", "health_component", "poise_component", "state_chart")]
 disable_mode = 1
 collision_layer = 2
 collision_mask = 17
@@ -46,6 +66,7 @@ gravity_field = NodePath("GravityField")
 gravity_field_collision_shape = NodePath("GravityField/CollisionShape2D")
 circle_attack_spawner = NodePath("CircleAttackSpawner")
 target_attack_spawner = NodePath("TargetAttackSpawner")
+homing_attack_spawner = NodePath("HomingAttackSpawner")
 sprite = NodePath("Sprite2D")
 anim_player = NodePath("AnimationPlayer")
 light = NodePath("PointLight2D")
@@ -77,7 +98,7 @@ gravity_point = true
 gravity_point_unit_distance = 200.0
 gravity_point_center = Vector2(0, 0)
 gravity_direction = Vector2(0, 0)
-gravity = 480.0
+gravity = 800.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GravityField"]
 shape = SubResource("CircleShape2D_0ciu7")
@@ -109,45 +130,38 @@ script = ExtResource("6_hh3ag")
 [node name="ToAttack" type="Node" parent="StateChart/Root/Idle"]
 script = ExtResource("9_70372")
 to = NodePath("../../Attack")
+event = &"battle_started"
 delay_in_seconds = "0.0"
 
 [node name="Attack" type="Node" parent="StateChart/Root"]
 script = ExtResource("7_gjrba")
-initial_state = NodePath("GravityPull")
+initial_state = NodePath("Idle")
+
+[node name="ToDead" type="Node" parent="StateChart/Root/Attack"]
+script = ExtResource("9_70372")
+to = NodePath("../../Dead")
+event = &"boss_defeated"
+delay_in_seconds = "0.0"
 
 [node name="Idle" type="Node" parent="StateChart/Root/Attack"]
 script = ExtResource("6_hh3ag")
 
-[node name="ToCircleAttack" type="Node" parent="StateChart/Root/Attack/Idle"]
+[node name="ToGravityPull" type="Node" parent="StateChart/Root/Attack/Idle"]
 script = ExtResource("9_70372")
-to = NodePath("../../CircleAttack")
-delay_in_seconds = "2.0"
+to = NodePath("../../GravityPull")
+guard = SubResource("Resource_4pljd")
+delay_in_seconds = "5.0"
+
+[node name="ToHomingAttack" type="Node" parent="StateChart/Root/Attack/Idle"]
+script = ExtResource("9_70372")
+to = NodePath("../../HomingAttack")
+guard = SubResource("Resource_b6lek")
+delay_in_seconds = "5.0"
 
 [node name="ToTargetAttack" type="Node" parent="StateChart/Root/Attack/Idle"]
 script = ExtResource("9_70372")
 to = NodePath("../../TargetAttack")
-delay_in_seconds = "1.0"
-
-[node name="ToGravityPull" type="Node" parent="StateChart/Root/Attack/Idle"]
-script = ExtResource("9_70372")
-to = NodePath("../../GravityPull")
 delay_in_seconds = "5.0"
-
-[node name="GravityPull" type="Node" parent="StateChart/Root/Attack"]
-script = ExtResource("6_hh3ag")
-
-[node name="ToIdle" type="Node" parent="StateChart/Root/Attack/GravityPull"]
-script = ExtResource("9_70372")
-to = NodePath("../../Idle")
-delay_in_seconds = "4.0"
-
-[node name="CircleAttack" type="Node" parent="StateChart/Root/Attack"]
-script = ExtResource("6_hh3ag")
-
-[node name="ToIdle" type="Node" parent="StateChart/Root/Attack/CircleAttack"]
-script = ExtResource("9_70372")
-to = NodePath("../../Idle")
-delay_in_seconds = "10.0"
 
 [node name="TargetAttack" type="Node" parent="StateChart/Root/Attack"]
 script = ExtResource("6_hh3ag")
@@ -155,7 +169,38 @@ script = ExtResource("6_hh3ag")
 [node name="ToIdle" type="Node" parent="StateChart/Root/Attack/TargetAttack"]
 script = ExtResource("9_70372")
 to = NodePath("../../Idle")
-delay_in_seconds = "10.0"
+event = &"attack_finished"
+delay_in_seconds = "0.0"
+
+[node name="HomingAttack" type="Node" parent="StateChart/Root/Attack"]
+script = ExtResource("6_hh3ag")
+
+[node name="ToIdle" type="Node" parent="StateChart/Root/Attack/HomingAttack"]
+script = ExtResource("9_70372")
+to = NodePath("../../Idle")
+event = &"attack_finished"
+delay_in_seconds = "0.0"
+
+[node name="GravityPull" type="Node" parent="StateChart/Root/Attack"]
+script = ExtResource("6_hh3ag")
+
+[node name="ToCircleAttack" type="Node" parent="StateChart/Root/Attack/GravityPull"]
+script = ExtResource("9_70372")
+to = NodePath("../../CircleAttack")
+delay_in_seconds = "5.0"
+
+[node name="CircleAttack" type="Node" parent="StateChart/Root/Attack"]
+script = ExtResource("6_hh3ag")
+
+[node name="ToIdle" type="Node" parent="StateChart/Root/Attack/CircleAttack"]
+script = ExtResource("9_70372")
+to = NodePath("../../Idle")
+event = &"attack_finished"
+delay_in_seconds = "0.0"
+
+[node name="Dead" type="Node" parent="StateChart/Root"]
+script = ExtResource("10_4x4fg")
+animation_player = NodePath("../../../AnimationPlayer")
 
 [node name="CircleAttackSpawner" type="Spawner" parent="."]
 startMode = 2
@@ -170,18 +215,36 @@ texture = ExtResource("10_07p0w")
 startMode = 2
 bulletType = SubResource("BulletType_lvwe1")
 ID = 2
-fireRadiusDegrees = 60.0
+fireRadiusDegrees = 80.0
 bulletsPerRadius = 9
 trackedNode = NodePath("..")
 startTowardPlayer = true
 staysTowardPlayer = true
-offsetTowardPlayer = -30.0
+offsetTowardPlayer = -40.0
 texture = ExtResource("10_07p0w")
 
+[node name="HomingAttackSpawner" type="Spawner" parent="." node_paths=PackedStringArray("trackedNode")]
+startMode = 2
+bulletType = SubResource("BulletType_tr3eg")
+trackedNode = NodePath("..")
+homing = true
+homingWeight = 0.01
+randomStart = true
+texture = ExtResource("10_07p0w")
+
+[node name="StateChartDebugger" parent="." instance=ExtResource("13_1tg7s")]
+offset_left = -128.0
+offset_top = -160.0
+offset_right = 128.0
+offset_bottom = 160.0
+initial_node_to_watch = NodePath("../StateChart")
+
 [connection signal="body_entered" from="EventHorizon" to="." method="_on_event_horizon_body_entered"]
+[connection signal="state_entered" from="StateChart/Root/Attack/TargetAttack" to="." method="_on_target_attack_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Attack/HomingAttack" to="." method="_on_homing_attack_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Attack/GravityPull" to="." method="_on_gravity_pull_state_entered"]
 [connection signal="state_exited" from="StateChart/Root/Attack/GravityPull" to="." method="_on_gravity_pull_state_exited"]
 [connection signal="state_entered" from="StateChart/Root/Attack/CircleAttack" to="." method="_on_circle_attack_state_entered"]
-[connection signal="state_entered" from="StateChart/Root/Attack/TargetAttack" to="." method="_on_target_attack_state_entered"]
 [connection signal="bullet_hit" from="CircleAttackSpawner" to="." method="_on_bullet_hit"]
 [connection signal="bullet_hit" from="TargetAttackSpawner" to="." method="_on_bullet_hit"]
+[connection signal="bullet_hit" from="HomingAttackSpawner" to="." method="_on_bullet_hit"]

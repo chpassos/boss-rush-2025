@@ -1,0 +1,92 @@
+[gd_scene load_steps=11 format=3 uid="uid://yblomidswfch"]
+
+[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_u46bj"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_pc5v7"]
+[ext_resource type="PackedScene" uid="uid://cu4l2obyiimj6" path="res://scenes/camera_manager/camera_manager.tscn" id="3_le0i1"]
+[ext_resource type="PackedScene" uid="uid://8tksrqglc2j5" path="res://scenes/arena/arena.tscn" id="4_7lgcd"]
+[ext_resource type="PackedScene" uid="uid://deje3vxmm68ao" path="res://scenes/player/player.tscn" id="5_3r7no"]
+[ext_resource type="PackedScene" uid="uid://gdsprfbpe76q" path="res://scenes/bosses/4_black_hole/black_hole.tscn" id="6_utpya"]
+[ext_resource type="PackedScene" uid="uid://bigybb2e4jmfv" path="res://scenes/asteroid/spawner/asteroid_spawner.tscn" id="7_ohqmo"]
+[ext_resource type="PackedScene" uid="uid://bguqcq048fxe1" path="res://ui/hud/hud.tscn" id="8_56yep"]
+[ext_resource type="PackedScene" uid="uid://dcyok8jhypmiv" path="res://ui/pause_menu/pause_menu.tscn" id="9_wvipa"]
+[ext_resource type="Material" uid="uid://k8w7wpayleaw" path="res://assets/crt_effect_material.tres" id="10_if0x6"]
+
+[node name="BlackHoleLevel" type="Node2D" node_paths=PackedStringArray("pause_menu")]
+script = ExtResource("1_u46bj")
+boss_number = 3
+pause_menu = NodePath("FG/PauseMenu")
+next_scene_path = "res://ui/main_menu/main_menu.tscn"
+
+[node name="MainCamera" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+process_callback = 0
+
+[node name="PhantomCameraHost" type="Node" parent="MainCamera"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("2_pc5v7")
+
+[node name="CameraManager" parent="." instance=ExtResource("3_le0i1")]
+
+[node name="Arena" parent="." instance=ExtResource("4_7lgcd")]
+arena_size = Vector2(2200, 1400)
+
+[node name="Player" parent="." instance=ExtResource("5_3r7no")]
+position = Vector2(-480, 0)
+
+[node name="BlackHole" parent="." instance=ExtResource("6_utpya")]
+
+[node name="Spawners" type="Node2D" parent="."]
+
+[node name="AsteroidSpawner1" parent="Spawners" instance=ExtResource("7_ohqmo")]
+position = Vector2(-448, 544)
+spawn_on_ready = true
+spawn_radius = 120.0
+min_wait_time = 8.0
+max_wait_time = 12.0
+clockwise_asteroid_weight = 9.0
+counterclockwise_asteroid_weight = 0.0
+
+[node name="AsteroidSpawner2" parent="Spawners" instance=ExtResource("7_ohqmo")]
+position = Vector2(448, -576)
+spawn_on_ready = true
+spawn_radius = 120.0
+min_wait_time = 8.0
+max_wait_time = 12.0
+clockwise_asteroid_weight = 9.0
+counterclockwise_asteroid_weight = 0.0
+
+[node name="AsteroidSpawner3" parent="Spawners" instance=ExtResource("7_ohqmo")]
+position = Vector2(608, 320)
+spawn_on_ready = true
+spawn_radius = 120.0
+min_wait_time = 8.0
+max_wait_time = 12.0
+clockwise_asteroid_weight = 9.0
+counterclockwise_asteroid_weight = 0.0
+
+[node name="AsteroidSpawner4" parent="Spawners" instance=ExtResource("7_ohqmo")]
+position = Vector2(-544, -480)
+spawn_on_ready = true
+spawn_radius = 120.0
+min_wait_time = 8.0
+max_wait_time = 12.0
+clockwise_asteroid_weight = 9.0
+counterclockwise_asteroid_weight = 0.0
+
+[node name="FG" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="FG" instance=ExtResource("8_56yep")]
+
+[node name="PauseMenu" parent="FG" instance=ExtResource("9_wvipa")]
+visible = false
+
+[node name="CRTEffect" type="ColorRect" parent="FG"]
+z_index = 100
+material = ExtResource("10_if0x6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
