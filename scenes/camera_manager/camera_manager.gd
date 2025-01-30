@@ -2,8 +2,15 @@ class_name CameraManager
 extends PhantomCamera2D
 
 
+@export var anim_player: AnimationPlayer
+
+
 func _ready() -> void:
 	SignalBus.arena_ready.connect(_on_arena_ready)
+	SignalBus.boss_defeated.connect(
+		func():
+			anim_player.play(&"outro")
+	)
 
 
 func _on_arena_ready() -> void:
