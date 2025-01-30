@@ -23,6 +23,8 @@ func _on_camera_animation_finished(anim_name: StringName) -> void:
 		SpeedrunTimer.start()
 	elif anim_name == &"outro":
 		get_tree().change_scene_to_file(next_scene_path)
+	elif anim_name == &"defeat":
+		get_tree().quit()
 
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -161,7 +161,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_w7k07"]
 resource_name = "death"
-length = 2.0
+length = 3.0
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -170,7 +170,7 @@ tracks/0/path = NodePath("Sprite2D:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5, 1.7, 1.9),
+"times": PackedFloat32Array(0, 1.6, 2.1, 2.6, 2.8, 3),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Rect2(0, 144, 36, 34), Rect2(38, 144, 36, 34), Rect2(76, 144, 36, 34), Rect2(114, 144, 36, 34), Rect2(152, 144, 36, 34), Rect2(190, 144, 36, 34)]
@@ -182,7 +182,7 @@ tracks/1/path = NodePath("Sprite2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.9),
+"times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -337,6 +337,12 @@ to = NodePath("../../Shoot")
 event = &"pressed_shoot"
 delay_in_seconds = "0.0"
 
+[node name="ToDead" type="Node" parent="StateChart/Root/Move"]
+script = ExtResource("7_mn7qe")
+to = NodePath("../../Dead")
+event = &"player_died"
+delay_in_seconds = "0.0"
+
 [node name="Shoot" type="Node" parent="StateChart/Root"]
 script = ExtResource("8_1si24")
 
@@ -346,6 +352,15 @@ to = NodePath("../../Move")
 event = &"released_shoot"
 delay_in_seconds = "0.0"
 
+[node name="ToDead" type="Node" parent="StateChart/Root/Shoot"]
+script = ExtResource("7_mn7qe")
+to = NodePath("../../Dead")
+event = &"player_died"
+delay_in_seconds = "0.0"
+
+[node name="Dead" type="Node" parent="StateChart/Root"]
+script = ExtResource("8_1si24")
+
 [connection signal="body_entered" from="CollisionDetection" to="." method="_on_collision_detection_body_entered"]
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_depleted"]
 [connection signal="state_physics_processing" from="StateChart/Root/Move" to="." method="_on_move_state_physics_processing"]
@@ -353,3 +368,4 @@ delay_in_seconds = "0.0"
 [connection signal="state_exited" from="StateChart/Root/Shoot" to="." method="_on_shoot_state_exited"]
 [connection signal="state_processing" from="StateChart/Root/Shoot" to="." method="_on_shoot_state_processing"]
 [connection signal="state_unhandled_input" from="StateChart/Root/Shoot" to="." method="_on_shoot_state_unhandled_input"]
+[connection signal="state_entered" from="StateChart/Root/Dead" to="." method="_on_dead_state_entered"]

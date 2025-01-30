@@ -7,6 +7,10 @@ extends PhantomCamera2D
 
 func _ready() -> void:
 	SignalBus.arena_ready.connect(_on_arena_ready)
+	SignalBus.player_defeated.connect(
+		func():
+			anim_player.play(&"defeat")
+	)
 	SignalBus.boss_defeated.connect(
 		func():
 			anim_player.play(&"outro")

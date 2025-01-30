@@ -45,8 +45,7 @@ func _on_collision_detection_body_entered(_body: Boss) -> void:
 
 
 func _on_health_depleted() -> void:
-	anim_player.play(&"death")
-	SignalBus.player_defeated.emit()
+	state_chart.send_event(&"player_died")
 
 
 func take_damage(amount: int) -> void:
@@ -242,3 +241,11 @@ func _on_shoot_state_processing(_delta: float) -> void:
 		anim_player.play(&"aim_center")
 	else:
 		anim_player.play(&"aim_left")
+
+
+# DEAD STATE
+
+func _on_dead_state_entered() -> void:
+	anim_player.queue(&"death")
+	SpeedrunTimer.stop()
+	SignalBus.player_defeated.emit()
