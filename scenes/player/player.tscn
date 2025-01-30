@@ -27,6 +27,7 @@ radius = 16.0
 radius = 18.0
 
 [sub_resource type="Gradient" id="Gradient_k1xnt"]
+offsets = PackedFloat32Array(0, 0.5)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_f1e7n"]
@@ -280,6 +281,7 @@ health_component = NodePath("HealthComponent")
 state_chart = NodePath("StateChart")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 2
 material = SubResource("ShaderMaterial_n7404")
 texture = SubResource("CanvasTexture_wxmcx")
 region_enabled = true
@@ -298,7 +300,9 @@ shape = SubResource("CircleShape2D_gj2h7")
 
 [node name="AimLine" type="Line2D" parent="."]
 modulate = Color(1, 1, 1, 0.12549)
-points = PackedVector2Array(0, 0, 540, 0)
+light_mask = 0
+z_index = 1
+points = PackedVector2Array(0, 0, 1080, 0)
 width = 2.0
 default_color = Color(0.968627, 0.945098, 0.894118, 1)
 gradient = SubResource("Gradient_k1xnt")

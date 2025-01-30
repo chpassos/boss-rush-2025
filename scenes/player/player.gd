@@ -229,7 +229,8 @@ func _on_shoot_state_unhandled_input(event: InputEvent) -> void:
 
 
 func _on_shoot_state_processing(_delta: float) -> void:
-	if anim_player.is_playing() and anim_player.current_animation == &"rotation":
+	if anim_player.is_playing() \
+	and (anim_player.current_animation == &"rotation" or anim_player.current_animation == &"hit"):
 		return
 
 	var dir_to_mouse: Vector2 = global_position.direction_to(get_global_mouse_position())
