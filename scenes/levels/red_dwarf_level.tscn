@@ -1,0 +1,84 @@
+[gd_scene load_steps=12 format=3 uid="uid://pqvoo5woaqd"]
+
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_1ot8k"]
+[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_joxw5"]
+[ext_resource type="PackedScene" uid="uid://cu4l2obyiimj6" path="res://scenes/camera_manager/camera_manager.tscn" id="2_d7y1g"]
+[ext_resource type="PackedScene" uid="uid://8tksrqglc2j5" path="res://scenes/arena/arena.tscn" id="3_fwod5"]
+[ext_resource type="PackedScene" uid="uid://deje3vxmm68ao" path="res://scenes/player/player.tscn" id="4_y3nwp"]
+[ext_resource type="PackedScene" uid="uid://b46v3f7wavfeq" path="res://scenes/bosses/1_red_dwarf/red_dwarf.tscn" id="5_flb2l"]
+[ext_resource type="PackedScene" uid="uid://bigybb2e4jmfv" path="res://scenes/asteroid/spawner/asteroid_spawner.tscn" id="6_s07ch"]
+[ext_resource type="PackedScene" uid="uid://bguqcq048fxe1" path="res://ui/hud/hud.tscn" id="7_rr8gk"]
+[ext_resource type="PackedScene" uid="uid://dcyok8jhypmiv" path="res://ui/pause_menu/pause_menu.tscn" id="8_gfrdj"]
+[ext_resource type="Shader" path="res://assets/shaders/crt_effect.gdshader" id="9_tjuh2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gyc5d"]
+shader = ExtResource("9_tjuh2")
+shader_parameter/screen_resolution = Vector2(480, 270)
+shader_parameter/scanline_intensity = 0.3
+shader_parameter/color_bleed_weight = 0.35
+
+[node name="RedDwarfLevel" type="Node2D" node_paths=PackedStringArray("pause_menu")]
+script = ExtResource("1_joxw5")
+pause_menu = NodePath("FG/PauseMenu")
+
+[node name="MainCamera" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+process_callback = 0
+
+[node name="PhantomCameraHost" type="Node" parent="MainCamera"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("1_1ot8k")
+
+[node name="CameraManager" parent="." instance=ExtResource("2_d7y1g")]
+
+[node name="Arena" parent="." instance=ExtResource("3_fwod5")]
+arena_size = Vector2(2250, 1500)
+
+[node name="Player" parent="." instance=ExtResource("4_y3nwp")]
+position = Vector2(-480, 0)
+
+[node name="RedDwarf" parent="." instance=ExtResource("5_flb2l")]
+
+[node name="Spawners" type="Node2D" parent="."]
+
+[node name="AsteroidSpawner1" parent="Spawners" instance=ExtResource("6_s07ch")]
+position = Vector2(-448, 256)
+spawn_on_ready = true
+min_wait_time = 5.0
+max_wait_time = 10.0
+
+[node name="AsteroidSpawner2" parent="Spawners" instance=ExtResource("6_s07ch")]
+position = Vector2(288, -256)
+spawn_on_ready = true
+min_wait_time = 5.0
+max_wait_time = 10.0
+
+[node name="AsteroidSpawner3" parent="Spawners" instance=ExtResource("6_s07ch")]
+position = Vector2(448, 320)
+spawn_on_ready = true
+min_wait_time = 5.0
+max_wait_time = 10.0
+
+[node name="AsteroidSpawner4" parent="Spawners" instance=ExtResource("6_s07ch")]
+position = Vector2(-576, -352)
+spawn_on_ready = true
+min_wait_time = 5.0
+max_wait_time = 10.0
+
+[node name="FG" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="FG" instance=ExtResource("7_rr8gk")]
+
+[node name="PauseMenu" parent="FG" instance=ExtResource("8_gfrdj")]
+visible = false
+
+[node name="CRTEffect" type="ColorRect" parent="FG"]
+z_index = 100
+material = SubResource("ShaderMaterial_gyc5d")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

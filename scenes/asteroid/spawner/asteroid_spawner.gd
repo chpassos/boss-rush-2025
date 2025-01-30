@@ -5,9 +5,9 @@ extends Node2D
 @export_range(0.0, 500.0, 10.0, "or_greater", "suffix:px") var spawn_radius: float = 200.0
 @export_range(0.0, 30.0, 0.5, "or_greater", "suffix:s") var min_wait_time: float = 1.0
 @export_range(0.0, 30.0, 0.5, "or_greater", "suffix:s") var max_wait_time: float = 2.5
-@export_range(0.0, 10.0, 1.0, "or_greater", "suffix:px") var heal_asteroid_weight: float = 1.0
-@export_range(0.0, 10.0, 1.0, "or_greater", "suffix:px") var clockwise_asteroid_weight: float = 1.0
-@export_range(0.0, 10.0, 1.0, "or_greater", "suffix:px") var counterclockwise_asteroid_weight: float = 1.0
+@export_range(0.0, 10.0, 1.0, "or_greater") var heal_asteroid_weight: float = 1.0
+@export_range(0.0, 10.0, 1.0, "or_greater") var clockwise_asteroid_weight: float = 1.0
+@export_range(0.0, 10.0, 1.0, "or_greater") var counterclockwise_asteroid_weight: float = 1.0
 @export var spawn_timer: Timer
 
 @onready var total_weight: float = heal_asteroid_weight + clockwise_asteroid_weight + counterclockwise_asteroid_weight

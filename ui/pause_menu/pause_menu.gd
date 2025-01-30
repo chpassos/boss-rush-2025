@@ -1,3 +1,4 @@
+class_name PauseMenu
 extends Control
 
 
@@ -9,6 +10,11 @@ func enable() -> void:
 func disable() -> void:
 	get_tree().paused = false
 	hide()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"pause"):
+		disable()
 
 
 func _on_back_button_pressed() -> void:
