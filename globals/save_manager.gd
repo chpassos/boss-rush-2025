@@ -20,6 +20,10 @@ func load_game() -> bool:
 	var save_file: FileAccess = FileAccess.open("user://" + FILENAME, FileAccess.READ)
 
 	saved_current_boss = save_file.get_8()
+
+	if saved_current_boss > Globals.TOTAL_BOSSES:
+		return false
+
 	saved_elapsed_time = save_file.get_float()
 
 	return true

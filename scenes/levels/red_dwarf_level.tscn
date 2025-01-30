@@ -13,7 +13,9 @@
 
 [node name="RedDwarfLevel" type="Node2D" node_paths=PackedStringArray("pause_menu")]
 script = ExtResource("1_joxw5")
+boss_number = 1
 pause_menu = NodePath("FG/PauseMenu")
+next_scene_path = "res://ui/main_menu/main_menu.tscn"
 
 [node name="MainCamera" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
