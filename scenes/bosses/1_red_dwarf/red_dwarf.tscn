@@ -188,7 +188,7 @@ texture_scale = 20.0
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("4_7r3q0")
-max_health = 2
+max_health = 50
 
 [node name="Poise Component" type="Node" parent="."]
 script = ExtResource("5_uo8ru")

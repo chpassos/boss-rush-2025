@@ -54,6 +54,6 @@ normal_texture = ExtResource("17_m72hk")
 script = ExtResource("1_egcp3")
 clockwise = true
 health_damage = 1
-poise_damage = 0.1
+poise_damage = 0.0
 sprites = Array[CanvasTexture]([SubResource("CanvasTexture_1frtv"), SubResource("CanvasTexture_f1rfj"), SubResource("CanvasTexture_13ju8"), SubResource("CanvasTexture_6j7xe"), SubResource("CanvasTexture_ff2re"), SubResource("CanvasTexture_7e4yl"), SubResource("CanvasTexture_wjgeb"), SubResource("CanvasTexture_x55rh")])
 color = Color(0.815686, 0.121569, 0.423529, 1)

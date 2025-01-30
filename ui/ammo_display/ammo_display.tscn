@@ -15,6 +15,7 @@ visible = false
 texture = ExtResource("1_ka0me")
 
 [node name="ControlLeft" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5

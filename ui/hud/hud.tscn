@@ -61,6 +61,7 @@ text = "00:00:00"
 
 [node name="BossPoiseBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 modulate = Color(0.52549, 0.741176, 0.156863, 1)
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
