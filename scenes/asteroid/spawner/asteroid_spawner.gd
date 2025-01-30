@@ -13,10 +13,6 @@ extends Node2D
 @onready var total_weight: float = heal_asteroid_weight + clockwise_asteroid_weight + counterclockwise_asteroid_weight
 
 
-func _draw() -> void:
-	draw_circle(Vector2.ZERO, spawn_radius, Color.WHITE, false)  # TODO: só pra debuggar
-
-
 func _ready() -> void:
 	assert(spawn_radius > 0)
 	assert(min_wait_time > 0)
@@ -30,39 +26,14 @@ func _ready() -> void:
 
 func spawn_asteroid() -> void:
 	var r: float = randf()
+	var gpos: Vector2 = global_position + spawn_radius * Utils.random_point_in_circle()
 
 	if r < heal_asteroid_weight / total_weight:
-		spawn_heal_asteroid()
+		CollectiblesManager.spawn_heal_asteroid(gpos)
 	elif r < (heal_asteroid_weight + clockwise_asteroid_weight) / total_weight:
-		spawn_clockwise_asteroid()
+		CollectiblesManager.spawn_clockwise_asteroid(gpos)
 	else:
-		spawn_counterclockwise_asteroid()
-
-
-func spawn_heal_asteroid() -> void:
-	var asteroid: HealAsteroid = Globals.HEAL_ASTEROID_SCENE.instantiate() as HealAsteroid
-	#asteroid.top_level = true
-	#asteroid.global_position = global_position + spawn_radius * Utils.random_point_in_circle()
-	asteroid.position = spawn_radius * Utils.random_point_in_circle()
-	add_child(asteroid)
-
-
-func spawn_clockwise_asteroid() -> void:
-	var asteroid: CollectibleAsteroid = Globals.COLLECTIBLE_ASTEROID_SCENE.instantiate() as CollectibleAsteroid
-	#asteroid.top_level = true
-	#asteroid.global_position = global_position + spawn_radius * Utils.random_point_in_circle()
-	asteroid.position = spawn_radius * Utils.random_point_in_circle()
-	asteroid.clockwise = true
-	add_child(asteroid)
-
-
-func spawn_counterclockwise_asteroid() -> void:
-	var asteroid: CollectibleAsteroid = Globals.COLLECTIBLE_ASTEROID_SCENE.instantiate() as CollectibleAsteroid
-	#asteroid.top_level = true
-	#asteroid.global_position = global_position + spawn_radius * Utils.random_point_in_circle()
-	asteroid.position = spawn_radius * Utils.random_point_in_circle()
-	asteroid.clockwise = false
-	add_child(asteroid)
+		CollectiblesManager.spawn_counterclockwise_asteroid(gpos)
 
 
 func start_timer() -> void:

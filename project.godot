@@ -25,6 +25,7 @@ ProjectileManager="*res://globals/projectile_manager.gd"
 CursorManager="*res://globals/cursor_manager.gd"
 SaveManager="*res://globals/save_manager.gd"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
+CollectiblesManager="*res://globals/collectibles_manager.gd"
 
 [display]
 
