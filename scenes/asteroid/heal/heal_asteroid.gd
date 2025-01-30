@@ -2,6 +2,8 @@ class_name HealAsteroid
 extends RigidBody2D
 
 
+signal collected()
+
 @export var sprites: Array[CanvasTexture]
 @export_group("Nodes")
 @export var sprite: Sprite2D
@@ -18,6 +20,7 @@ func _ready() -> void:
 
 func _on_player_revolved(_clockwise: bool) -> void:
 	Globals.player.heal(1)
+	collected.emit()
 	queue_free.call_deferred()
 
 

@@ -2,6 +2,8 @@ class_name CollectibleAsteroid
 extends RigidBody2D
 
 
+signal collected()
+
 @export var clockwise: bool = true
 @export_group("Nodes")
 @export var sprite: Sprite2D
@@ -25,6 +27,7 @@ func _ready() -> void:
 
 func _on_player_revolved(_clockwise: bool) -> void:
 	Globals.player.add_asteroid_to_queue(clockwise)
+	collected.emit()
 	queue_free.call_deferred()
 
 

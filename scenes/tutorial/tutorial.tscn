@@ -1,0 +1,138 @@
+[gd_scene load_steps=18 format=3 uid="uid://dhjckg4gl4fs2"]
+
+[ext_resource type="PackedScene" uid="uid://8tksrqglc2j5" path="res://scenes/arena/arena.tscn" id="1_khee5"]
+[ext_resource type="Script" path="res://scenes/tutorial/tutorial.gd" id="1_tpygo"]
+[ext_resource type="PackedScene" uid="uid://deje3vxmm68ao" path="res://scenes/player/player.tscn" id="2_3inyr"]
+[ext_resource type="FontFile" uid="uid://cr1f100uqwao4" path="res://assets/fonts/Mono10 Light.ttf" id="2_p3nwj"]
+[ext_resource type="FontFile" uid="uid://c267uu8ivdy0k" path="res://assets/fonts/Mono10 Regular.ttf" id="3_dtkvu"]
+[ext_resource type="Material" uid="uid://k8w7wpayleaw" path="res://assets/crt_effect_material.tres" id="4_ndsbt"]
+[ext_resource type="Script" path="res://scenes/asteroid/heal/heal_asteroid.gd" id="6_4b2kq"]
+[ext_resource type="Texture2D" uid="uid://ctotpt3ieqi4q" path="res://assets/asteroids/asteroid_17.png" id="7_8chpj"]
+[ext_resource type="Texture2D" uid="uid://brvhhiqm40qrb" path="res://assets/asteroids/asteroid_n_17.png" id="8_rim0k"]
+[ext_resource type="Texture2D" uid="uid://leoh06lpfx8e" path="res://assets/asteroids/asteroid_18.png" id="9_i5vvp"]
+[ext_resource type="Texture2D" uid="uid://c36kuiv6c4eoc" path="res://assets/asteroids/asteroid_n_18.png" id="10_p3b8e"]
+[ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroids/asteroid.png" id="11_yfwae"]
+[ext_resource type="Script" path="res://customs/nodes/player_revolution_component.gd" id="12_7s38b"]
+[ext_resource type="PackedScene" uid="uid://c3xeqpsd8k1m" path="res://ui/revolution_progress/revolution_progress.tscn" id="13_s4r5q"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_511px"]
+diffuse_texture = ExtResource("7_8chpj")
+normal_texture = ExtResource("8_rim0k")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_afatm"]
+diffuse_texture = ExtResource("9_i5vvp")
+normal_texture = ExtResource("10_p3b8e")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5c0tp"]
+radius = 8.0
+
+[node name="Tutorial" type="Node2D" node_paths=PackedStringArray("spawner", "repeat_label", "exit_label", "exit_asteroid")]
+script = ExtResource("1_tpygo")
+spawner = NodePath("TutorialSpawner")
+repeat_label = NodePath("Repeat")
+exit_label = NodePath("Exit")
+exit_asteroid = NodePath("ExitAsteroid")
+main_menu_scene_path = "res://ui/main_menu/main_menu.tscn"
+
+[node name="Tutorial" type="RichTextLabel" parent="."]
+offset_left = -448.0
+offset_top = -224.0
+offset_right = -128.0
+offset_bottom = 28.0
+theme_override_colors/default_color = Color(0.968627, 0.945098, 0.894118, 1)
+theme_override_fonts/normal_font = ExtResource("2_p3nwj")
+theme_override_fonts/bold_font = ExtResource("3_dtkvu")
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "[center]Use [b]WASD[/b] to spin around the asteroid to collect it. Then, hold the [b]left mouse button[/b] to enter shoot mode. While in shoot mode, repeatedly and alternately press [b]A and D[/b] to spin and shoot the asteroid at where you are aiming.[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="Repeat" type="RichTextLabel" parent="."]
+offset_left = -448.0
+offset_top = 128.0
+offset_right = -128.0
+offset_bottom = 156.0
+theme_override_colors/default_color = Color(0.968627, 0.945098, 0.894118, 1)
+theme_override_fonts/normal_font = ExtResource("2_p3nwj")
+theme_override_fonts/bold_font = ExtResource("3_dtkvu")
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "[center][wave amp=50.0 freq=5.0 connected=1]Now, do it again![/wave][/center]"
+fit_content = true
+scroll_active = false
+
+[node name="Exit" type="RichTextLabel" parent="."]
+offset_left = 128.0
+offset_top = 32.0
+offset_right = 448.0
+offset_bottom = 200.0
+theme_override_colors/default_color = Color(0.968627, 0.945098, 0.894118, 1)
+theme_override_fonts/normal_font = ExtResource("2_p3nwj")
+theme_override_fonts/bold_font = ExtResource("3_dtkvu")
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "[center]The [color=#d01f6c][b]red[/b][/color] asteroid you just shot is used to deal [color=#d01f6c][b]damage[/b][/color], while the [color=#2da1c4][b]blue[/b][/color], heart-shaped asteroid above is used to instantly [color=#2da1c4][b]heal[/b][/color] you. Collect this one to exit the tutorial.[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+process_callback = 0
+
+[node name="Arena" parent="." instance=ExtResource("1_khee5")]
+arena_size = Vector2(960, 540)
+parallax_intensity = 0.0
+
+[node name="Player" parent="." instance=ExtResource("2_3inyr")]
+position = Vector2(-384, 96)
+
+[node name="TutorialSpawner" type="Marker2D" parent="."]
+
+[node name="ExitAsteroid" type="RigidBody2D" parent="." node_paths=PackedStringArray("sprite", "player_revolution_component", "revolution_progess")]
+position = Vector2(320, -160)
+collision_layer = 4
+collision_mask = 7
+gravity_scale = 0.0
+script = ExtResource("6_4b2kq")
+sprites = Array[CanvasTexture]([SubResource("CanvasTexture_511px"), SubResource("CanvasTexture_afatm")])
+sprite = NodePath("Sprite2D")
+player_revolution_component = NodePath("PlayerRevolutionComponent")
+revolution_progess = NodePath("RevolutionProgress")
+
+[node name="Sprite2D" type="Sprite2D" parent="ExitAsteroid"]
+texture = ExtResource("11_yfwae")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitAsteroid"]
+shape = SubResource("CircleShape2D_5c0tp")
+
+[node name="PlayerRevolutionComponent" type="Node2D" parent="ExitAsteroid" node_paths=PackedStringArray("progress_bar")]
+script = ExtResource("12_7s38b")
+max_distance = 100.0
+progress_bar = NodePath("../RevolutionProgress")
+
+[node name="RevolutionProgress" parent="ExitAsteroid" instance=ExtResource("13_s4r5q")]
+top_level = true
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+
+[node name="FG" type="CanvasLayer" parent="."]
+
+[node name="CRTEffect" type="ColorRect" parent="FG"]
+z_index = 100
+material = ExtResource("4_ndsbt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="shot_asteroid" from="Player" to="." method="_on_player_shot_asteroid"]
+[connection signal="collected" from="ExitAsteroid" to="." method="_on_exit_asteroid_collected"]
+[connection signal="player_revolved" from="ExitAsteroid/PlayerRevolutionComponent" to="ExitAsteroid" method="_on_player_revolved"]

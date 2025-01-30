@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://csgewo4ifdwtl"]
+[gd_scene load_steps=45 format=3 uid="uid://csgewo4ifdwtl"]
 
 [ext_resource type="Script" path="res://ui/main_menu/main_menu.gd" id="1_6x6l8"]
 [ext_resource type="Shader" path="res://assets/shaders/space_background.gdshader" id="1_at1td"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bjycg3kn7urr8" path="res://assets/buttons/settings_button.png" id="5_wnl3m"]
 [ext_resource type="Texture2D" uid="uid://cies2uaf7v5fc" path="res://assets/buttons/credits_button.png" id="6_badav"]
 [ext_resource type="Texture2D" uid="uid://cpn1ai75gghti" path="res://assets/buttons/quit_button.png" id="7_poh8v"]
+[ext_resource type="Texture2D" uid="uid://botkq5pnolxma" path="res://assets/buttons/tutorial_button.png" id="8_lpyqv"]
 [ext_resource type="PackedScene" uid="uid://bwmr00dl8des8" path="res://ui/credits/credits.tscn" id="11_jyjel"]
 [ext_resource type="Material" uid="uid://k8w7wpayleaw" path="res://assets/crt_effect_material.tres" id="12_oa131"]
 
@@ -63,6 +64,26 @@ region = Rect2(0, 60, 81, 20)
 [sub_resource type="AtlasTexture" id="AtlasTexture_oxr7l"]
 atlas = ExtResource("4_l56nw")
 region = Rect2(0, 20, 81, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7utc"]
+atlas = ExtResource("8_lpyqv")
+region = Rect2(0, 0, 58, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ec8jb"]
+atlas = ExtResource("8_lpyqv")
+region = Rect2(0, 16, 58, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m178v"]
+atlas = ExtResource("8_lpyqv")
+region = Rect2(0, 32, 58, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxy3m"]
+atlas = ExtResource("8_lpyqv")
+region = Rect2(0, 48, 58, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykne5"]
+atlas = ExtResource("8_lpyqv")
+region = Rect2(0, 16, 58, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n8e04"]
 atlas = ExtResource("5_wnl3m")
@@ -133,6 +154,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6x6l8")
 level_transition_scene_path = "res://ui/level_transition/level_transition.tscn"
+tutorial_scene_path = "res://scenes/tutorial/tutorial.tscn"
 credits = NodePath("Credits")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -206,6 +228,19 @@ on_hover_scale = 1.4
 layout_mode = 2
 theme_override_constants/separation = 32
 
+[node name="TutorialButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerBottom"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(232, 64)
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_f7utc")
+texture_pressed = SubResource("AtlasTexture_ec8jb")
+texture_hover = SubResource("AtlasTexture_m178v")
+texture_disabled = SubResource("AtlasTexture_wxy3m")
+texture_focused = SubResource("AtlasTexture_ykne5")
+stretch_mode = 4
+script = ExtResource("3_rybte")
+on_hover_scale = 1.2
+
 [node name="SettingsButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerBottom"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(280, 64)
@@ -264,6 +299,7 @@ mouse_filter = 2
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerTop/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerTop/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerBottom/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerBottom/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerBottom/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerBottom/QuitButton" to="." method="_on_quit_button_pressed"]

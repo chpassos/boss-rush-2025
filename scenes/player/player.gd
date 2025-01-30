@@ -2,6 +2,8 @@ class_name Player
 extends CharacterBody2D
 
 
+signal shot_asteroid(clockwise: bool)
+
 @export var max_speed: float = 200.0
 @export var acceleration: float = 1500.0
 @export var drag: float = 800.0
@@ -93,6 +95,7 @@ func shoot_asteroid_from_queue(clockwise: bool, direction: Vector2) -> void:
 		orbiting_asteroid.queue_free()
 		ammo_display.clockwise_ammo_counter.text = str(clockwise_asteroid_queue.size())
 		ProjectileManager.spawn_projectile(global_position, true, direction)
+		shot_asteroid.emit(true)
 
 	else:
 		if not counterclockwise_asteroid_queue:
@@ -102,6 +105,7 @@ func shoot_asteroid_from_queue(clockwise: bool, direction: Vector2) -> void:
 		orbiting_asteroid.queue_free()
 		ammo_display.counterclockwise_ammo_counter.text = str(counterclockwise_asteroid_queue.size())
 		ProjectileManager.spawn_projectile(global_position, false, direction)
+		shot_asteroid.emit(false)
 
 
 # MOVE STATE
