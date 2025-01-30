@@ -9,7 +9,7 @@ const HEAL_ASTEROID_SCENE: PackedScene = preload("res://scenes/asteroid/heal/hea
 const CLOCKWISE_ASTEROID_DATA: AsteroidData = preload("res://scenes/asteroid/clockwise.tres")
 const COUNTERCLOCKWISE_ASTEROID_DATA: AsteroidData = preload("res://scenes/asteroid/counterclockwise.tres")
 # DATA
-const TOTAL_BOSSES: int = 4
+const TOTAL_BOSSES: int = 3
 
 # SCENES
 var player: Player
