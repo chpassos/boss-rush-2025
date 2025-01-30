@@ -5,6 +5,15 @@ extends Node
 @onready var is_active: bool = false
 
 
+func _ready() -> void:
+	SignalBus.camera_animation_finished.connect(
+		func(anim_name: StringName):
+			if anim_name == &"intro":
+				start()
+	)
+	SignalBus.boss_defeated.connect(stop)
+
+
 func start() -> void:
 	is_active = true
 
