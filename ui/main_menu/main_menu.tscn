@@ -130,6 +130,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6x6l8")
+credits_scene_path = "res://ui/credits/credits.tscn"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_7mxup")
@@ -170,7 +171,7 @@ alignment = 2
 
 [node name="HBoxContainerTop" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 32
 
 [node name="StartButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerTop"]
 unique_name_in_owner = true
@@ -200,7 +201,7 @@ on_hover_scale = 1.4
 
 [node name="HBoxContainerBottom" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 32
 
 [node name="SettingsButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerBottom"]
 unique_name_in_owner = true

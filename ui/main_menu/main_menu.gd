@@ -1,9 +1,13 @@
 extends Control
 
 
+@export_file("*.tscn") var credits_scene_path: String
+
+
 func _ready() -> void:
-	(%ContinueButton as TextureButton).disabled = not SaveManager.load_game()
-	(%ContinueButton as TextureButton).focus_mode = Control.FOCUS_NONE
+	if not SaveManager.load_game():
+		(%ContinueButton as TextureButton).disabled = true
+		(%ContinueButton as TextureButton).focus_mode = Control.FOCUS_NONE
 
 
 func _on_start_button_pressed() -> void:
@@ -19,7 +23,7 @@ func _on_settings_button_pressed() -> void:
 
 
 func _on_credits_button_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().change_scene_to_file(credits_scene_path)
 
 
 func _on_quit_button_pressed() -> void:
