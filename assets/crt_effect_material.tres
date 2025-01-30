@@ -4,6 +4,6 @@
 
 [resource]
 shader = ExtResource("1_r54cv")
-shader_parameter/screen_resolution = Vector2(480, 270)
-shader_parameter/scanline_intensity = 0.3
-shader_parameter/color_bleed_weight = 0.35
+shader_parameter/screen_resolution = Vector2(960, 540)
+shader_parameter/scanline_intensity = 0.5
+shader_parameter/color_bleed_weight = 0.5
