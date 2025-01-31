@@ -126,7 +126,7 @@ shape = SubResource("CircleShape2D_w3vpg")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_8iqbf")
-max_health = 15
+max_health = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

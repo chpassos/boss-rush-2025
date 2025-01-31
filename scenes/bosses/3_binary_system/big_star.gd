@@ -3,9 +3,19 @@ extends Boss
 
 @export var move_speed: float = 100.0
 
+@onready var is_furious: bool = false
+
 
 func _on_small_star_died() -> void:
-	pass
+	is_furious = true
+	move_speed *= 1.8
+	anim_player.play(&"fury_transition")
+	anim_player.queue(&"idle")
+
+
+func _on_current_animation_changed(name: String) -> void:
+	if is_furious and name == "idle" or name == "attack" or name == "hit":
+		anim_player.current_animation = name + "_fury"
 
 
 # MOVE IDLE STATE
