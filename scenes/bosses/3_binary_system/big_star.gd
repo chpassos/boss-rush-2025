@@ -13,9 +13,9 @@ func _on_small_star_died() -> void:
 	anim_player.queue(&"idle")
 
 
-func _on_current_animation_changed(name: String) -> void:
-	if is_furious and name == "idle" or name == "attack" or name == "hit":
-		anim_player.current_animation = name + "_fury"
+func _on_current_animation_changed(anim_name: StringName) -> void:
+	if is_furious and anim_name == &"idle" or anim_name == &"attack" or anim_name == &"hit":
+		anim_player.current_animation = anim_name + "_fury"
 
 
 # MOVE IDLE STATE
