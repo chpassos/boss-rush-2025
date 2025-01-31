@@ -1,11 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://gdsprfbpe76q"]
+[gd_scene load_steps=32 format=3 uid="uid://gdsprfbpe76q"]
 
 [ext_resource type="Script" path="res://scenes/bosses/4_black_hole/black_hole.gd" id="1_1mhgs"]
 [ext_resource type="Script" path="res://customs/nodes/health_component.gd" id="2_23syd"]
-[ext_resource type="Texture2D" uid="uid://8cad2d2ajuiw" path="res://assets/sketches/boss.png" id="2_ac02r"]
 [ext_resource type="Shader" path="res://assets/shaders/hit_flash.gdshader" id="2_ae5cj"]
 [ext_resource type="Texture2D" uid="uid://xpjeb363su68" path="res://assets/point_light.webp" id="2_p6k48"]
 [ext_resource type="Script" path="res://customs/nodes/poise_component.gd" id="3_0b6ut"]
+[ext_resource type="Texture2D" uid="uid://copbf8115ulvg" path="res://assets/bosses/black_hole/black_hole_boss.png" id="3_cvnyo"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="4_q0jqj"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="6_hh3ag"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="7_gjrba"]
@@ -13,7 +13,6 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/animation_player_state.gd" id="10_4x4fg"]
 [ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroids/asteroid.png" id="10_07p0w"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="10_s8duk"]
-[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="13_1tg7s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_717pu"]
 shader = ExtResource("2_ae5cj")
@@ -21,13 +20,128 @@ shader_parameter/active = false
 shader_parameter/flash_color = Color(0.968627, 0.596078, 0.192157, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7kqoi"]
-radius = 200.0
+radius = 128.0
+
+[sub_resource type="Animation" id="Animation_1bbmn"]
+resource_name = "death"
+length = 4.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 1092, 272, 271), Rect2(274, 1092, 272, 271), Rect2(548, 1092, 272, 271), Rect2(822, 1092, 272, 271), Rect2(0, 1092, 272, 271), Rect2(274, 1092, 272, 271), Rect2(548, 1092, 272, 271), Rect2(822, 1092, 272, 271), Rect2(548, 0, 272, 271), Rect2(2192, 819, 272, 271), Rect2(0, 1638, 272, 271), Rect2(274, 1638, 272, 271), Rect2(548, 1638, 272, 271), Rect2(822, 1638, 272, 271), Rect2(1096, 1638, 272, 271), Rect2(1370, 1638, 272, 271), Rect2(1644, 1638, 272, 271), Rect2(1918, 1638, 272, 271), Rect2(2192, 1638, 272, 271)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_o4uu5"]
+resource_name = "hit"
+length = 0.45
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.15, 0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 1092, 272, 271), Rect2(274, 1092, 272, 271), Rect2(548, 1092, 272, 271)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_q4nmb"]
+resource_name = "attack"
+
+[sub_resource type="Animation" id="Animation_0tygc"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 272, 271), Rect2(274, 0, 272, 271), Rect2(548, 0, 272, 271), Rect2(822, 0, 272, 271)]
+}
+
+[sub_resource type="Animation" id="Animation_h800m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 272, 271)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e5ox4"]
+_data = {
+"RESET": SubResource("Animation_h800m"),
+"attack": SubResource("Animation_q4nmb"),
+"death": SubResource("Animation_1bbmn"),
+"hit": SubResource("Animation_o4uu5"),
+"idle": SubResource("Animation_0tygc")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0ciu7"]
 radius = 768.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q1ql3"]
-radius = 204.0
+radius = 136.235
 
 [sub_resource type="Resource" id="Resource_4pljd"]
 script = ExtResource("10_s8duk")
@@ -83,21 +197,28 @@ state_chart = NodePath("StateChart")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 0
 material = SubResource("ShaderMaterial_717pu")
-scale = Vector2(5, 5)
-texture = ExtResource("2_ac02r")
+texture = ExtResource("3_cvnyo")
+region_enabled = true
+region_rect = Rect2(0, 0, 272, 271)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_7kqoi")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_e5ox4")
+}
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 energy = 1.5
 blend_mode = 1
 texture = ExtResource("2_p6k48")
 texture_scale = 10.0
 
 [node name="GravityField" type="Area2D" parent="."]
+visible = false
 collision_layer = 32
 collision_mask = 5
 gravity_space_override = 3
@@ -111,6 +232,7 @@ gravity = 800.0
 shape = SubResource("CircleShape2D_0ciu7")
 
 [node name="EventHorizon" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 4
 monitorable = false
@@ -241,13 +363,6 @@ homingWeight = 0.01
 randomStart = true
 light_mask = 0
 texture = ExtResource("10_07p0w")
-
-[node name="StateChartDebugger" parent="." instance=ExtResource("13_1tg7s")]
-offset_left = -128.0
-offset_top = -160.0
-offset_right = 128.0
-offset_bottom = 160.0
-initial_node_to_watch = NodePath("../StateChart")
 
 [connection signal="body_entered" from="EventHorizon" to="." method="_on_event_horizon_body_entered"]
 [connection signal="state_entered" from="StateChart/Root/Attack/TargetAttack" to="." method="_on_target_attack_state_entered"]
