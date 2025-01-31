@@ -29,6 +29,7 @@ func take_damage(health_damage: int, poise_damage: float) -> void:
 	poise_component.take_damage(poise_damage)
 
 	if health_component.current_health:
+		anim_player.stop()
 		anim_player.play(&"hit")
 		anim_player.queue(&"idle")
 

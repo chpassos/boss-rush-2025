@@ -8,7 +8,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ds7ch"]
 shader = ExtResource("2_bupol")
 shader_parameter/active = false
-shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_color = Color(0.176471, 0.631373, 0.768627, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w3vpg"]
 radius = 32.0
@@ -121,6 +121,7 @@ hframes = 47
 frame = 43
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_w3vpg")
 
 [node name="HealthComponent" type="Node" parent="."]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://b46v3f7wavfeq"]
+[gd_scene load_steps=29 format=3 uid="uid://b46v3f7wavfeq"]
 
 [ext_resource type="Script" path="res://scenes/bosses/1_red_dwarf/red_dwarf.gd" id="1_n6yai"]
+[ext_resource type="Shader" path="res://assets/shaders/hit_flash.gdshader" id="2_f15vo"]
 [ext_resource type="Texture2D" uid="uid://lll4ov3ih6br" path="res://assets/bosses/red_dwarf/red_dwarf_sketch.png" id="2_l51nt"]
 [ext_resource type="Texture2D" uid="uid://xpjeb363su68" path="res://assets/point_light.webp" id="3_scyfx"]
 [ext_resource type="Script" path="res://customs/nodes/health_component.gd" id="4_7r3q0"]
@@ -11,7 +12,12 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="9_402m1"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="10_ppt32"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/animation_player_state.gd" id="11_0d1j0"]
-[ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroids/asteroid.png" id="12_6yxke"]
+[ext_resource type="Texture2D" uid="uid://fpwlr7qfi031" path="res://assets/projectiles/projectiles.png" id="13_f4pj3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sj66s"]
+shader = ExtResource("2_f15vo")
+shader_parameter/active = false
+shader_parameter/flash_color = Color(0.968627, 0.596078, 0.192157, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fqvag"]
 radius = 66.0
@@ -42,6 +48,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:material:shader_parameter/active")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_tp38o"]
 resource_name = "attack"
@@ -58,6 +76,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [Rect2(0, 405, 134, 133), Rect2(136, 405, 134, 133), Rect2(272, 405, 134, 133), Rect2(408, 405, 134, 133), Rect2(544, 405, 134, 133)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_dvs7x"]
@@ -88,6 +118,47 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(0.0588235, 0.0509804, 0.0588235, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:material:shader_parameter/active")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_eaonw"]
+resource_name = "hit"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 135, 134, 133)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_52l8n"]
 resource_name = "idle"
@@ -106,22 +177,17 @@ tracks/0/keys = {
 "update": 1,
 "values": [Rect2(0, 0, 134, 133), Rect2(136, 0, 134, 133), Rect2(272, 0, 134, 133), Rect2(408, 0, 134, 133), Rect2(544, 0, 134, 133), Rect2(680, 0, 134, 133)]
 }
-
-[sub_resource type="Animation" id="Animation_eaonw"]
-resource_name = "hit"
-length = 0.5
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:region_rect")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Rect2(0, 135, 134, 133)]
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wk2ei"]
@@ -145,6 +211,10 @@ _shape = SubResource("CircleShape2D_qdbb6")
 collideWithBodies = true
 collideWithAreas = false
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_juula"]
+atlas = ExtResource("13_f4pj3")
+region = Rect2(64, 0, 16, 16)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_kbtfd"]
 
 [sub_resource type="BulletType" id="BulletType_jl0c3"]
@@ -152,6 +222,10 @@ initialSpeed = 160.0
 _shape = SubResource("CircleShape2D_kbtfd")
 collideWithBodies = true
 collideWithAreas = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onovj"]
+atlas = ExtResource("13_f4pj3")
+region = Rect2(32, 0, 16, 16)
 
 [node name="RedDwarf" type="CharacterBody2D" node_paths=PackedStringArray("cone_attack_spawner", "circle_attack_spawner", "sprite", "anim_player", "light", "health_component", "poise_component", "state_chart")]
 disable_mode = 1
@@ -173,6 +247,7 @@ state_chart = NodePath("StateChart")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 0
+material = SubResource("ShaderMaterial_sj66s")
 texture = ExtResource("2_l51nt")
 region_enabled = true
 region_rect = Rect2(0, 0, 133, 134)
@@ -300,7 +375,7 @@ startTowardPlayer = true
 staysTowardPlayer = true
 offsetTowardPlayer = -22.5
 light_mask = 0
-texture = ExtResource("12_6yxke")
+texture = SubResource("AtlasTexture_juula")
 
 [node name="CircleAttackSpawner" type="Spawner" parent="."]
 startMode = 2
@@ -308,7 +383,7 @@ bulletType = SubResource("BulletType_jl0c3")
 ID = 2
 bulletsPerRadius = 20
 light_mask = 0
-texture = ExtResource("12_6yxke")
+texture = SubResource("AtlasTexture_onovj")
 
 [connection signal="state_exited" from="StateChart/Root/Move" to="." method="_on_move_state_exited"]
 [connection signal="state_physics_processing" from="StateChart/Root/Move" to="." method="_on_move_state_physics_processing"]

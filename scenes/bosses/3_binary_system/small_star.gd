@@ -1,6 +1,8 @@
 extends Area2D
 
 
+signal died()
+
 @export var big_star: Boss
 @export_range(0.0, 200.0, 5.0, "or_greater", "suffix:px") var orbiting_distace: float = 120.0
 @export var angular_acceleration: float = 35.0
@@ -14,6 +16,7 @@ extends Area2D
 
 
 func _ready() -> void:
+	died.connect(big_star._on_small_star_died)
 	if not Globals.player:
 		SignalBus.player_ready.connect(
 			func():
@@ -71,6 +74,7 @@ func _on_area_entered(area: ProjectileAsteroid) -> void:
 
 func _on_health_component_health_depleted() -> void:
 	is_dead = true
+	died.emit()
 	anim_player.queue(&"death")
 	await anim_player.animation_finished
 	queue_free.call_deferred()

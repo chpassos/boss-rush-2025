@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://gdsprfbpe76q"]
+[gd_scene load_steps=27 format=3 uid="uid://gdsprfbpe76q"]
 
 [ext_resource type="Script" path="res://scenes/bosses/4_black_hole/black_hole.gd" id="1_1mhgs"]
 [ext_resource type="Script" path="res://customs/nodes/health_component.gd" id="2_23syd"]
 [ext_resource type="Texture2D" uid="uid://8cad2d2ajuiw" path="res://assets/sketches/boss.png" id="2_ac02r"]
+[ext_resource type="Shader" path="res://assets/shaders/hit_flash.gdshader" id="2_ae5cj"]
 [ext_resource type="Texture2D" uid="uid://xpjeb363su68" path="res://assets/point_light.webp" id="2_p6k48"]
 [ext_resource type="Script" path="res://customs/nodes/poise_component.gd" id="3_0b6ut"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="4_q0jqj"]
@@ -13,6 +14,11 @@
 [ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroids/asteroid.png" id="10_07p0w"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="10_s8duk"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="13_1tg7s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_717pu"]
+shader = ExtResource("2_ae5cj")
+shader_parameter/active = false
+shader_parameter/flash_color = Color(0.968627, 0.596078, 0.192157, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7kqoi"]
 radius = 200.0
@@ -76,6 +82,7 @@ state_chart = NodePath("StateChart")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 0
+material = SubResource("ShaderMaterial_717pu")
 scale = Vector2(5, 5)
 texture = ExtResource("2_ac02r")
 
@@ -209,6 +216,7 @@ bulletsPerRadius = 32
 maxSpin = 10.0
 minSpin = 10.0
 spinAcceleration = 2.0
+light_mask = 0
 texture = ExtResource("10_07p0w")
 
 [node name="TargetAttackSpawner" type="Spawner" parent="." node_paths=PackedStringArray("trackedNode")]
@@ -221,6 +229,7 @@ trackedNode = NodePath("..")
 startTowardPlayer = true
 staysTowardPlayer = true
 offsetTowardPlayer = -40.0
+light_mask = 0
 texture = ExtResource("10_07p0w")
 
 [node name="HomingAttackSpawner" type="Spawner" parent="." node_paths=PackedStringArray("trackedNode")]
@@ -230,6 +239,7 @@ trackedNode = NodePath("..")
 homing = true
 homingWeight = 0.01
 randomStart = true
+light_mask = 0
 texture = ExtResource("10_07p0w")
 
 [node name="StateChartDebugger" parent="." instance=ExtResource("13_1tg7s")]

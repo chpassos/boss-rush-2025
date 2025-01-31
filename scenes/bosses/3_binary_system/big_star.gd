@@ -4,6 +4,10 @@ extends Boss
 @export var move_speed: float = 100.0
 
 
+func _on_small_star_died() -> void:
+	pass
+
+
 # MOVE IDLE STATE
 
 func _on_idle_state_entered() -> void:
