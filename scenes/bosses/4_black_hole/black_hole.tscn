@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://gdsprfbpe76q"]
+[gd_scene load_steps=35 format=3 uid="uid://gdsprfbpe76q"]
 
 [ext_resource type="Script" path="res://scenes/bosses/4_black_hole/black_hole.gd" id="1_1mhgs"]
 [ext_resource type="Script" path="res://customs/nodes/health_component.gd" id="2_23syd"]
@@ -80,9 +80,6 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_q4nmb"]
-resource_name = "attack"
-
 [sub_resource type="Animation" id="Animation_0tygc"]
 resource_name = "idle"
 length = 0.4
@@ -128,13 +125,85 @@ tracks/1/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_q4nmb"]
+resource_name = "gravity_pull"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(822, 819, 272, 271), Rect2(1096, 819, 272, 271), Rect2(1370, 819, 272, 271), Rect2(1644, 819, 272, 271), Rect2(1918, 819, 272, 271), Rect2(2192, 819, 272, 271)]
+}
+
+[sub_resource type="Animation" id="Animation_cp6o2"]
+resource_name = "circle_attack"
+length = 0.45
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(3014, 546, 272, 271), Rect2(3288, 546, 272, 271), Rect2(3562, 546, 272, 271), Rect2(3836, 546, 272, 271), Rect2(4110, 546, 272, 271), Rect2(4384, 546, 272, 271), Rect2(4658, 546, 272, 271), Rect2(4932, 546, 272, 271), Rect2(3014, 546, 272, 271)]
+}
+
+[sub_resource type="Animation" id="Animation_exan0"]
+resource_name = "homing_attack"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 273, 272, 271), Rect2(274, 273, 272, 271), Rect2(548, 273, 272, 271), Rect2(822, 273, 272, 271), Rect2(1096, 273, 272, 271), Rect2(1370, 273, 272, 271), Rect2(1644, 273, 272, 271), Rect2(1918, 273, 272, 271), Rect2(2192, 273, 272, 271), Rect2(274, 273, 272, 271)]
+}
+
+[sub_resource type="Animation" id="Animation_t4hom"]
+resource_name = "target_attack"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 1365, 272, 271), Rect2(274, 1365, 272, 271), Rect2(548, 1365, 272, 271), Rect2(822, 1365, 272, 271)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e5ox4"]
 _data = {
 "RESET": SubResource("Animation_h800m"),
-"attack": SubResource("Animation_q4nmb"),
+"circle_attack": SubResource("Animation_cp6o2"),
 "death": SubResource("Animation_1bbmn"),
+"gravity_pull": SubResource("Animation_q4nmb"),
 "hit": SubResource("Animation_o4uu5"),
-"idle": SubResource("Animation_0tygc")
+"homing_attack": SubResource("Animation_exan0"),
+"idle": SubResource("Animation_0tygc"),
+"target_attack": SubResource("Animation_t4hom")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0ciu7"]
@@ -209,6 +278,7 @@ shape = SubResource("CircleShape2D_7kqoi")
 libraries = {
 "": SubResource("AnimationLibrary_e5ox4")
 }
+autoplay = "idle"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 visible = false
@@ -365,6 +435,8 @@ light_mask = 0
 texture = ExtResource("10_07p0w")
 
 [connection signal="body_entered" from="EventHorizon" to="." method="_on_event_horizon_body_entered"]
+[connection signal="state_entered" from="StateChart/Root/Idle" to="." method="_on_idle_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Attack/Idle" to="." method="_on_idle_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Attack/TargetAttack" to="." method="_on_target_attack_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Attack/HomingAttack" to="." method="_on_homing_attack_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Attack/GravityPull" to="." method="_on_gravity_pull_state_entered"]
