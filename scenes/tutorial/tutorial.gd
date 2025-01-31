@@ -23,6 +23,7 @@ func spawn_asteroid() -> void:
 	var asteroid: CollectibleAsteroid = Globals.COLLECTIBLE_ASTEROID_SCENE.instantiate() as CollectibleAsteroid
 	asteroid.global_position = spawner.global_position
 	asteroid.clockwise = true
+	asteroid.freeze = true
 	add_child(asteroid)
 
 

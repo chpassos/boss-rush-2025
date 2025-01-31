@@ -7,7 +7,7 @@
 
 [node name="ProjectileAsteroid" type="Area2D" node_paths=PackedStringArray("sprite")]
 collision_layer = 8
-collision_mask = 2
+collision_mask = 66
 script = ExtResource("1_ma1no")
 speed = 300.0
 sprite = NodePath("Sprite2D")

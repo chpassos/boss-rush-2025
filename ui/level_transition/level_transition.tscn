@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://btqwhxam54vpd"]
+[gd_scene load_steps=7 format=3 uid="uid://btqwhxam54vpd"]
 
 [ext_resource type="Script" path="res://ui/level_transition/level_transition.gd" id="1_cfcg5"]
 [ext_resource type="Texture2D" uid="uid://ba0ixfyioyvjo" path="res://assets/galaxy.jpg" id="1_rqaf3"]
 [ext_resource type="PackedScene" uid="uid://pqvoo5woaqd" path="res://scenes/levels/red_dwarf_level.tscn" id="2_k13ya"]
 [ext_resource type="PackedScene" uid="uid://yblomidswfch" path="res://scenes/levels/black_hole_level.tscn" id="3_hdtdy"]
 [ext_resource type="Material" uid="uid://k8w7wpayleaw" path="res://assets/crt_effect_material.tres" id="4_fy7g0"]
+[ext_resource type="PackedScene" uid="uid://ba7fji6g1gi02" path="res://scenes/levels/binary_system_level.tscn" id="4_jej1t"]
 
 [node name="LevelTransition" type="Control"]
 layout_mode = 3
@@ -16,6 +17,7 @@ grow_vertical = 2
 script = ExtResource("1_cfcg5")
 level_scenes = {
 1: ExtResource("2_k13ya"),
+2: ExtResource("4_jej1t"),
 3: ExtResource("3_hdtdy")
 }
 

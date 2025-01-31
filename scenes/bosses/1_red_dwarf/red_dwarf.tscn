@@ -60,23 +60,6 @@ tracks/0/keys = {
 "values": [Rect2(0, 405, 134, 133), Rect2(136, 405, 134, 133), Rect2(272, 405, 134, 133), Rect2(408, 405, 134, 133), Rect2(544, 405, 134, 133)]
 }
 
-[sub_resource type="Animation" id="Animation_eaonw"]
-resource_name = "damage"
-length = 0.5
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:region_rect")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Rect2(0, 135, 134, 133)]
-}
-
 [sub_resource type="Animation" id="Animation_dvs7x"]
 resource_name = "death"
 length = 4.0
@@ -124,12 +107,29 @@ tracks/0/keys = {
 "values": [Rect2(0, 0, 134, 133), Rect2(136, 0, 134, 133), Rect2(272, 0, 134, 133), Rect2(408, 0, 134, 133), Rect2(544, 0, 134, 133), Rect2(680, 0, 134, 133)]
 }
 
+[sub_resource type="Animation" id="Animation_eaonw"]
+resource_name = "hit"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 135, 134, 133)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wk2ei"]
 _data = {
 "RESET": SubResource("Animation_yf2kk"),
 "attack": SubResource("Animation_tp38o"),
-"damage": SubResource("Animation_eaonw"),
 "death": SubResource("Animation_dvs7x"),
+"hit": SubResource("Animation_eaonw"),
 "idle": SubResource("Animation_52l8n")
 }
 

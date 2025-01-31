@@ -1,0 +1,101 @@
+[gd_scene load_steps=12 format=3 uid="uid://884reuwv2yeu"]
+
+[ext_resource type="Script" path="res://scenes/bosses/3_binary_system/big_star.gd" id="1_0y2m4"]
+[ext_resource type="Texture2D" uid="uid://c4cxtga0rde1p" path="res://assets/bosses/binary_system/binary_system_boss_with_armour.png" id="2_35v0s"]
+[ext_resource type="Texture2D" uid="uid://xpjeb363su68" path="res://assets/point_light.webp" id="3_ib6xk"]
+[ext_resource type="Script" path="res://customs/nodes/health_component.gd" id="4_t0hwn"]
+[ext_resource type="Script" path="res://customs/nodes/poise_component.gd" id="5_7rdrd"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="6_hfb2o"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="7_x66ok"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="8_nv3b2"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="9_cup11"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="10_jvbow"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uvgdm"]
+radius = 53.0
+
+[node name="BigStar" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "anim_player", "light", "health_component", "poise_component", "state_chart")]
+collision_layer = 2
+collision_mask = 17
+motion_mode = 1
+script = ExtResource("1_0y2m4")
+move_speed = 75.0
+sprite = NodePath("Sprite2D")
+anim_player = NodePath("AnimationPlayer")
+light = NodePath("PointLight2D")
+health_component = NodePath("HealthComponent")
+poise_component = NodePath("PoiseComponent")
+state_chart = NodePath("StateChart")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 0
+texture = ExtResource("2_35v0s")
+hframes = 47
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_uvgdm")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = ExtResource("3_ib6xk")
+texture_scale = 20.0
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_t0hwn")
+max_health = 40
+
+[node name="PoiseComponent" type="Node" parent="."]
+script = ExtResource("5_7rdrd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("6_hfb2o")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("7_x66ok")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Root"]
+script = ExtResource("8_nv3b2")
+
+[node name="ToActive" type="Node" parent="StateChart/Root/Idle"]
+script = ExtResource("9_cup11")
+to = NodePath("../../Active")
+event = &"battle_started"
+delay_in_seconds = "0.0"
+
+[node name="Active" type="Node" parent="StateChart/Root"]
+script = ExtResource("10_jvbow")
+
+[node name="Move" type="Node" parent="StateChart/Root/Active"]
+script = ExtResource("7_x66ok")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Root/Active/Move"]
+script = ExtResource("8_nv3b2")
+
+[node name="ToWander" type="Node" parent="StateChart/Root/Active/Move/Idle"]
+script = ExtResource("9_cup11")
+to = NodePath("../../Wander")
+delay_in_seconds = "0.0"
+
+[node name="Wander" type="Node" parent="StateChart/Root/Active/Move"]
+script = ExtResource("8_nv3b2")
+
+[node name="ToIdle" type="Node" parent="StateChart/Root/Active/Move/Wander"]
+script = ExtResource("9_cup11")
+to = NodePath("../../Idle")
+delay_in_seconds = "1.0"
+
+[node name="Attack" type="Node" parent="StateChart/Root/Active"]
+script = ExtResource("7_x66ok")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Root/Active/Attack"]
+script = ExtResource("8_nv3b2")
+
+[node name="Attack" type="Node" parent="StateChart/Root/Active/Attack"]
+script = ExtResource("8_nv3b2")
+
+[connection signal="state_entered" from="StateChart/Root/Active/Move/Idle" to="." method="_on_idle_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/Active/Move/Wander" to="." method="_on_wander_state_physics_processing"]

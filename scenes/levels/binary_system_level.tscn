@@ -1,0 +1,97 @@
+[gd_scene load_steps=12 format=3 uid="uid://ba7fji6g1gi02"]
+
+[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_pl8eo"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_m00dl"]
+[ext_resource type="PackedScene" uid="uid://cu4l2obyiimj6" path="res://scenes/camera_manager/camera_manager.tscn" id="3_4umwb"]
+[ext_resource type="PackedScene" uid="uid://8tksrqglc2j5" path="res://scenes/arena/arena.tscn" id="4_lh4du"]
+[ext_resource type="PackedScene" uid="uid://deje3vxmm68ao" path="res://scenes/player/player.tscn" id="5_mbfha"]
+[ext_resource type="PackedScene" uid="uid://884reuwv2yeu" path="res://scenes/bosses/3_binary_system/big_star.tscn" id="6_l5ptd"]
+[ext_resource type="PackedScene" uid="uid://bigybb2e4jmfv" path="res://scenes/asteroid/spawner/asteroid_spawner.tscn" id="7_b3gen"]
+[ext_resource type="PackedScene" uid="uid://d0rfnnmmsowvs" path="res://scenes/bosses/3_binary_system/small_star.tscn" id="7_kaffc"]
+[ext_resource type="PackedScene" uid="uid://bguqcq048fxe1" path="res://ui/hud/hud.tscn" id="8_g0ea8"]
+[ext_resource type="PackedScene" uid="uid://dcyok8jhypmiv" path="res://ui/pause_menu/pause_menu.tscn" id="9_i2tqx"]
+[ext_resource type="Material" uid="uid://k8w7wpayleaw" path="res://assets/crt_effect_material.tres" id="10_8m3pm"]
+
+[node name="BinarySystemLevel" type="Node2D" node_paths=PackedStringArray("pause_menu")]
+script = ExtResource("1_pl8eo")
+boss_number = 2
+pause_menu = NodePath("FG/PauseMenu")
+next_scene_path = "res://ui/level_transition/level_transition.tscn"
+
+[node name="MainCamera" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+process_callback = 0
+
+[node name="PhantomCameraHost" type="Node" parent="MainCamera"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("2_m00dl")
+
+[node name="CameraManager" parent="." instance=ExtResource("3_4umwb")]
+
+[node name="Arena" parent="." instance=ExtResource("4_lh4du")]
+arena_size = Vector2(2200, 1400)
+
+[node name="Player" parent="." instance=ExtResource("5_mbfha")]
+position = Vector2(-480, 0)
+
+[node name="BigStar" parent="." instance=ExtResource("6_l5ptd")]
+
+[node name="SmallStar" parent="." node_paths=PackedStringArray("big_star") instance=ExtResource("7_kaffc")]
+big_star = NodePath("../BigStar")
+angular_acceleration = 90.0
+
+[node name="Spawners" type="Node2D" parent="."]
+
+[node name="AsteroidSpawner1" parent="Spawners" instance=ExtResource("7_b3gen")]
+position = Vector2(-448, 544)
+spawn_on_ready = true
+spawn_radius = 120.0
+min_wait_time = 8.0
+max_wait_time = 12.0
+clockwise_asteroid_weight = 9.0
+counterclockwise_asteroid_weight = 0.0
+
+[node name="AsteroidSpawner2" parent="Spawners" instance=ExtResource("7_b3gen")]
+position = Vector2(448, -576)
+spawn_on_ready = true
+spawn_radius = 120.0
+min_wait_time = 8.0
+max_wait_time = 12.0
+clockwise_asteroid_weight = 9.0
+counterclockwise_asteroid_weight = 0.0
+
+[node name="AsteroidSpawner3" parent="Spawners" instance=ExtResource("7_b3gen")]
+position = Vector2(608, 320)
+spawn_on_ready = true
+spawn_radius = 120.0
+min_wait_time = 8.0
+max_wait_time = 12.0
+clockwise_asteroid_weight = 9.0
+counterclockwise_asteroid_weight = 0.0
+
+[node name="AsteroidSpawner4" parent="Spawners" instance=ExtResource("7_b3gen")]
+position = Vector2(-544, -480)
+spawn_on_ready = true
+spawn_radius = 120.0
+min_wait_time = 8.0
+max_wait_time = 12.0
+clockwise_asteroid_weight = 9.0
+counterclockwise_asteroid_weight = 0.0
+
+[node name="FG" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="FG" instance=ExtResource("8_g0ea8")]
+
+[node name="PauseMenu" parent="FG" instance=ExtResource("9_i2tqx")]
+visible = false
+
+[node name="CRTEffect" type="ColorRect" parent="FG"]
+z_index = 100
+material = ExtResource("10_8m3pm")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
