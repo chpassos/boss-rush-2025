@@ -1,6 +1,11 @@
 extends Node2D
 
 
+func clear_asteroids() -> void:
+	for child: Node in get_children():
+		child.queue_free()
+
+
 func spawn_heal_asteroid(gpos: Vector2) -> void:
 	var asteroid: HealAsteroid = Globals.HEAL_ASTEROID_SCENE.instantiate() as HealAsteroid
 	asteroid.global_position = gpos

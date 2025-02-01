@@ -22,6 +22,10 @@ func _ready() -> void:
 	Globals.boss = self
 	SignalBus.boss_ready.emit.call_deferred()
 	SignalBus.camera_animation_finished.connect(_on_camera_animation_finished)
+	SignalBus.player_defeated.connect(
+		func():
+			state_chart.send_event(&"player_defeated")
+	)
 
 
 func take_damage(health_damage: int, poise_damage: float) -> void:

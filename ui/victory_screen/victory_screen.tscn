@@ -1,0 +1,135 @@
+[gd_scene load_steps=13 format=3 uid="uid://bpd16tkl2po11"]
+
+[ext_resource type="Script" path="res://ui/victory_screen/victory_screen.gd" id="1_4wew8"]
+[ext_resource type="Shader" path="res://assets/shaders/space_background.gdshader" id="2_s0pb3"]
+[ext_resource type="FontFile" uid="uid://c267uu8ivdy0k" path="res://assets/fonts/Mono10 Regular.ttf" id="3_4fapv"]
+[ext_resource type="FontFile" uid="uid://cr1f100uqwao4" path="res://assets/fonts/Mono10 Light.ttf" id="4_1y6xt"]
+[ext_resource type="Texture2D" uid="uid://djavc4y05jlsb" path="res://assets/buttons/menu_button.png" id="5_iaxuc"]
+[ext_resource type="Script" path="res://ui/menu_button/animated_button.gd" id="6_l8nmq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0j476"]
+shader = ExtResource("2_s0pb3")
+shader_parameter/bg_color = Color(0, 0, 0, 0)
+shader_parameter/offset = null
+shader_parameter/bigStarSlow = 2.0
+shader_parameter/mediumStarSlow = 6.0
+shader_parameter/smallStarSlow = 8.0
+shader_parameter/smallStarAmount = 0.002
+shader_parameter/mediumStarAmount = 0.01
+shader_parameter/bigStarAmount = 0.02
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gnhar"]
+atlas = ExtResource("5_iaxuc")
+region = Rect2(0, 0, 37, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0jif"]
+atlas = ExtResource("5_iaxuc")
+region = Rect2(0, 16, 37, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46l26"]
+atlas = ExtResource("5_iaxuc")
+region = Rect2(0, 32, 37, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xir6x"]
+atlas = ExtResource("5_iaxuc")
+region = Rect2(0, 48, 37, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqa0g"]
+atlas = ExtResource("5_iaxuc")
+region = Rect2(0, 16, 37, 16)
+
+[node name="VictoryScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4wew8")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_0j476")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.968627, 0.945098, 0.894118, 1)
+theme_override_fonts/font = ExtResource("3_4fapv")
+theme_override_font_sizes/font_size = 120
+text = "YOU WIN!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Time" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_1y6xt")
+theme_override_font_sizes/font_size = 80
+text = "Your time was 00:00:00.000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Share" type="Label" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("4_1y6xt")
+theme_override_font_sizes/font_size = 60
+text = "Share your time at our itch.io page and see how othe players did!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Credits" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.968627, 0.945098, 0.894118, 1)
+theme_override_fonts/normal_font = ExtResource("4_1y6xt")
+theme_override_fonts/bold_font = ExtResource("3_4fapv")
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 50
+bbcode_enabled = true
+text = "[center]A game by
+[wave amp=50.0 freq=5.0 connected=1][b]alfroids[/b][/wave] & [wave amp=50.0 freq=5.0 connected=1][b]chpassos[/b][/wave][/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MenuButton" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(132, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = SubResource("AtlasTexture_gnhar")
+texture_pressed = SubResource("AtlasTexture_g0jif")
+texture_hover = SubResource("AtlasTexture_46l26")
+texture_disabled = SubResource("AtlasTexture_xir6x")
+texture_focused = SubResource("AtlasTexture_nqa0g")
+stretch_mode = 4
+script = ExtResource("6_l8nmq")
+on_hover_scale = 1.2
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]

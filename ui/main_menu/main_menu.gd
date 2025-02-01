@@ -7,6 +7,8 @@ extends Control
 
 
 func _ready() -> void:
+	SongManager.play_main_menu_song()
+
 	if not SaveManager.load_game():
 		(%ContinueButton as TextureButton).disabled = true
 		(%ContinueButton as TextureButton).focus_mode = Control.FOCUS_NONE

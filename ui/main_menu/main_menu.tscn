@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cies2uaf7v5fc" path="res://assets/buttons/credits_button.png" id="6_badav"]
 [ext_resource type="Texture2D" uid="uid://cpn1ai75gghti" path="res://assets/buttons/quit_button.png" id="7_poh8v"]
 [ext_resource type="Texture2D" uid="uid://botkq5pnolxma" path="res://assets/buttons/tutorial_button.png" id="8_lpyqv"]
-[ext_resource type="PackedScene" uid="uid://bwmr00dl8des8" path="res://ui/credits/credits.tscn" id="11_jyjel"]
+[ext_resource type="PackedScene" uid="uid://p2o4jyawnsl1" path="res://ui/credits/credits.tscn" id="11_jyjel"]
 [ext_resource type="Material" uid="uid://k8w7wpayleaw" path="res://assets/crt_effect_material.tres" id="12_oa131"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7mxup"]

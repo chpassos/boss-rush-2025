@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://ba7fji6g1gi02"]
 
-[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_pl8eo"]
+[ext_resource type="Script" path="res://scenes/levels/binary_system_level.gd" id="1_dkovn"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_m00dl"]
 [ext_resource type="PackedScene" uid="uid://cu4l2obyiimj6" path="res://scenes/camera_manager/camera_manager.tscn" id="3_4umwb"]
 [ext_resource type="PackedScene" uid="uid://8tksrqglc2j5" path="res://scenes/arena/arena.tscn" id="4_lh4du"]
@@ -13,7 +13,7 @@
 [ext_resource type="Material" uid="uid://k8w7wpayleaw" path="res://assets/crt_effect_material.tres" id="10_8m3pm"]
 
 [node name="BinarySystemLevel" type="Node2D" node_paths=PackedStringArray("pause_menu")]
-script = ExtResource("1_pl8eo")
+script = ExtResource("1_dkovn")
 boss_number = 2
 pause_menu = NodePath("FG/PauseMenu")
 next_scene_path = "res://ui/level_transition/level_transition.tscn"

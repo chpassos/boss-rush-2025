@@ -263,7 +263,7 @@ texture_scale = 20.0
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("4_7r3q0")
-max_health = 50
+max_health = 25
 
 [node name="Poise Component" type="Node" parent="."]
 script = ExtResource("5_uo8ru")
@@ -304,6 +304,12 @@ initial_state = NodePath("Idle")
 script = ExtResource("9_402m1")
 to = NodePath("../../Dead")
 event = &"boss_defeated"
+delay_in_seconds = "0.0"
+
+[node name="ToIdle" type="Node" parent="StateChart/Root/Move"]
+script = ExtResource("9_402m1")
+to = NodePath("../../Idle")
+event = &"player_defeated"
 delay_in_seconds = "0.0"
 
 [node name="Idle" type="Node" parent="StateChart/Root/Move"]
@@ -349,6 +355,12 @@ delay_in_seconds = "5.0"
 script = ExtResource("9_402m1")
 to = NodePath("../../Dead")
 event = &"boss_defeated"
+delay_in_seconds = "0.0"
+
+[node name="ToIdle" type="Node" parent="StateChart/Root/Attack"]
+script = ExtResource("9_402m1")
+to = NodePath("../../Idle")
+event = &"player_defeated"
 delay_in_seconds = "0.0"
 
 [node name="Idle" type="Node" parent="StateChart/Root/Attack"]

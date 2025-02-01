@@ -22,6 +22,50 @@ shader_parameter/flash_color = Color(0.968627, 0.596078, 0.192157, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_7kqoi"]
 radius = 128.0
 
+[sub_resource type="Animation" id="Animation_h800m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 272, 271)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_cp6o2"]
+resource_name = "circle_attack"
+length = 0.45
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(3014, 546, 272, 271), Rect2(3288, 546, 272, 271), Rect2(3562, 546, 272, 271), Rect2(3836, 546, 272, 271), Rect2(4110, 546, 272, 271), Rect2(4384, 546, 272, 271), Rect2(4658, 546, 272, 271), Rect2(4932, 546, 272, 271), Rect2(3014, 546, 272, 271)]
+}
+
 [sub_resource type="Animation" id="Animation_1bbmn"]
 resource_name = "death"
 length = 4.0
@@ -37,80 +81,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Rect2(0, 1092, 272, 271), Rect2(274, 1092, 272, 271), Rect2(548, 1092, 272, 271), Rect2(822, 1092, 272, 271), Rect2(0, 1092, 272, 271), Rect2(274, 1092, 272, 271), Rect2(548, 1092, 272, 271), Rect2(822, 1092, 272, 271), Rect2(548, 0, 272, 271), Rect2(2192, 819, 272, 271), Rect2(0, 1638, 272, 271), Rect2(274, 1638, 272, 271), Rect2(548, 1638, 272, 271), Rect2(822, 1638, 272, 271), Rect2(1096, 1638, 272, 271), Rect2(1370, 1638, 272, 271), Rect2(1644, 1638, 272, 271), Rect2(1918, 1638, 272, 271), Rect2(2192, 1638, 272, 271)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:material:shader_parameter/active")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_o4uu5"]
-resource_name = "hit"
-length = 0.45
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:region_rect")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.15, 0.25, 0.35),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Rect2(0, 1092, 272, 271), Rect2(274, 1092, 272, 271), Rect2(548, 1092, 272, 271)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:material:shader_parameter/active")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="Animation" id="Animation_0tygc"]
-resource_name = "idle"
-length = 0.4
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:region_rect")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Rect2(0, 0, 272, 271), Rect2(274, 0, 272, 271), Rect2(548, 0, 272, 271), Rect2(822, 0, 272, 271)]
-}
-
-[sub_resource type="Animation" id="Animation_h800m"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:region_rect")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Rect2(0, 0, 272, 271)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -143,8 +113,8 @@ tracks/0/keys = {
 "values": [Rect2(822, 819, 272, 271), Rect2(1096, 819, 272, 271), Rect2(1370, 819, 272, 271), Rect2(1644, 819, 272, 271), Rect2(1918, 819, 272, 271), Rect2(2192, 819, 272, 271)]
 }
 
-[sub_resource type="Animation" id="Animation_cp6o2"]
-resource_name = "circle_attack"
+[sub_resource type="Animation" id="Animation_o4uu5"]
+resource_name = "hit"
 length = 0.45
 step = 0.05
 tracks/0/type = "value"
@@ -154,10 +124,22 @@ tracks/0/path = NodePath("Sprite2D:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0.15, 0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [Rect2(3014, 546, 272, 271), Rect2(3288, 546, 272, 271), Rect2(3562, 546, 272, 271), Rect2(3836, 546, 272, 271), Rect2(4110, 546, 272, 271), Rect2(4384, 546, 272, 271), Rect2(4658, 546, 272, 271), Rect2(4932, 546, 272, 271), Rect2(3014, 546, 272, 271)]
+"values": [Rect2(0, 1092, 272, 271), Rect2(274, 1092, 272, 271), Rect2(548, 1092, 272, 271)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_exan0"]
@@ -174,6 +156,24 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Rect2(0, 273, 272, 271), Rect2(274, 273, 272, 271), Rect2(548, 273, 272, 271), Rect2(822, 273, 272, 271), Rect2(1096, 273, 272, 271), Rect2(1370, 273, 272, 271), Rect2(1644, 273, 272, 271), Rect2(1918, 273, 272, 271), Rect2(2192, 273, 272, 271), Rect2(274, 273, 272, 271)]
+}
+
+[sub_resource type="Animation" id="Animation_0tygc"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 272, 271), Rect2(274, 0, 272, 271), Rect2(548, 0, 272, 271), Rect2(822, 0, 272, 271)]
 }
 
 [sub_resource type="Animation" id="Animation_t4hom"]
@@ -312,6 +312,7 @@ shape = SubResource("CircleShape2D_q1ql3")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_23syd")
+max_health = 25
 
 [node name="PoiseComponent" type="Node" parent="."]
 script = ExtResource("3_0b6ut")
@@ -340,6 +341,12 @@ initial_state = NodePath("Idle")
 script = ExtResource("9_70372")
 to = NodePath("../../Dead")
 event = &"boss_defeated"
+delay_in_seconds = "0.0"
+
+[node name="ToIdle" type="Node" parent="StateChart/Root/Attack"]
+script = ExtResource("9_70372")
+to = NodePath("../../Idle")
+event = &"player_defeated"
 delay_in_seconds = "0.0"
 
 [node name="Idle" type="Node" parent="StateChart/Root/Attack"]

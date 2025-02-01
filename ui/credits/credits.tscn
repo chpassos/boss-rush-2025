@@ -1,29 +1,41 @@
-[gd_scene load_steps=11 format=3 uid="uid://bwmr00dl8des8"]
+[gd_scene load_steps=13 format=3 uid="uid://p2o4jyawnsl1"]
 
 [ext_resource type="Script" path="res://ui/credits/credits.gd" id="1_3lq5c"]
-[ext_resource type="FontFile" uid="uid://c267uu8ivdy0k" path="res://assets/fonts/Mono10 Regular.ttf" id="1_b4fep"]
-[ext_resource type="FontFile" uid="uid://cr1f100uqwao4" path="res://assets/fonts/Mono10 Light.ttf" id="2_avm5x"]
-[ext_resource type="Texture2D" uid="uid://dd720txt5p4db" path="res://assets/buttons/back_button.png" id="3_rnimx"]
-[ext_resource type="Script" path="res://ui/menu_button/animated_button.gd" id="4_pr4k8"]
+[ext_resource type="FontFile" uid="uid://c267uu8ivdy0k" path="res://assets/fonts/Mono10 Regular.ttf" id="2_fc5pu"]
+[ext_resource type="Shader" path="res://assets/shaders/space_background.gdshader" id="2_ippl4"]
+[ext_resource type="FontFile" uid="uid://cr1f100uqwao4" path="res://assets/fonts/Mono10 Light.ttf" id="3_olpjl"]
+[ext_resource type="Texture2D" uid="uid://dd720txt5p4db" path="res://assets/buttons/back_button.png" id="4_l0d3h"]
+[ext_resource type="Script" path="res://ui/menu_button/animated_button.gd" id="5_isfp5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_slbv3"]
+shader = ExtResource("2_ippl4")
+shader_parameter/bg_color = Color(0.0588235, 0.0509804, 0.0588235, 1)
+shader_parameter/offset = null
+shader_parameter/bigStarSlow = 2.0
+shader_parameter/mediumStarSlow = 6.0
+shader_parameter/smallStarSlow = 8.0
+shader_parameter/smallStarAmount = 0.002
+shader_parameter/mediumStarAmount = 0.01
+shader_parameter/bigStarAmount = 0.02
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gnhar"]
-atlas = ExtResource("3_rnimx")
+atlas = ExtResource("4_l0d3h")
 region = Rect2(0, 0, 33, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oslrs"]
-atlas = ExtResource("3_rnimx")
+atlas = ExtResource("4_l0d3h")
 region = Rect2(0, 16, 33, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j6k3h"]
-atlas = ExtResource("3_rnimx")
+atlas = ExtResource("4_l0d3h")
 region = Rect2(0, 32, 33, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_26onw"]
-atlas = ExtResource("3_rnimx")
+atlas = ExtResource("4_l0d3h")
 region = Rect2(0, 48, 33, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_axcvt"]
-atlas = ExtResource("3_rnimx")
+atlas = ExtResource("4_l0d3h")
 region = Rect2(0, 16, 33, 16)
 
 [node name="Credits" type="Control"]
@@ -36,6 +48,7 @@ grow_vertical = 2
 script = ExtResource("1_3lq5c")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_slbv3")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -66,7 +79,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.968627, 0.945098, 0.894118, 1)
-theme_override_fonts/font = ExtResource("1_b4fep")
+theme_override_fonts/font = ExtResource("2_fc5pu")
 theme_override_font_sizes/font_size = 120
 text = "CREDITS"
 horizontal_alignment = 1
@@ -76,8 +89,8 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_colors/default_color = Color(0.968627, 0.945098, 0.894118, 1)
-theme_override_fonts/normal_font = ExtResource("2_avm5x")
-theme_override_fonts/bold_font = ExtResource("1_b4fep")
+theme_override_fonts/normal_font = ExtResource("3_olpjl")
+theme_override_fonts/bold_font = ExtResource("2_fc5pu")
 theme_override_font_sizes/normal_font_size = 80
 theme_override_font_sizes/bold_font_size = 80
 bbcode_enabled = true
@@ -90,7 +103,7 @@ scroll_active = false
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_colors/default_color = Color(0.968627, 0.945098, 0.894118, 1)
-theme_override_fonts/normal_font = ExtResource("2_avm5x")
+theme_override_fonts/normal_font = ExtResource("3_olpjl")
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "[center]Coding and implementation by
@@ -115,7 +128,7 @@ texture_hover = SubResource("AtlasTexture_j6k3h")
 texture_disabled = SubResource("AtlasTexture_26onw")
 texture_focused = SubResource("AtlasTexture_axcvt")
 stretch_mode = 4
-script = ExtResource("4_pr4k8")
+script = ExtResource("5_isfp5")
 on_hover_scale = 1.2
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

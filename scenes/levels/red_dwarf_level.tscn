@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://pqvoo5woaqd"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_1ot8k"]
-[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_joxw5"]
+[ext_resource type="Script" path="res://scenes/levels/red_dwarf_level.gd" id="1_rpedt"]
 [ext_resource type="PackedScene" uid="uid://cu4l2obyiimj6" path="res://scenes/camera_manager/camera_manager.tscn" id="2_d7y1g"]
 [ext_resource type="PackedScene" uid="uid://8tksrqglc2j5" path="res://scenes/arena/arena.tscn" id="3_fwod5"]
 [ext_resource type="PackedScene" uid="uid://deje3vxmm68ao" path="res://scenes/player/player.tscn" id="4_y3nwp"]
@@ -12,7 +12,7 @@
 [ext_resource type="Material" uid="uid://k8w7wpayleaw" path="res://assets/crt_effect_material.tres" id="10_sqo1m"]
 
 [node name="RedDwarfLevel" type="Node2D" node_paths=PackedStringArray("pause_menu")]
-script = ExtResource("1_joxw5")
+script = ExtResource("1_rpedt")
 boss_number = 1
 pause_menu = NodePath("FG/PauseMenu")
 next_scene_path = "res://ui/level_transition/level_transition.tscn"

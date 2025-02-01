@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://884reuwv2yeu"]
+[gd_scene load_steps=31 format=3 uid="uid://884reuwv2yeu"]
 
 [ext_resource type="Script" path="res://scenes/bosses/3_binary_system/big_star.gd" id="1_0y2m4"]
 [ext_resource type="Texture2D" uid="uid://c4cxtga0rde1p" path="res://assets/bosses/binary_system/binary_system_boss_with_armour.png" id="2_35v0s"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="8_nv3b2"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="9_cup11"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="10_jvbow"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="12_mm4pk"]
+[ext_resource type="Texture2D" uid="uid://7ulx1r07x862" path="res://assets/asteroids/asteroid.png" id="12_py28g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8oysb"]
 shader = ExtResource("2_y2kws")
@@ -282,12 +284,31 @@ _data = {
 "idle_fury": SubResource("Animation_ib22g")
 }
 
-[node name="BigStar" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "anim_player", "light", "health_component", "poise_component", "state_chart")]
+[sub_resource type="Resource" id="Resource_i0nqo"]
+script = ExtResource("12_mm4pk")
+expression = "is_furious == true"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3dpsy"]
+
+[sub_resource type="BulletType" id="BulletType_ia7qp"]
+initialSpeed = 160.0
+_shape = SubResource("CircleShape2D_3dpsy")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6bmvi"]
+
+[sub_resource type="BulletType" id="BulletType_4qeaq"]
+initialSpeed = 200.0
+_shape = SubResource("CircleShape2D_6bmvi")
+
+[node name="BigStar" type="CharacterBody2D" node_paths=PackedStringArray("move_recalculate_timer", "circle_attack_spawner", "target_attack_spawner", "sprite", "anim_player", "light", "health_component", "poise_component", "state_chart")]
 collision_layer = 2
 collision_mask = 17
 motion_mode = 1
 script = ExtResource("1_0y2m4")
-move_speed = 85.0
+move_speed = 75.0
+move_recalculate_timer = NodePath("StateChart/Root/Active/Move/RecalculateTimer")
+circle_attack_spawner = NodePath("CircleAttackSpawner")
+target_attack_spawner = NodePath("TargetAttackSpawner")
 light_color = Color(0.968627, 0.596078, 0.192157, 1)
 sprite = NodePath("Sprite2D")
 anim_player = NodePath("AnimationPlayer")
@@ -311,7 +332,7 @@ texture_scale = 20.0
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("4_t0hwn")
-max_health = 40
+max_health = 15
 
 [node name="PoiseComponent" type="Node" parent="."]
 script = ExtResource("5_7rdrd")
@@ -341,25 +362,22 @@ delay_in_seconds = "0.0"
 [node name="Active" type="Node" parent="StateChart/Root"]
 script = ExtResource("10_jvbow")
 
-[node name="Move" type="Node" parent="StateChart/Root/Active"]
-script = ExtResource("7_x66ok")
-initial_state = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="StateChart/Root/Active/Move"]
-script = ExtResource("8_nv3b2")
-
-[node name="ToWander" type="Node" parent="StateChart/Root/Active/Move/Idle"]
+[node name="ToDead" type="Node" parent="StateChart/Root/Active"]
 script = ExtResource("9_cup11")
-to = NodePath("../../Wander")
+to = NodePath("../../Dead")
+event = &"boss_defeated"
 delay_in_seconds = "0.0"
 
-[node name="Wander" type="Node" parent="StateChart/Root/Active/Move"]
-script = ExtResource("8_nv3b2")
-
-[node name="ToIdle" type="Node" parent="StateChart/Root/Active/Move/Wander"]
+[node name="ToIdle" type="Node" parent="StateChart/Root/Active"]
 script = ExtResource("9_cup11")
 to = NodePath("../../Idle")
-delay_in_seconds = "1.0"
+event = &"player_defeated"
+delay_in_seconds = "0.0"
+
+[node name="Move" type="Node" parent="StateChart/Root/Active"]
+script = ExtResource("8_nv3b2")
+
+[node name="RecalculateTimer" type="Timer" parent="StateChart/Root/Active/Move"]
 
 [node name="Attack" type="Node" parent="StateChart/Root/Active"]
 script = ExtResource("7_x66ok")
@@ -368,9 +386,60 @@ initial_state = NodePath("Idle")
 [node name="Idle" type="Node" parent="StateChart/Root/Active/Attack"]
 script = ExtResource("8_nv3b2")
 
-[node name="Attack" type="Node" parent="StateChart/Root/Active/Attack"]
+[node name="ToTargetAttack" type="Node" parent="StateChart/Root/Active/Attack/Idle"]
+script = ExtResource("9_cup11")
+to = NodePath("../../TargetAttack")
+guard = SubResource("Resource_i0nqo")
+delay_in_seconds = "5.0"
+
+[node name="ToCircleAttack" type="Node" parent="StateChart/Root/Active/Attack/Idle"]
+script = ExtResource("9_cup11")
+to = NodePath("../../CircleAttack")
+delay_in_seconds = "5.0"
+
+[node name="CircleAttack" type="Node" parent="StateChart/Root/Active/Attack"]
 script = ExtResource("8_nv3b2")
 
+[node name="ToIdle" type="Node" parent="StateChart/Root/Active/Attack/CircleAttack"]
+script = ExtResource("9_cup11")
+to = NodePath("../../Idle")
+event = &"attack_finished"
+delay_in_seconds = "0.0"
+
+[node name="TargetAttack" type="Node" parent="StateChart/Root/Active/Attack"]
+script = ExtResource("8_nv3b2")
+
+[node name="ToIdle" type="Node" parent="StateChart/Root/Active/Attack/TargetAttack"]
+script = ExtResource("9_cup11")
+to = NodePath("../../Idle")
+event = &"attack_finished"
+delay_in_seconds = "0.0"
+
+[node name="Dead" type="Node" parent="StateChart/Root"]
+script = ExtResource("8_nv3b2")
+
+[node name="CircleAttackSpawner" type="Spawner" parent="."]
+startMode = 2
+bulletType = SubResource("BulletType_ia7qp")
+bulletsPerRadius = 6
+maxSpin = 60.0
+minSpin = 60.0
+spinAcceleration = 12.0
+texture = ExtResource("12_py28g")
+
+[node name="TargetAttackSpawner" type="Spawner" parent="." node_paths=PackedStringArray("trackedNode")]
+startMode = 2
+bulletType = SubResource("BulletType_4qeaq")
+trackedNode = NodePath("..")
+startTowardPlayer = true
+staysTowardPlayer = true
+light_mask = 0
+texture = ExtResource("12_py28g")
+
 [connection signal="current_animation_changed" from="AnimationPlayer" to="." method="_on_current_animation_changed"]
-[connection signal="state_entered" from="StateChart/Root/Active/Move/Idle" to="." method="_on_idle_state_entered"]
-[connection signal="state_physics_processing" from="StateChart/Root/Active/Move/Wander" to="." method="_on_wander_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Active/Move" to="." method="_on_move_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/Active/Move" to="." method="_on_move_state_physics_processing"]
+[connection signal="timeout" from="StateChart/Root/Active/Move/RecalculateTimer" to="." method="_on_recalculate_timer_timeout"]
+[connection signal="state_entered" from="StateChart/Root/Active/Attack/CircleAttack" to="." method="_on_circle_attack_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Active/Attack/TargetAttack" to="." method="_on_target_attack_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Dead" to="." method="_on_dead_state_entered"]
