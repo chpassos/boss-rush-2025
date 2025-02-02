@@ -40,3 +40,7 @@ func _physics_process(_delta: float) -> void:
 
 func _on_despawn_timer_timeout() -> void:
 	queue_free()
+
+
+func add_jitter(intensity: float = 1.0) -> void:
+	linear_velocity += intensity * Vector2.RIGHT.rotated(TAU * randf())

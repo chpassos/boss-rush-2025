@@ -38,7 +38,7 @@ window/vsync/vsync_mode=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
+enabled=PackedStringArray("res://addons/PerfBullets/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [file_customization]
 
@@ -50,6 +50,10 @@ folder_colors={
 "res://scenes/": "blue",
 "res://ui/": "green"
 }
+
+[global_group]
+
+collectible_asteroids=""
 
 [input]
 

@@ -20,7 +20,7 @@ normal_texture = ExtResource("5_ir3g0")
 [sub_resource type="CircleShape2D" id="CircleShape2D_5c0tp"]
 radius = 8.0
 
-[node name="HealAsteroid" type="RigidBody2D" node_paths=PackedStringArray("sprite", "player_revolution_component", "revolution_progess")]
+[node name="HealAsteroid" type="RigidBody2D" node_paths=PackedStringArray("sprite", "player_revolution_component", "revolution_progess") groups=["collectible_asteroids"]]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_3idcg")

@@ -31,9 +31,9 @@ func _ready() -> void:
 
 
 func _on_event_horizon_body_entered(body: Node2D) -> void:
-	if body is CollectibleAsteroid:
-		body.queue_free()
+	if body is HealAsteroid:
 		heal(1)
+	body.queue_free()
 
 
 # GRAVITY PULL ATTACK STATE
@@ -45,6 +45,7 @@ func _on_gravity_pull_state_entered() -> void:
 	homing_attack_count = 0
 	state_chart.set_expression_property(&"homing_attack_count", homing_attack_count)
 	gravity_field_collision_shape.disabled = false
+	get_tree().call_group(&"collectible_asteroids", &"add_jitter")
 
 
 func _on_gravity_pull_state_exited() -> void:
@@ -95,3 +96,9 @@ func _on_idle_state_entered() -> void:
 			anim_player.play(&"idle")
 		else:
 			anim_player.queue(&"idle")
+
+
+# DEAD STATE
+
+func _on_dead_state_entered() -> void:
+	pass # Replace with function body.

@@ -29,7 +29,7 @@ script = ExtResource("2_pc5v7")
 [node name="CameraManager" parent="." instance=ExtResource("3_le0i1")]
 
 [node name="Arena" parent="." instance=ExtResource("4_7lgcd")]
-arena_size = Vector2(2200, 1400)
+arena_size = Vector2(2000, 1200)
 
 [node name="Player" parent="." instance=ExtResource("5_3r7no")]
 position = Vector2(-480, 0)
@@ -39,39 +39,39 @@ position = Vector2(-480, 0)
 [node name="Spawners" type="Node2D" parent="."]
 
 [node name="AsteroidSpawner1" parent="Spawners" instance=ExtResource("7_ohqmo")]
-position = Vector2(-448, 544)
+position = Vector2(-416, 512)
 spawn_on_ready = true
 spawn_radius = 120.0
-min_wait_time = 8.0
+min_wait_time = 6.0
 max_wait_time = 12.0
-clockwise_asteroid_weight = 9.0
+clockwise_asteroid_weight = 5.0
 counterclockwise_asteroid_weight = 0.0
 
 [node name="AsteroidSpawner2" parent="Spawners" instance=ExtResource("7_ohqmo")]
-position = Vector2(448, -576)
+position = Vector2(448, -512)
 spawn_on_ready = true
 spawn_radius = 120.0
-min_wait_time = 8.0
+min_wait_time = 6.0
 max_wait_time = 12.0
-clockwise_asteroid_weight = 9.0
+clockwise_asteroid_weight = 5.0
 counterclockwise_asteroid_weight = 0.0
 
 [node name="AsteroidSpawner3" parent="Spawners" instance=ExtResource("7_ohqmo")]
-position = Vector2(608, 320)
+position = Vector2(544, 352)
 spawn_on_ready = true
 spawn_radius = 120.0
-min_wait_time = 8.0
+min_wait_time = 6.0
 max_wait_time = 12.0
-clockwise_asteroid_weight = 9.0
+clockwise_asteroid_weight = 5.0
 counterclockwise_asteroid_weight = 0.0
 
 [node name="AsteroidSpawner4" parent="Spawners" instance=ExtResource("7_ohqmo")]
-position = Vector2(-544, -480)
+position = Vector2(-480, -448)
 spawn_on_ready = true
 spawn_radius = 120.0
-min_wait_time = 8.0
+min_wait_time = 6.0
 max_wait_time = 12.0
-clockwise_asteroid_weight = 9.0
+clockwise_asteroid_weight = 5.0
 counterclockwise_asteroid_weight = 0.0
 
 [node name="FG" type="CanvasLayer" parent="."]

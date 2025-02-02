@@ -13,34 +13,34 @@ func _ready() -> void:
 	pass
 
 
-func play_song(song: AudioStream) -> void:
+func play_song(song: AudioStream, from_position: float = 0.0) -> void:
 	stream = song
-	play()
+	play(from_position)
 
 
-func play_filler_song() -> void:
+func play_filler_song(from_position: float = 0.0) -> void:
 	stream = FILLER_SONG
-	play()
+	play(from_position)
 
 
-func play_main_menu_song() -> void:
+func play_main_menu_song(from_position: float = 0.0) -> void:
 	stream = MAIN_MENU_SONG
-	play()
+	play(from_position)
 
 
-func play_red_dwarf_boss_song() -> void:
+func play_red_dwarf_boss_song(from_position: float = 0.0) -> void:
 	stream = RED_DWARF_BOSS_SONG
-	play()
+	play(from_position)
 
 
-func play_binary_system_boss_song() -> void:
+func play_binary_system_boss_song(from_position: float = 0.0) -> void:
 	stream = BINARY_SYSTEM_BOSS_SONG
-	play()
+	play(from_position)
 
 
-func play_binary_system_fury_boss_song() -> void:
+func play_binary_system_fury_boss_song(from_position: float = 0.0) -> void:
 	stream = BINARY_SYSTEM_FURY_BOSS_SONG
-	play()
+	play(from_position)
 
 
 func play_black_hole_boss_song() -> void:

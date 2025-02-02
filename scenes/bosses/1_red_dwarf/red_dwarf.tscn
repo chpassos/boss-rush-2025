@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://b46v3f7wavfeq"]
+[gd_scene load_steps=27 format=3 uid="uid://b46v3f7wavfeq"]
 
 [ext_resource type="Script" path="res://scenes/bosses/1_red_dwarf/red_dwarf.gd" id="1_n6yai"]
 [ext_resource type="Shader" path="res://assets/shaders/hit_flash.gdshader" id="2_f15vo"]
@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="9_402m1"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="10_ppt32"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/animation_player_state.gd" id="11_0d1j0"]
-[ext_resource type="Texture2D" uid="uid://fpwlr7qfi031" path="res://assets/projectiles/projectiles.png" id="13_f4pj3"]
+[ext_resource type="Texture2D" uid="uid://b3o62nm37mfg8" path="res://assets/projectiles/boss_projectile1.png" id="13_45rft"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sj66s"]
 shader = ExtResource("2_f15vo")
@@ -211,10 +211,6 @@ _shape = SubResource("CircleShape2D_qdbb6")
 collideWithBodies = true
 collideWithAreas = false
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_juula"]
-atlas = ExtResource("13_f4pj3")
-region = Rect2(64, 0, 16, 16)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_kbtfd"]
 
 [sub_resource type="BulletType" id="BulletType_jl0c3"]
@@ -222,10 +218,6 @@ initialSpeed = 160.0
 _shape = SubResource("CircleShape2D_kbtfd")
 collideWithBodies = true
 collideWithAreas = false
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_onovj"]
-atlas = ExtResource("13_f4pj3")
-region = Rect2(32, 0, 16, 16)
 
 [node name="RedDwarf" type="CharacterBody2D" node_paths=PackedStringArray("cone_attack_spawner", "circle_attack_spawner", "sprite", "anim_player", "light", "health_component", "poise_component", "state_chart")]
 disable_mode = 1
@@ -387,7 +379,7 @@ startTowardPlayer = true
 staysTowardPlayer = true
 offsetTowardPlayer = -22.5
 light_mask = 0
-texture = SubResource("AtlasTexture_juula")
+texture = ExtResource("13_45rft")
 
 [node name="CircleAttackSpawner" type="Spawner" parent="."]
 startMode = 2
@@ -395,7 +387,7 @@ bulletType = SubResource("BulletType_jl0c3")
 ID = 2
 bulletsPerRadius = 20
 light_mask = 0
-texture = SubResource("AtlasTexture_onovj")
+texture = ExtResource("13_45rft")
 
 [connection signal="state_exited" from="StateChart/Root/Move" to="." method="_on_move_state_exited"]
 [connection signal="state_physics_processing" from="StateChart/Root/Move" to="." method="_on_move_state_physics_processing"]

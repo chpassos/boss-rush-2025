@@ -1,6 +1,8 @@
 extends Boss
 
 
+signal got_furious()
+
 @export var move_speed: float = 100.0
 @export_group("Nodes")
 @export var move_recalculate_timer: Timer
@@ -26,6 +28,7 @@ func _ready() -> void:
 
 func _on_small_star_died() -> void:
 	is_furious = true
+	got_furious.emit()
 	state_chart.set_expression_property(&"is_furious", is_furious)
 	move_speed *= 1.5
 	anim_player.play(&"fury_transition")
