@@ -6,6 +6,7 @@ extends Control
 
 func _ready() -> void:
 	(%Time as Label).text = "Your time was " + Utils.time_to_text(SpeedrunTimer.elapsed_time)
+	SongManager.play_filler_song()
 
 
 func _on_menu_button_pressed() -> void:

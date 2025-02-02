@@ -46,6 +46,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4wew8")
+main_menu_scene_path = "res://ui/main_menu/main_menu.tscn"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_0j476")
@@ -99,7 +100,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("4_1y6xt")
 theme_override_font_sizes/font_size = 60
-text = "Share your time at our itch.io page and see how othe players did!"
+text = "Share your time with other players at our itch.io page!"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
