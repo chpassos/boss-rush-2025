@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://gdsprfbpe76q"]
+[gd_scene load_steps=36 format=3 uid="uid://gdsprfbpe76q"]
 
 [ext_resource type="Script" path="res://scenes/bosses/4_black_hole/black_hole.gd" id="1_1mhgs"]
 [ext_resource type="Script" path="res://customs/nodes/health_component.gd" id="2_23syd"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="9_70372"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/animation_player_state.gd" id="10_4x4fg"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="10_s8duk"]
+[ext_resource type="Texture2D" uid="uid://bsoxomaskwh1a" path="res://assets/projectiles/projectiles_frames12.png" id="13_8ta2e"]
 [ext_resource type="Texture2D" uid="uid://bcfbl48xk7di" path="res://assets/projectiles/boss_projectile3.png" id="13_st7vv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_717pu"]
@@ -392,7 +393,7 @@ shape = SubResource("CircleShape2D_q1ql3")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_23syd")
-max_health = 25
+max_health = 24
 
 [node name="PoiseComponent" type="Node" parent="."]
 script = ExtResource("3_0b6ut")
@@ -497,7 +498,7 @@ maxSpin = 10.0
 minSpin = 10.0
 spinAcceleration = 2.0
 light_mask = 0
-texture = ExtResource("13_st7vv")
+texture = ExtResource("13_8ta2e")
 
 [node name="TargetAttackSpawner" type="Spawner" parent="." node_paths=PackedStringArray("trackedNode")]
 startMode = 2

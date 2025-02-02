@@ -60,6 +60,7 @@ func _on_recalculate_timer_timeout() -> void:
 # TARGET ATTACK STATE
 
 func _on_target_attack_state_entered() -> void:
+	anim_player.play(&"attack")
 	for _i in range(5):
 		target_attack_spawner.offsetTowardPlayer = randf_range(-10, 10)
 		target_attack_spawner.set_manual_start(true)
@@ -70,6 +71,7 @@ func _on_target_attack_state_entered() -> void:
 # CIRCLE ATTACK STATE
 
 func _on_circle_attack_state_entered() -> void:
+	anim_player.play(&"attack")
 	for _i in range(6):
 		circle_attack_spawner.set_manual_start(true)
 		await get_tree().create_timer(0.2).timeout
@@ -79,4 +81,12 @@ func _on_circle_attack_state_entered() -> void:
 # DEAD STATE
 
 func _on_dead_state_entered() -> void:
+	anim_player.stop()
+	anim_player.clear_queue()
 	anim_player.play(&"death")
+
+
+# ATTACK IDLE STATE
+
+func _on_idle_state_entered() -> void:
+	anim_player.play(&"idle")

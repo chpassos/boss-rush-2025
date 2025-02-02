@@ -42,36 +42,40 @@ position = Vector2(-480, 0)
 position = Vector2(-416, 512)
 spawn_on_ready = true
 spawn_radius = 120.0
-min_wait_time = 6.0
-max_wait_time = 12.0
-clockwise_asteroid_weight = 5.0
+min_wait_time = 4.0
+max_wait_time = 10.0
+heal_asteroid_weight = 2.0
+clockwise_asteroid_weight = 6.0
 counterclockwise_asteroid_weight = 0.0
 
 [node name="AsteroidSpawner2" parent="Spawners" instance=ExtResource("7_ohqmo")]
 position = Vector2(448, -512)
 spawn_on_ready = true
 spawn_radius = 120.0
-min_wait_time = 6.0
-max_wait_time = 12.0
-clockwise_asteroid_weight = 5.0
+min_wait_time = 4.0
+max_wait_time = 10.0
+heal_asteroid_weight = 2.0
+clockwise_asteroid_weight = 6.0
 counterclockwise_asteroid_weight = 0.0
 
 [node name="AsteroidSpawner3" parent="Spawners" instance=ExtResource("7_ohqmo")]
 position = Vector2(544, 352)
 spawn_on_ready = true
 spawn_radius = 120.0
-min_wait_time = 6.0
-max_wait_time = 12.0
-clockwise_asteroid_weight = 5.0
+min_wait_time = 4.0
+max_wait_time = 10.0
+heal_asteroid_weight = 2.0
+clockwise_asteroid_weight = 6.0
 counterclockwise_asteroid_weight = 0.0
 
 [node name="AsteroidSpawner4" parent="Spawners" instance=ExtResource("7_ohqmo")]
 position = Vector2(-480, -448)
 spawn_on_ready = true
 spawn_radius = 120.0
-min_wait_time = 6.0
-max_wait_time = 12.0
-clockwise_asteroid_weight = 5.0
+min_wait_time = 4.0
+max_wait_time = 10.0
+heal_asteroid_weight = 2.0
+clockwise_asteroid_weight = 6.0
 counterclockwise_asteroid_weight = 0.0
 
 [node name="FG" type="CanvasLayer" parent="."]

@@ -18,6 +18,8 @@ func _ready() -> void:
 
 	spawn_asteroid()
 
+	SongManager.play_filler_song()
+
 
 func spawn_asteroid() -> void:
 	var asteroid: CollectibleAsteroid = Globals.COLLECTIBLE_ASTEROID_SCENE.instantiate() as CollectibleAsteroid

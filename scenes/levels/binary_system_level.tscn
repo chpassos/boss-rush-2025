@@ -81,8 +81,11 @@ counterclockwise_asteroid_weight = 0.0
 
 [node name="AsteroidSpawner5" parent="Spawners" instance=ExtResource("7_b3gen")]
 position = Vector2(-32, -352)
+spawn_radius = 160.0
 min_wait_time = 9.0
 max_wait_time = 16.0
+clockwise_asteroid_weight = 9.0
+counterclockwise_asteroid_weight = 0.0
 
 [node name="FG" type="CanvasLayer" parent="."]
 
